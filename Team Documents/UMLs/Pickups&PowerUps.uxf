@@ -1,0 +1,43 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>1390</x><y>525</y><w>540</w><h>160</h></coordinates><panel_attributes>&lt;&lt; APowerUp&gt;&gt;
+Ball
+--
++weight:float
++duration:float
++ProjectileMovementComponent:UPROPERTY(EditAnywhere) UProjectileMovementComponent* 
++ParticleFX1:UPROPERTY(EditAnywhere) UParticleSystem*
+--
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1200</x><y>755</y><w>380</w><h>190</h></coordinates><panel_attributes>&lt;&lt; APowerUp&gt;&gt;
+GlobalFreeze
+--
++duration:float
++ParticleFX1:UPROPERTY(EditAnywhere) UParticleSystem*
+--
++Freeze() : void
++UnFreeze() : void
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1760</x><y>745</y><w>990</w><h>140</h></coordinates><panel_attributes>&lt;&lt; APowerUp&gt;&gt;
+Firework
+--
++force:float
++ProjectileMovementComponent:UPROPERTY(EditAnywhere) UProjectileMovementComponent* 
++RadialForceComponent:UPROPERTY(EditAnywhere) URadialForceComponent*
++ParticleFX1:UPROPERTY(EditAnywhere) UParticleSystem*
+--
+#OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult&amp; Hit):UFUNCTION() void&lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>545</y><w>1340</w><h>180</h></coordinates><panel_attributes>&lt;&lt; APowerUp&gt;&gt;
+Clone
+--
++location:Fvector
++force:float
++RadialForceComponent:UPROPERTY(EditAnywhere) URadialForceComponent*
++ParticleFX1:UPROPERTY(EditAnywhere) UParticleSystem*
+--
+#OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult):UFUNCTION() void &lt;virtual override&gt;
+#OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex):UFUNCTION() void&lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>145</y><w>1340</w><h>160</h></coordinates><panel_attributes>&lt;&lt; AActor &gt;&gt;
+APowerUp
+--
++MeshComponent: UPROPERTY(EditAnywhere, BlueprintReadWrite) UStaticMeshComponent*
++CollisionComponent: UPROPERTY(EditAnywhere, BlueprintReadWrite) USphereComponent* 
+--
+# BeginPlay() : void &lt;virtual override&gt;
+#OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult):UFUNCTION() void &lt;virtual override&gt;
+#OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex):UFUNCTION() void&lt;virtual override&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1480</x><y>295</y><w>160</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80;140;80;140;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1610</x><y>365</y><w>480</w><h>400</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>10;10;460;10;460;380</additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>365</y><w>150</w><h>410</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>130;10;10;10;10;390</additional_attributes></element><element><id>Relation</id><coordinates><x>650</x><y>365</y><w>740</w><h>200</h></coordinates><panel_attributes>lt=-</panel_attributes><additional_attributes>720;10;10;10;10;180</additional_attributes></element></diagram>
