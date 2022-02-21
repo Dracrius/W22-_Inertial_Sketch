@@ -1,0 +1,93 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>108</x><y>450</y><w>300</w><h>430</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AMainMenu
+--
++playerName: FText
++topScores : std::vector&lt;float&gt;
++lastCar: ACar
++musicVolume: float
++effectVolume: float
++avgSpeed: float
++numFlips : int 
++volumeMenu:AVolumeMenu
++usernameMenu:AUsernameMenu
++localRaceMenu:ALocalRaceMenu
++networkRaceMenu:ANetworkRaceMenu
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# GetSave() : void &lt;virtual&gt;
+# CreateSave() : void &lt;virtual&gt;
+# Save() : void &lt;virtual&gt;
+# Quit() : void &lt;virtual&gt;
+# LoadVolume() : void &lt;virtual&gt;
+# LoadUsername() : void &lt;virtual&gt;
+# LoadLocal() : void &lt;virtual&gt;
+# LoadNetwork() : void &lt;virtual&gt;
+# SetVolume(channel:FText, vol:float) : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>550</y><w>410</w><h>320</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+contains
+
+
+
+1
+</panel_attributes><additional_attributes>10;10;260;10;260;300;390;300</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>520</y><w>410</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+contains
+
+1
+</panel_attributes><additional_attributes>10;10;290;10;290;100;390;100</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>480</y><w>410</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;390;20</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>170</y><w>410</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+contains
+
+
+
+1
+</panel_attributes><additional_attributes>10;310;130;310;130;10;390;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>100</y><w>210</w><h>170</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AVolumeMenu
+--
++musicVolume: float
++effectVolume: float
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# Return() : void &lt;virtual&gt;
+# SetVolume(channel:FText, vol:float) : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>370</y><w>300</w><h>170</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AUsernameMenu
+--
++playerName: FText
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# Return() : void &lt;virtual&gt;
+# SetName(name:FText) : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>570</y><w>300</w><h>250</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+ALocalRaceMenu
+--
++playerName: FText
++topScores : std::vector&lt;float&gt;
++currentCar: ACar
++cars:std::vector&lt;ACar&gt;
++avgSpeed: float
++numFlips : int 
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# Start() : void &lt;virtual&gt;
+# Return() : void &lt;virtual&gt;
+# NextCar() : void &lt;virtual&gt;
+# PreviousCar() : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>830</y><w>300</w><h>180</h></coordinates><panel_attributes>&lt;&lt;ALocalRaceMenu&gt;&gt;
+ANetworkRaceMenu
+--
++lobbyNames: std::vector&lt;Ftext&gt;
++lobbyName: Ftext
++netwrorkRacers: std::vector&lt;FText&gt;
+--
+# GetLobbies() : void &lt;virtual&gt;
+# SetLobby(lobby: Ftext) : void &lt;virtual&gt;
+# GetRacers() : void &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element></diagram>

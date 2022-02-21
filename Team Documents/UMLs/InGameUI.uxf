@@ -1,0 +1,74 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;788&lt;/x&gt;&lt;y&gt;830&lt;/y&gt;&lt;w&gt;300&lt;/w&gt;&lt;h&gt;180&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;&amp;lt;&amp;lt;ALocalRaceMenu&amp;gt;&amp;gt;
+ANetworkRaceMenu
+--
++lobbyNames: std::vector&amp;lt;Ftext&amp;gt;
++lobbyName: Ftext
++netwrorkRacers: std::vector&amp;lt;FText&amp;gt;
+--
+# GetLobbies() : void &amp;lt;virtual&amp;gt;
+# SetLobby(lobby: Ftext) : void &amp;lt;virtual&amp;gt;
+# GetRacers() : void &amp;lt;virtual&amp;gt;&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;788&lt;/x&gt;&lt;y&gt;570&lt;/y&gt;&lt;w&gt;300&lt;/w&gt;&lt;h&gt;250&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;&amp;lt;&amp;lt;AHUD&amp;gt;&amp;gt;
+ALocalRaceMenu
+--
++playerName: FText
++topScores : std::vector&amp;lt;float&amp;gt;
++currentCar: ACar
++cars:std::vector&amp;lt;ACar&amp;gt;
++avgSpeed: float
++numFlips : int 
+--
+# BeginPlay() : void &amp;lt;virtual override&amp;gt;
+# Start() : void &amp;lt;virtual&amp;gt;
+# Return() : void &amp;lt;virtual&amp;gt;
+# NextCar() : void &amp;lt;virtual&amp;gt;
+# PreviousCar() : void &amp;lt;virtual&amp;gt;
++ Tick() : void &amp;lt;virtual override&amp;gt;&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>108</x><y>450</y><w>300</w><h>210</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+APauseMeun
+--
++volumeMenu:AVolumeMenu
++controlsMenu:AControlsMenu
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# Quit() : void &lt;virtual&gt;
+# LoadVolume() : void &lt;virtual&gt;
+# LoadControls() : void &lt;virtual&gt;
+# ReturnToMenu() : void &lt;virtual&gt;
+# Continue() : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>480</y><w>410</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;390;20</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>240</y><w>380</w><h>260</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+contains
+
+
+
+1
+</panel_attributes><additional_attributes>10;240;130;240;130;10;360;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>758</x><y>170</y><w>210</w><h>170</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AVolumeMenu
+--
++musicVolume: float
++effectVolume: float
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# Return() : void &lt;virtual&gt;
+# SetVolume(channel:FText, vol:float) : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>430</y><w>180</w><h>110</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AControlsMenu
+--
+# Return() : void &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>110</x><y>740</y><w>300</w><h>250</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AFinishScreen
+--
++playerName: FText
++racerNames: std::vector&lt;FText&gt;
++finishTimes: std::vector&lt;float&gt;
++playerPos:int
++avgSpeed: float
++numFlips : int 
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# Finish() : void &lt;virtual&gt;
+# QuitToMenu() : void &lt;virtual&gt;
+# Pause() : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element></diagram>
