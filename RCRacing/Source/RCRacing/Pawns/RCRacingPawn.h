@@ -6,6 +6,7 @@
 #include "WheeledVehicle.h"
 #include "RCRacingPawn.generated.h"
 
+class APowerUp;
 class UPhysicalMaterial;
 class UCameraComponent;
 class USpringArmComponent;
@@ -47,6 +48,9 @@ class ARCRacingPawn : public AWheeledVehicle
 	/** Audio component for the engine sound */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UAudioComponent* EngineSoundComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Powerups")
+		TSubclassOf<APowerUp> PowerupClass;
 
 public:
 	ARCRacingPawn();
