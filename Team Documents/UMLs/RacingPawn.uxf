@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>423</x>
+      <y>549</y>
+      <w>189</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; UVehicleWheel&gt;&gt;
+URCRacingWheelRear
+--
++URCRacingWheelRear()
++~URCRacingWheelRear();
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>135</y>
+      <w>450</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; AWheeledVehicle&gt;&gt;
+ARCRacingPawn
+--
++m_Weight: float
++m_SteeringRadius: float
+--
+#Operation(i: int): int
++AVehiclePawn()
++Tick(float DeltaTime) override: virtual void
++ApplyThrottle(value: float): void
++ApplySteering(value: float): void
++OnHandbreakPressed(): void
++OnHandbreakReleased(): void
+
+UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MeshBody")
++MeshBody: UStaticMeshComponent*
+
+UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
++CollisionComponent: UCollisionComponent*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>198</x>
+      <y>549</y>
+      <w>189</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; UVehicleWheel&gt;&gt;
+URCRacingWheelFront
+--
++URCRacingWheelFront();
++~URCRacingWheelFront();
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>279</x>
+      <y>396</y>
+      <w>45</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+has
+
+
+
+1
+</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>396</y>
+      <w>45</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+has
+
+
+
+1
+</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

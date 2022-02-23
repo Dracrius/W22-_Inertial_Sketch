@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>30</y>
+      <w>510</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>&lt; APawn&gt;&gt;
+Driver
+--
++ m_Position: Vector3
++ m_NumberLap: int
++ m_PowerUp: vector&lt;APickUp*&gt;
++ m_LapTime: float
++ m_TotalTime: float
+--
++Driver()
++~Driver()
++UpdateInAirControl(DeltaTime: float ): void
+
+UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "MeshBody")
++MeshBody: UStaticMeshComponent*
+
+UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
++CollisionComponent: UCollisionComponent*
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>470</y>
+      <w>300</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; ADriver&gt;&gt;
+NetworkPlayer
+--
++ m_Position: vector3*
+--
++ANetworkPlayer();
++~ANetwork();
++Tick(float DeltaTime) override: virtual void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>310</y>
+      <w>50</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+has
+
+
+
+1
+</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>310</y>
+      <w>110</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;140.0;10.0;140.0;10.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>310</y>
+      <w>180</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;140.0;10.0;140.0;10.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1030</x>
+      <y>310</y>
+      <w>160</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0;140.0;140.0;140.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>620</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; ADriver&gt;&gt;
+AI
+--
++ m_Car: AVehiclePawn
++ m_Drivers: vector&lt;ADriver*&gt;
+--
++AI()
++~AI()
++Tick(float DeltaTime) override: virtual void
++Fire(): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>620</y>
+      <w>710</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; ADriver&gt;&gt;
+Player
+--
++ m_PickUp: Pickup*
++ m_Car: AVehiclePawn
+--
++APlayer();
++~APlayer(); 
++Tick(float DeltaTime) override: virtual void
++Fire(): void
+
+UPROPERTY(Category = Camera, EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
++SpringArm: USpringArmComponent*
+
+UPROPERTY(Category = Camera, EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
++Camera: UCameraComponent*
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
