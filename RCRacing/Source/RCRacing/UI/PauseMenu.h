@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include <vector>
 #include "GameFramework/HUD.h"
-#include "Menu.generated.h"
+#include "PauseMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RCRACING_API AMenu : public AHUD
+class RCRACING_API APauseMenu : public AHUD
 {
 	GENERATED_BODY()
 public:
@@ -29,39 +29,18 @@ public:
 	float effectVolume;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class AUsernameMenu* usernameMenu;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
 	class AVolumeMenu* volumeMenu;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
 	class AControlsMenu* controlsMenu;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class ALocalRaceMenu* localRaceMenu;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class ANetworkRaceMenu* networkRaceMenu;
-
 protected:
-	AMenu();
+	APauseMenu();
 
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	virtual void GetSave();
-
-	UFUNCTION()
-	virtual void CreateFirstSave();
-
-	UFUNCTION()
-	virtual void Save();
-
-	UFUNCTION()
 	virtual void Quit();
-
-	UFUNCTION()
-	virtual void LoadUsername();
 
 	UFUNCTION()
 	virtual void LoadVolume();
@@ -70,13 +49,10 @@ protected:
 	virtual void LoadControls();
 
 	UFUNCTION()
-	virtual void LoadLocal();
+	virtual void ReturnToMenu();
 
 	UFUNCTION()
-	virtual void LoadNetwork();
-
-	UFUNCTION()
-	virtual void SetVolume(FText channel, float vol);
+	virtual void Continue();
 
 public:
 	virtual void Tick(float DeltaTime) override;
