@@ -4,19 +4,19 @@
 
 #include "CoreMinimal.h"
 #include <vector>
-#include "GameFramework/HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "LocalRaceMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RCRACING_API ALocalRaceMenu : public AHUD
+class RCRACING_API ULocalRaceMenu : public UUserWidget
 {
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-		UFont* menuFont;
+	UFont* menuFont;
 
 	FText playerName;
 
@@ -29,12 +29,10 @@ public:
 	float musicVolume;
 	float effectVolume;
 
-	const FObjectInitializer* mainMenu;
-
 protected:
-	ALocalRaceMenu(const FObjectInitializer& rootMenu);
+	ULocalRaceMenu(const FObjectInitializer& rootMenu);
 
-	virtual void BeginPlay() override;
+	virtual void NativeConstruct() override;
 
 	UFUNCTION()
 	virtual void StartRace();
@@ -49,6 +47,5 @@ protected:
 	virtual void PreviousCar();
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	
 };

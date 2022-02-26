@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include <vector>
-#include "GameFramework/HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "LocalRaceMenu.h"
 #include "NetworkRaceMenu.generated.h"
 
@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class RCRACING_API ANetworkRaceMenu : public ALocalRaceMenu
+class RCRACING_API UNetworkRaceMenu : public ULocalRaceMenu
 {
 	GENERATED_BODY()
 public:
@@ -22,9 +22,9 @@ public:
 	std::vector<FText> NetworkRacers;
 
 protected:
-	ANetworkRaceMenu(const FObjectInitializer& rootMenu);
+	UNetworkRaceMenu(const FObjectInitializer& rootMenu);
 
-	virtual void BeginPlay() override;
+	virtual void NativeConstruct() override;
 
 	UFUNCTION()
 	virtual void GetLobbies();
@@ -36,6 +36,5 @@ protected:
 	virtual void GetRacers();
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	
 };

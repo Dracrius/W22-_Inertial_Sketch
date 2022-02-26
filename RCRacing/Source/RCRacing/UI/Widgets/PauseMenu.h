@@ -4,40 +4,38 @@
 
 #include "CoreMinimal.h"
 #include <vector>
-#include "GameFramework/HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "PauseMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RCRACING_API APauseMenu : public AHUD
+class RCRACING_API UPauseMenu : public UUserWidget
 {
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-		UFont* menuFont;
+	UFont* menuFont;
 
 	FText playerName;
 
-	class ACar* lastCar;
 	float avgSpeed;
-	std::vector<float> topScores;
 	int numFlips;
 
 	float musicVolume;
 	float effectVolume;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class AVolumeMenu* volumeMenu;
+	class UVolumeMenu* volumeMenu;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class AControlsMenu* controlsMenu;
+	class UControlsMenu* controlsMenu;
 
 protected:
-	APauseMenu();
+	UPauseMenu(const FObjectInitializer& rootMenu);
 
-	virtual void BeginPlay() override;
+	virtual void NativeConstruct() override;
 
 	UFUNCTION()
 	virtual void Quit();
@@ -55,6 +53,5 @@ protected:
 	virtual void Continue();
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	
 };

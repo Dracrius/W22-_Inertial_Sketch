@@ -4,27 +4,26 @@
 
 #include "CoreMinimal.h"
 #include <vector>
-#include "GameFramework/HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "UsernameMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RCRACING_API AUsernameMenu : public AHUD
+class RCRACING_API UUsernameMenu : public UUserWidget
 {
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-		UFont* menuFont;
+	UFont* menuFont;
 
 	FText playerName;
 
-	const FObjectInitializer* mainMenu;
 protected:
-	AUsernameMenu(const FObjectInitializer& rootMenu);
+	UUsernameMenu(const FObjectInitializer& rootMenu);
 
-	virtual void BeginPlay() override;
+	virtual void NativeConstruct() override;
 
 	UFUNCTION()
 	virtual void Return();
@@ -33,6 +32,5 @@ protected:
 	virtual void SetName(FText name);
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	
 };

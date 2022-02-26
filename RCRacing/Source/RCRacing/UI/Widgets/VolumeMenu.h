@@ -4,29 +4,27 @@
 
 #include "CoreMinimal.h"
 #include <vector>
-#include "GameFramework/HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "VolumeMenu.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RCRACING_API AVolumeMenu : public AHUD
+class RCRACING_API UVolumeMenu : public UUserWidget
 {
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-		UFont* menuFont;
+	UFont* menuFont;
 
 	float musicVolume;
 	float effectVolume;
 
-	const FObjectInitializer* mainMenu;
-
 protected:
-	AVolumeMenu(const FObjectInitializer& rootMenu);
+	UVolumeMenu(const FObjectInitializer& rootMenu);
 
-	virtual void BeginPlay() override;
+	virtual void NativeConstruct() override;
 
 	UFUNCTION()
 	virtual void Return();
@@ -35,6 +33,5 @@ protected:
 	virtual void SetVolume(FText channel, float vol);
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	
 };

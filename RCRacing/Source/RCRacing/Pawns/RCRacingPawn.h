@@ -50,7 +50,7 @@ class ARCRacingPawn : public AWheeledVehicle
 	UAudioComponent* EngineSoundComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Powerups")
-		TSubclassOf<APowerUp> PowerupClass;
+	TSubclassOf<APowerUp> PowerupClass;
 
 public:
 	ARCRacingPawn();
@@ -119,6 +119,7 @@ public:
 	static const FName EngineAudioRPM;
 
 private:
+	void FlipCar();
 	/** 
 	 * Activate In-Car camera. Enable camera and sets visibility of incar hud display
 	 *

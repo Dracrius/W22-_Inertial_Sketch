@@ -4,19 +4,19 @@
 
 #include "CoreMinimal.h"
 #include <vector>
-#include "GameFramework/HUD.h"
+#include "Blueprint/UserWidget.h"
 #include "FinishScreen.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class RCRACING_API AFinishScreen : public AHUD
+class RCRACING_API UFinishScreen : public UUserWidget
 {
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-		UFont* menuFont;
+	UFont* menuFont;
 
 	FText playerName;
 	int playerPos;
@@ -26,13 +26,13 @@ public:
 	float avgSpeed;
 	int numFlips;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-		class APauseMenu* pauseMenu;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenu")
+	class UPauseMenu* pauseMenu;
 
 protected:
-	AFinishScreen();
+	UFinishScreen(const FObjectInitializer& rootMenu);
 
-	virtual void BeginPlay() override;
+	virtual void NativeConstruct() override;
 
 	UFUNCTION()
 	virtual void Finish();
@@ -44,6 +44,5 @@ protected:
 	virtual void LoadPauseMenu();
 
 public:
-	virtual void Tick(float DeltaTime) override;
 	
 };

@@ -18,6 +18,7 @@
 #include "GameFramework/Controller.h"
 #include "UObject/ConstructorHelpers.h"
 #include "GameFramework/PlayerController.h"
+#include "Editor/EditorEngine.h"
 
 #ifndef HMD_MODULE_INCLUDED
 #define HMD_MODULE_INCLUDED 0
@@ -126,10 +127,11 @@ ARCRacingPawn::ARCRacingPawn()
 	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->TargetArmLength = 125.0f;
 	SpringArm->bEnableCameraLag = false;
-	SpringArm->bEnableCameraRotationLag = false;
-	SpringArm->bInheritPitch = true;
+	SpringArm->bEnableCameraRotationLag = true;
+	SpringArm->CameraRotationLagSpeed = 5.f;
+	SpringArm->bInheritPitch = false;
 	SpringArm->bInheritYaw = true;
-	SpringArm->bInheritRoll = true;
+	SpringArm->bInheritRoll = false;
 
 	// Create the chase camera component 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("ChaseCamera"));
@@ -196,6 +198,8 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 	PlayerInputComponent->BindAction("SwitchCamera", IE_Pressed, this, &ARCRacingPawn::OnToggleCamera);
 
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARCRacingPawn::OnResetVR); 
+
+	PlayerInputComponent->BindAction("FlipCar", IE_Pressed, this, &ARCRacingPawn::FlipCar);
 }
 
 void ARCRacingPawn::MoveForward(float Val)
@@ -222,6 +226,21 @@ void ARCRacingPawn::OnHandbrakeReleased()
 void ARCRacingPawn::OnToggleCamera()
 {
 	EnableIncarView(!bInCarCameraActive);
+}
+
+void ARCRacingPawn::FlipCar()
+{
+	//GetMesh()->SetSimulatePhysics(false);
+
+	FVector pos = GetMesh()->GetSkeletalCenterOfMass();
+	FRotator rot = GetActorRotation();
+
+	pos.Z += 10.f;
+	rot.Roll = 0.f;
+	rot.Pitch = 0.f;
+	
+	GetMesh()->SetWorldLocationAndRotation(pos, rot, false, nullptr, ETeleportType::ResetPhysics);
+	//GetMesh()->SetSimulatePhysics(true);
 }
 
 void ARCRacingPawn::EnableIncarView(const bool bState)
