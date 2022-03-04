@@ -6,7 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "PowerUp.generated.h"
 
+class UStaticMeshComponent;
 class UBoxComponent;
+
 UCLASS()
 class RCRACING_API APowerUp : public AActor
 {
@@ -15,6 +17,7 @@ class RCRACING_API APowerUp : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APowerUp();
+	virtual void Use(FVector direction);
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpBox")
@@ -30,17 +33,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void RandomizePowerup();
+	bool bImGoingUp = true;
 
 	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-
+		virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	UFUNCTION()
-		void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	void FreezePowerUp();
-	void TrapPowerUp();
-	void BowlingBallPowerUp();
-	void FireworkPowerUp();
+	bool m_IsActive;
 
+	void SetActive(bool isActive) { m_IsActive = isActive; }
+
+	bool GetActive() { return m_IsActive; }
 };

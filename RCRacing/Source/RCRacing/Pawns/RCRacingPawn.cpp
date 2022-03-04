@@ -13,22 +13,19 @@
 #include "Sound/SoundCue.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
 #include "WheeledVehicleMovementComponent4W.h"
+#include "Components/BoxComponent.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/Engine.h"
 #include "GameFramework/Controller.h"
 #include "UObject/ConstructorHelpers.h"
 #include "GameFramework/PlayerController.h"
+#include "RCRacing/Actors/BowlingBall_PowerUp.h"
+#include "RCRacing/Actors/PowerUp.h"
 #include "Editor/EditorEngine.h"
+#include "RCRacing/Actors/Firework_PowerUp.h"
+#include "RCRacing/Actors/Freeze_PowerUp.h"
+#include "RCRacing/Actors/Trap_PowerUp.h"
 
-#ifndef HMD_MODULE_INCLUDED
-#define HMD_MODULE_INCLUDED 0
-#endif
-
-// Needed for VR Headset
-#if HMD_MODULE_INCLUDED
-#include "IXRTrackingSystem.h"
-#include "HeadMountedDisplayFunctionLibrary.h"
-#endif // HMD_MODULE_INCLUDED
 
 const FName ARCRacingPawn::LookUpBinding("LookUp");
 const FName ARCRacingPawn::LookRightBinding("LookRight");
@@ -179,6 +176,8 @@ ARCRacingPawn::ARCRacingPawn()
 
 	bIsLowFriction = false;
 	bInReverseGear = false;
+
+	GetMesh()->OnComponentBeginOverlap.AddDynamic(this, &ARCRacingPawn::OnOverlapBegin);
 }
 
 void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -197,7 +196,7 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 	PlayerInputComponent->BindAction("Handbrake", IE_Released, this, &ARCRacingPawn::OnHandbrakeReleased);
 	PlayerInputComponent->BindAction("SwitchCamera", IE_Pressed, this, &ARCRacingPawn::OnToggleCamera);
 
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARCRacingPawn::OnResetVR); 
+	PlayerInputComponent->BindAction("UsePowerUp", IE_Pressed, this, &ARCRacingPawn::OnUsePowerUp);
 
 	PlayerInputComponent->BindAction("FlipCar", IE_Pressed, this, &ARCRacingPawn::FlipCar);
 }
@@ -251,7 +250,6 @@ void ARCRacingPawn::EnableIncarView(const bool bState)
 		
 		if (bState == true)
 		{
-			OnResetVR();
 			Camera->Deactivate();
 			InternalCamera->Activate();
 		}
@@ -283,12 +281,7 @@ void ARCRacingPawn::Tick(float Delta)
 	SetupInCarHUD();
 
 	bool bHMDActive = false;
-#if HMD_MODULE_INCLUDED
-	if ((GEngine->XRSystem.IsValid() == true ) && ( (GEngine->XRSystem->IsHeadTrackingAllowed() == true) || (GEngine->IsStereoscopic3D() == true)))
-	{
-		bHMDActive = true;
-	}
-#endif // HMD_MODULE_INCLUDED
+
 	if( bHMDActive == false )
 	{
 		if ( (InputComponent) && (bInCarCameraActive == true ))
@@ -303,6 +296,8 @@ void ARCRacingPawn::Tick(float Delta)
 	// Pass the engine RPM to the sound component
 	float RPMToAudioScale = 2500.0f / GetVehicleMovement()->GetEngineMaxRotationSpeed();
 	EngineSoundComponent->SetFloatParameter(EngineAudioRPM, GetVehicleMovement()->GetEngineRotationSpeed()*RPMToAudioScale);
+
+	//Powerups
 }
 
 void ARCRacingPawn::BeginPlay()
@@ -316,25 +311,9 @@ void ARCRacingPawn::BeginPlay()
 	InCarGear->SetVisibility(bInCarCameraActive);
 
 	// Enable in car view if HMD is attached
-#if HMD_MODULE_INCLUDED
-	bWantInCar = UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled();
-#endif // HMD_MODULE_INCLUDED
-
 	EnableIncarView(bWantInCar);
 	// Start an engine sound playing
 	EngineSoundComponent->Play();
-}
-
-void ARCRacingPawn::OnResetVR()
-{
-#if HMD_MODULE_INCLUDED
-	if (GEngine->XRSystem.IsValid())
-	{
-		GEngine->XRSystem->ResetOrientationAndPosition();
-		InternalCamera->SetRelativeLocation(InternalCameraOrigin);
-		GetController()->SetControlRotation(FRotator());
-	}
-#endif // HMD_MODULE_INCLUDED
 }
 
 void ARCRacingPawn::UpdateHUDStrings()
@@ -356,6 +335,71 @@ void ARCRacingPawn::UpdateHUDStrings()
 		GearDisplayString = (Gear == 0) ? LOCTEXT("N", "N") : FText::AsNumber(Gear);
 	}
 
+}
+
+void ARCRacingPawn::OnUsePowerUp()
+{
+	if (PowerupClass)
+	{
+		if (CurrentPowerUp)
+		{
+			CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+			CurrentPowerUp->SetActive(true);
+			CurrentPowerUp->Use(GetActorForwardVector());
+			CurrentPowerUp = nullptr;
+		}
+	}
+}
+
+void ARCRacingPawn::SetCurrentPowerUp(int power)
+{
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	if (power == 1)
+	{
+		BowlingBall_PowerUp = GetWorld()->SpawnActor<APowerUp>(BowlingBall_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		CurrentPowerUp = BowlingBall_PowerUp;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Bowling Ball!"));
+	}
+	else if (power == 2)
+	{
+		Firework_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		
+		CurrentPowerUp = Firework_PowerUp;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Firework!"));
+	}
+	else if (power == 3)
+	{
+		Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Freeze_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		CurrentPowerUp = Freeze_PowerUp;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Freeze!"));
+	}
+	else if (power == 4)
+	{
+		Trap_PowerUp = GetWorld()->SpawnActor<APowerUp>(Trap_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		CurrentPowerUp = Trap_PowerUp;
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Trap!"));
+	}
+
+	CurrentPowerUp->SetActive(false);
+	CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	CurrentPowerUp->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, "BowlingBallSocket");
+}
+
+void ARCRacingPawn::Trapped()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been trapped!"));
+}
+
+void ARCRacingPawn::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor != this)
+	{
+		int i = 5;
+		//CarMeshComponent
+	}
 }
 
 void ARCRacingPawn::SetupInCarHUD()

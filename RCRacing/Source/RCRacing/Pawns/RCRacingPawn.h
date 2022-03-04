@@ -6,6 +6,11 @@
 #include "WheeledVehicle.h"
 #include "RCRacingPawn.generated.h"
 
+class AFirework_PowerUp;
+class AFreeze_PowerUp;
+class ATrap_PowerUp;
+class ABowlingBall_PowerUp;
+class UBoxComponent;
 class APowerUp;
 class UPhysicalMaterial;
 class UCameraComponent;
@@ -21,63 +26,64 @@ class ARCRacingPawn : public AWheeledVehicle
 {
 	GENERATED_BODY()
 
-	/** Spring arm that will offset the camera */
-	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	USpringArmComponent* SpringArm;
+		/** Spring arm that will offset the camera */
+		UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+		USpringArmComponent* SpringArm;
 
 	/** Camera component that will be our viewpoint */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* Camera;
+		UCameraComponent* Camera;
 
 	/** SCene component for the In-Car view origin */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class USceneComponent* InternalCameraBase;
+		class USceneComponent* InternalCameraBase;
 
 	/** Camera component for the In-Car view */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UCameraComponent* InternalCamera;
+		UCameraComponent* InternalCamera;
 
 	/** Text component for the In-Car speed */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UTextRenderComponent* InCarSpeed;
+		UTextRenderComponent* InCarSpeed;
 
 	/** Text component for the In-Car gear */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UTextRenderComponent* InCarGear;
+		UTextRenderComponent* InCarGear;
 
 	/** Audio component for the engine sound */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	UAudioComponent* EngineSoundComponent;
+		UAudioComponent* EngineSoundComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Powerups")
-	TSubclassOf<APowerUp> PowerupClass;
+
+	UPROPERTY(EditAnywhere, Category = "Powerups")
+		TSubclassOf<APowerUp> PowerupClass;
 
 public:
 	ARCRacingPawn();
 
 	/** The current speed as a string eg 10 km/h */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly)
-	FText SpeedDisplayString;
+		FText SpeedDisplayString;
 
 	/** The current gear as a string (R,N, 1,2 etc) */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly)
-	FText GearDisplayString;
+		FText GearDisplayString;
 
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly)
-	/** The color of the incar gear text in forward gears */
-	FColor	GearDisplayColor;
+		/** The color of the incar gear text in forward gears */
+		FColor	GearDisplayColor;
 
 	/** The color of the incar gear text when in reverse */
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly)
-	FColor	GearDisplayReverseColor;
+		FColor	GearDisplayReverseColor;
 
 	/** Are we using incar camera */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly)
-	bool bInCarCameraActive;
+		bool bInCarCameraActive;
 
 	/** Are we in reverse gear */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly)
-	bool bInReverseGear;
+		bool bInReverseGear;
 
 	/** Initial offset of incar camera */
 	FVector InternalCameraOrigin;
@@ -88,8 +94,14 @@ public:
 
 	// Begin Actor interface
 	virtual void Tick(float Delta) override;
+
 protected:
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+
 
 public:
 	// End Actor interface
@@ -111,8 +123,6 @@ public:
 	void OnHandbrakeReleased();
 	/** Switch between cameras */
 	void OnToggleCamera();
-	/** Handle reset VR device */
-	void OnResetVR();
 
 	static const FName LookUpBinding;
 	static const FName LookRightBinding;
@@ -151,6 +161,45 @@ public:
 	FORCEINLINE UTextRenderComponent* GetInCarGear() const { return InCarGear; }
 	/** Returns EngineSoundComponent subobject **/
 	FORCEINLINE UAudioComponent* GetEngineSoundComponent() const { return EngineSoundComponent; }
+
+public:
+	void OnUsePowerUp();
+
+	APowerUp* CurrentPowerUp = nullptr;
+
+
+	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
+		TSubclassOf<APowerUp> BowlingBall_PowerUpClass;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
+		TSubclassOf<APowerUp> Firework_PowerUpClass;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
+		TSubclassOf<APowerUp> Freeze_PowerUpClass;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
+		TSubclassOf<APowerUp> Trap_PowerUpClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
+		APowerUp* BowlingBall_PowerUp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
+		APowerUp* Firework_PowerUp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
+		APowerUp* Freeze_PowerUp;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
+		APowerUp* Trap_PowerUp;
+
+	void SetCurrentPowerUp(APowerUp* power);
+	void SetCurrentPowerUp(int power);
+
+	void Trapped();
+
+	UPROPERTY(EditAnywhere, Category = "Mesh")
+		USkeletalMeshComponent* CarMeshComponent;
+
 };
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
