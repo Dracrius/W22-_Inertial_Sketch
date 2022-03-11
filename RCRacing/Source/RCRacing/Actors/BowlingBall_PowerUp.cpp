@@ -48,12 +48,15 @@ void ABowlingBall_PowerUp::Tick(float DeltaTime)
 
 void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (OtherActor != this)
+	if (isPicked)
 	{
-		ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
+		if (OtherActor != this)
+		{
+			ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
 
-		if (playerPawn)
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle_Fuse, this, &ABowlingBall_PowerUp::Explode, 0.0f, false);
+			if (playerPawn)
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle_Fuse, this, &ABowlingBall_PowerUp::Explode, 0.0f, false);
+		}
 	}
 }
 

@@ -28,6 +28,7 @@ APowerUp::APowerUp()
 void APowerUp::Use(FVector direction)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Powerup: USED!"));
+	isPicked = false;
 }
 
 // Called when the game starts or when spawned
@@ -63,19 +64,22 @@ void APowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 
 void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,	AActor* OtherActor,	UPrimitiveComponent* OtherComp,	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor != this)
+	if (!isPicked)
 	{
-		ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
-
-		if (playerPawn)
+		if (OtherActor != this)
 		{
-			int i = FMath::RandRange(1, 4);
-			playerPawn->SetCurrentPowerUp(4);
+			ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
 
-			//if(this->IsA<ABowlingBall_PowerUp>())
+			if (playerPawn)
+			{
+				int i = FMath::RandRange(1, 4);
+				playerPawn->SetCurrentPowerUp(i);
 
-			//playerPawn->SetCurrentPowerUp(this);
-			Destroy();
+				//if(this->IsA<ABowlingBall_PowerUp>())
+
+				//playerPawn->SetCurrentPowerUp(this);
+				Destroy();
+			}
 		}
 	}
 }

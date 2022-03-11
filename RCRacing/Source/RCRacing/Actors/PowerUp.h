@@ -45,4 +45,8 @@ public:
 	void SetActive(bool isActive) { m_IsActive = isActive; }
 
 	bool GetActive() { return m_IsActive; }
+
+	void SetPicked(bool picked) { isPicked = picked; }
+
+	bool isPicked = false;
 };

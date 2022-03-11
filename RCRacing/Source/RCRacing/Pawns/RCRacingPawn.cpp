@@ -377,7 +377,10 @@ void ARCRacingPawn::OnUsePowerUp()
 			//		PrimComp->SetSimulatePhysics(true);
 			//	}
 			//}
+			
+			CurrentPowerUp->SetPicked(true);
 			CurrentPowerUp->SetActorEnableCollision(true);
+			
 			CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			CurrentPowerUp->SetActive(true);
 			CurrentPowerUp->Use(GetActorForwardVector());

@@ -28,14 +28,17 @@ void ATrap_PowerUp::Tick(float DeltaTime)
 
 void ATrap_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor != this)
+	if (isPicked)
 	{
-		ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
-
-		if (playerPawn)
+		if (OtherActor != this)
 		{
-			playerPawn->Trapped();
-			//Destroy();
+			ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
+
+			if (playerPawn)
+			{
+				playerPawn->Trapped();
+				Destroy();
+			}
 		}
 	}
 }

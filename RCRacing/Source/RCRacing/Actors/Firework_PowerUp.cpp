@@ -86,4 +86,8 @@ void AFirework_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 
 void AFirework_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	if (isPicked)
+	{
+		
+	}
 }
