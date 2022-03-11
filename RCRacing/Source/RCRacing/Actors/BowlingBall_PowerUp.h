@@ -20,6 +20,9 @@ public:
 	virtual void Use(FVector direction) override;
 	void Explode();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
+		USphereComponent* PowerupSphere;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

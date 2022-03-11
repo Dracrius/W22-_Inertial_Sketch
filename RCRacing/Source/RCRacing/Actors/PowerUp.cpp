@@ -70,7 +70,7 @@ void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,	AActor* 
 		if (playerPawn)
 		{
 			int i = FMath::RandRange(1, 4);
-			playerPawn->SetCurrentPowerUp(i);
+			playerPawn->SetCurrentPowerUp(4);
 
 			//if(this->IsA<ABowlingBall_PowerUp>())
 

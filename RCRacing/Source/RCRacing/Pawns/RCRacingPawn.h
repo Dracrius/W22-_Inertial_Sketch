@@ -129,7 +129,7 @@ public:
 	static const FName EngineAudioRPM;
 
 private:
-	void FlipCar();
+	void FlipCar(float DeltaTime);
 	/** 
 	 * Activate In-Car camera. Enable camera and sets visibility of incar hud display
 	 *
@@ -196,6 +196,7 @@ public:
 	void SetCurrentPowerUp(int power);
 
 	void Trapped();
+	void Freezed();
 
 	UPROPERTY(EditAnywhere, Category = "Mesh")
 		USkeletalMeshComponent* CarMeshComponent;

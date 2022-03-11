@@ -198,7 +198,7 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 
 	PlayerInputComponent->BindAction("UsePowerUp", IE_Pressed, this, &ARCRacingPawn::OnUsePowerUp);
 
-	PlayerInputComponent->BindAction("FlipCar", IE_Pressed, this, &ARCRacingPawn::FlipCar);
+	//PlayerInputComponent->BindAction("FlipCar", IE_Pressed, this, &ARCRacingPawn::FlipCar);
 }
 
 void ARCRacingPawn::MoveForward(float Val)
@@ -227,19 +227,44 @@ void ARCRacingPawn::OnToggleCamera()
 	EnableIncarView(!bInCarCameraActive);
 }
 
-void ARCRacingPawn::FlipCar()
+void ARCRacingPawn::FlipCar(float DeltaTime)
 {
-	//GetMesh()->SetSimulatePhysics(false);
+	float KPH = FMath::Abs(GetVehicleMovement()->GetForwardSpeed()) * 0.036f;
+	int32 KPH_int = FMath::FloorToInt(KPH);
 
-	FVector pos = GetMesh()->GetSkeletalCenterOfMass();
-	FRotator rot = GetActorRotation();
+	if (KPH_int == 0)
+	{
+		if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+		{
+			FCollisionQueryParams QueryParams;
+			QueryParams.AddIgnoredActor(this);
 
-	pos.Z += 10.f;
-	rot.Roll = 0.f;
-	rot.Pitch = 0.f;
-	
-	GetMesh()->SetWorldLocationAndRotation(pos, rot, false, nullptr, ETeleportType::ResetPhysics);
-	//GetMesh()->SetSimulatePhysics(true);
+			const FVector TraceStart = GetActorLocation() + FVector(0.0f, 0.0f, 50.0f);
+			const FVector TraceEnd = GetActorLocation() + FVector(0.0f, 0.0f, 200.0f);
+
+			FHitResult Hit;
+
+			const bool bInAir = GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
+			const bool bNotGrounded = FVector::DotProduct(GetActorUpVector(), FVector::UpVector) < 0.1f;
+
+			if (bInAir || bNotGrounded)
+			{
+				const float ForwardInput = InputComponent->GetAxisValue("MoveForward");
+				const float RightInput = InputComponent->GetAxisValue("MoveRight");
+
+				const float AirMovementForcePitch = 2.0f;
+				const float AirMovementForceRoll = !bInAir && bNotGrounded ? 15.0f : 2.0f;
+
+				if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
+				{
+					const FVector MovementVector = FVector(RightInput * AirMovementForceRoll, ForwardInput * AirMovementForcePitch, 0.0f) * DeltaTime * 200.0f;
+					const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
+					VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
+				}
+			}
+		}
+	}
+
 }
 
 void ARCRacingPawn::EnableIncarView(const bool bState)
@@ -298,6 +323,8 @@ void ARCRacingPawn::Tick(float Delta)
 	EngineSoundComponent->SetFloatParameter(EngineAudioRPM, GetVehicleMovement()->GetEngineRotationSpeed()*RPMToAudioScale);
 
 	//Powerups
+
+	FlipCar(Delta);
 }
 
 void ARCRacingPawn::BeginPlay()
@@ -343,6 +370,14 @@ void ARCRacingPawn::OnUsePowerUp()
 	{
 		if (CurrentPowerUp)
 		{
+			//for (UActorComponent* Component : GetComponents())
+			//{
+			//	if (UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(Component))
+			//	{
+			//		PrimComp->SetSimulatePhysics(true);
+			//	}
+			//}
+			CurrentPowerUp->SetActorEnableCollision(true);
 			CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 			CurrentPowerUp->SetActive(true);
 			CurrentPowerUp->Use(GetActorForwardVector());
@@ -360,37 +395,69 @@ void ARCRacingPawn::SetCurrentPowerUp(int power)
 	if (power == 1)
 	{
 		BowlingBall_PowerUp = GetWorld()->SpawnActor<APowerUp>(BowlingBall_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+
 		CurrentPowerUp = BowlingBall_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Bowling Ball!"));
 	}
 	else if (power == 2)
 	{
 		Firework_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
-		
+
 		CurrentPowerUp = Firework_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Firework!"));
 	}
 	else if (power == 3)
 	{
 		Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Freeze_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		
 		CurrentPowerUp = Freeze_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Freeze!"));
 	}
 	else if (power == 4)
 	{
 		Trap_PowerUp = GetWorld()->SpawnActor<APowerUp>(Trap_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+
 		CurrentPowerUp = Trap_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Trap!"));
 	}
 
 	CurrentPowerUp->SetActive(false);
+	CurrentPowerUp->SetActorEnableCollision(false);
+
 	CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	CurrentPowerUp->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, "BowlingBallSocket");
+	//CurrentPowerUp->DisableComponentsSimulatePhysics();
 }
 
 void ARCRacingPawn::Trapped()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been trapped!"));
+
+	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+	{
+		const float AirMovementForceRoll = 250.0f;
+
+		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
+		{
+			const FVector MovementVector = FVector(AirMovementForceRoll, 0.0f, 0.0f);
+			const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
+			VehicleMesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 1000.f), true);
+			VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
+		}
+	}
+}
+
+void ARCRacingPawn::Freezed()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been freezed!"));
+
+	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+	{
+		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
+		{
+			VehicleMesh->SetPhysicsLinearVelocity(FVector(0), false);
+		}
+	}
 }
 
 void ARCRacingPawn::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

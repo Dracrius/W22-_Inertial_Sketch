@@ -40,15 +40,25 @@ void AFreeze_PowerUp::Tick(float DeltaTime)
 
 void AFreeze_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	//if (OtherActor != this)
+	//{
+	//	ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
+
+	//	if (playerPawn)
+	//		GetWorld()->GetTimerManager().SetTimer(TimerHandle_Fuse, this, &AFreeze_PowerUp::Explode, 0.0f, false);
+	//}
+}
+
+void AFreeze_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
 	if (OtherActor != this)
 	{
 		ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
 
 		if (playerPawn)
-			GetWorld()->GetTimerManager().SetTimer(TimerHandle_Fuse, this, &AFreeze_PowerUp::Explode, 0.0f, false);
+		{
+			playerPawn->Freezed();
+			//Destroy();
+		}
 	}
-}
-
-void AFreeze_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
 }

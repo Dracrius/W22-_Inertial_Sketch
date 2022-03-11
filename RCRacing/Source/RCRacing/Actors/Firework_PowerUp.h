@@ -28,6 +28,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		URadialForceComponent* RadialForceComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
+		USphereComponent* PowerupSphere;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

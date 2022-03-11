@@ -14,16 +14,20 @@ ABowlingBall_PowerUp::ABowlingBall_PowerUp()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	PowerupSphere = CreateDefaultSubobject<USphereComponent>(TEXT("PowerupSphere"));
+	PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
+	RootComponent = PowerupSphere;
 }
 
 void ABowlingBall_PowerUp::Use(FVector direction)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
 
-	PowerupBox->SetSimulatePhysics(true);
-	PowerupBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	PowerupBox->SetNotifyRigidBodyCollision(true);
-	PowerupBox->GetBodyInstance()->AddForce(-direction * 10000 * PowerupBox->GetMass());
+	PowerupSphere->SetSimulatePhysics(true);
+	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	PowerupSphere->SetNotifyRigidBodyCollision(true);
+	PowerupSphere->GetBodyInstance()->AddForce(-direction * 10000 * PowerupBox->GetMass());
 }
 
 void ABowlingBall_PowerUp::Explode()
