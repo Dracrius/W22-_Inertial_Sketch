@@ -109,6 +109,9 @@ public:
 	/** Handle pressing forwards */
 	void MoveForward(float Val);
 
+
+	void MoveSlower();
+
 	/** Setup the strings used on the hud */
 	void SetupInCarHUD();
 
@@ -130,11 +133,7 @@ public:
 
 private:
 	void FlipCar(float DeltaTime);
-	/** 
-	 * Activate In-Car camera. Enable camera and sets visibility of incar hud display
-	 *
-	 * @param	bState true will enable in car view and set visibility of various
-	 */
+
 	void EnableIncarView( const bool bState );
 
 	/** Update the gear and speed strings */
@@ -192,6 +191,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
 		APowerUp* Trap_PowerUp;
 
+	UPROPERTY(EditAnywhere, Category = "PowerUp")
+		int BoostAmount = 1000.0f;
 
 	void SetCurrentPowerUp(APowerUp* power);
 	void SetCurrentPowerUp(int power);
@@ -199,6 +200,7 @@ public:
 	void Trapped();
 	void Freezed(float deltaTime);
 	void GotHit();
+	void Boost();
 };
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

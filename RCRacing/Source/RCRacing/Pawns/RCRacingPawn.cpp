@@ -87,13 +87,11 @@ ARCRacingPawn::ARCRacingPawn()
 	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(0.0f, 400.0f);
 	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(1890.0f, 500.0f);
 	Vehicle4W->EngineSetup.TorqueCurve.GetRichCurve()->AddKey(5730.0f, 400.0f);
- 
 	// Adjust the steering 
 	Vehicle4W->SteeringCurve.GetRichCurve()->Reset();
 	Vehicle4W->SteeringCurve.GetRichCurve()->AddKey(0.0f, 1.0f);
 	Vehicle4W->SteeringCurve.GetRichCurve()->AddKey(40.0f, 0.7f);
 	Vehicle4W->SteeringCurve.GetRichCurve()->AddKey(120.0f, 0.6f);
-			
  	// Transmission	
 	// We want 4wd
 	Vehicle4W->DifferentialSetup.DifferentialType = EVehicleDifferential4W::LimitedSlip_4W;
@@ -144,10 +142,10 @@ ARCRacingPawn::ARCRacingPawn()
 	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
 	InternalCameraBase->SetupAttachment(GetMesh());
 
-	InternalCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("InternalCamera"));
-	InternalCamera->bUsePawnControlRotation = false;
-	InternalCamera->FieldOfView = 90.f;
-	InternalCamera->SetupAttachment(InternalCameraBase);
+	//InternalCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("InternalCamera"));
+	//InternalCamera->bUsePawnControlRotation = false;
+	//InternalCamera->FieldOfView = 90.f;
+	//InternalCamera->SetupAttachment(InternalCameraBase);
 
 	// In car HUD
 	// Create text render component for in car speed display
@@ -204,7 +202,6 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 void ARCRacingPawn::MoveForward(float Val)
 {
 	GetVehicleMovementComponent()->SetThrottleInput(Val);
-
 }
 
 void ARCRacingPawn::MoveRight(float Val)
@@ -471,13 +468,21 @@ void ARCRacingPawn::GotHit()
 	}
 }
 
+void ARCRacingPawn::Boost()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Boost!"));
+	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+	{
+		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
+		{
+			FVector Force = GetActorForwardVector() * BoostAmount;
+			VehicleMesh->SetPhysicsLinearVelocity(Force, false);
+		}
+	}
+}
+
 void ARCRacingPawn::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor != this)
-	{
-		int i = 5;
-		//CarMeshComponent
-	}
 }
 
 void ARCRacingPawn::SetupInCarHUD()

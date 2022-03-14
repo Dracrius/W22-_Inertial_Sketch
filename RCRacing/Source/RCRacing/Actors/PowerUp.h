@@ -21,9 +21,6 @@ public:
 	virtual void Use(FVector direction);
 
 protected:
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpBox")
-	//	UBoxComponent* PowerupBox;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
 		USphereComponent* PowerupSphere;
 
@@ -64,9 +61,9 @@ public:
 		float m_MaxCooldown = 2.0f;
 
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
-	float TimeUntilDespawn;
+		float TimeUntilDespawn;
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
-	float MaxTimeUntilDespawn = 5.0f;
+		float MaxTimeUntilDespawn = 5.0f;
 
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 	int RandomPowerUp;
