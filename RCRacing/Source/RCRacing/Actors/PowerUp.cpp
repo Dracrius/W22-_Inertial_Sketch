@@ -12,16 +12,16 @@ APowerUp::APowerUp()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PowerupBox = CreateDefaultSubobject<UBoxComponent>(TEXT("PowerupBox"));
-	PowerupBox->SetRelativeRotation(FRotator(-45.0f, 0, 0));
-	PowerupBox->SetCollisionProfileName("BlockAllDynamic");
-	PowerupBox->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Overlap);
-	PowerupBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	RootComponent = PowerupBox;
+	PowerupSphere = CreateDefaultSubobject<USphereComponent>(TEXT("PowerupSphere"));
+	PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
+	PowerupSphere->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Overlap);
+	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	RootComponent = PowerupSphere;
 
 	PowerupMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PowerupMesh"));
 	PowerupMesh->SetRelativeRotation(FRotator(-45.0f, 0, 0));
 	PowerupMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	PowerupMesh->SetRelativeLocation(FVector(0));
 	PowerupMesh->SetupAttachment(RootComponent);
 }
 
@@ -29,6 +29,7 @@ void APowerUp::Use(FVector direction)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Powerup: USED!"));
 	isPicked = false;
+	PowerupSphere->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 }
 
 // Called when the game starts or when spawned
@@ -36,9 +37,8 @@ void APowerUp::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PowerupBox->OnComponentHit.AddDynamic(this, &APowerUp::OnHit);
-	PowerupBox->OnComponentBeginOverlap.AddDynamic(this, &APowerUp::OnOverlapBegin);
-	
+	PowerupSphere->OnComponentHit.AddDynamic(this, &APowerUp::OnHit);
+	PowerupSphere->OnComponentBeginOverlap.AddDynamic(this, &APowerUp::OnOverlapBegin);
 }
 
 // Called every frame
@@ -72,8 +72,8 @@ void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,	AActor* 
 
 			if (playerPawn)
 			{
-				int i = FMath::RandRange(1, 4);
-				playerPawn->SetCurrentPowerUp(i);
+				RandomPowerUp = FMath::RandRange(1, 4);
+				playerPawn->SetCurrentPowerUp(RandomPowerUp);
 
 				//if(this->IsA<ABowlingBall_PowerUp>())
 

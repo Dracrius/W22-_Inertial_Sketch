@@ -7,6 +7,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "RCRacing/Pawns/RCRacingPawn.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 class ARCRacingPawn;
 // Sets default values
@@ -19,49 +20,65 @@ AFreeze_PowerUp::AFreeze_PowerUp()
 void AFreeze_PowerUp::Use(FVector direction)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Freeze: USED!"));
-	//PowerupBox->GetBodyInstance()->AddForce(-direction * 100000 * PowerupBox->GetMass());
 }
 
 void AFreeze_PowerUp::Explode()
 {
 }
+
 // Called when the game starts or when spawned
 void AFreeze_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
 void AFreeze_PowerUp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (isPicked && isUsed)
+	{
+		m_Cooldown += DeltaTime;
+		if (m_Cooldown > m_MaxCooldown)
+		{
+			const FVector Start = GetActorLocation();
+			const FVector End = GetActorLocation();
+
+			TArray<AActor*> ActorsToIgnore;
+
+			//ActorsToIgnore.Add(GetOwner());
+			TArray<FHitResult> HitArray;
+
+			const bool Hit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), Start, End, TraceRadius, ETraceTypeQuery::TraceTypeQuery1,
+				false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitArray, true, FLinearColor::Green, FLinearColor::Blue, 0.0f);
+
+			if (Hit)
+			{
+				m_Cooldown += DeltaTime;
+				if (m_Cooldown > m_MaxCooldown)
+				{
+					for (const FHitResult HitResult : HitArray)
+					{
+						ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(HitResult.GetActor());
+						if (playerPawn)
+						{
+							playerPawn->Freezed(DeltaTime);
+						}
+					}
+				}
+			}
+			
+			Destroy();
+			m_Cooldown = 0.0f;
+		}
+	}
 }
 
 void AFreeze_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//if (OtherActor != this)
-	//{
-	//	ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
-
-	//	if (playerPawn)
-	//		GetWorld()->GetTimerManager().SetTimer(TimerHandle_Fuse, this, &AFreeze_PowerUp::Explode, 0.0f, false);
-	//}
 }
 
 void AFreeze_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (isPicked)
-	{
-		if (OtherActor != this)
-		{
-			ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
-
-			if (playerPawn)
-			{
-				playerPawn->Freezed();
-				Destroy();
-			}
-		}
-	}
 }

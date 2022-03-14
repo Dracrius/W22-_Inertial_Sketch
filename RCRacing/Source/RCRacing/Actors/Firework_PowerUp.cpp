@@ -2,12 +2,12 @@
 
 
 #include "Firework_PowerUp.h"
+
 #include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
-#include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystem.h"
-#include "PhysicsEngine/RadialForceComponent.h"
+#include "RCRacing/Pawns/RCRacingPawn.h"
 
 class ARCRacingPawn;
 // Sets default values
@@ -16,49 +16,28 @@ AFirework_PowerUp::AFirework_PowerUp()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PowerupSphere = CreateDefaultSubobject<USphereComponent>(TEXT("PowerupSphere"));
-	PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
-	//PowerupSphere->SetCollisionResponseToChannel(ECC_Vehicle, ECR_Overlap);
-	//PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	RootComponent = PowerupSphere;
-
-	//VFX
 	ExplosionTemplate = CreateDefaultSubobject<UParticleSystem>(TEXT("ExplosionEffectComponent"));
-
-	RadialForceComponent = CreateDefaultSubobject<URadialForceComponent>(TEXT("RadialForceComponent"));
-	RadialForceComponent->bImpulseVelChange = true;
-	RadialForceComponent->ForceStrength = 1000.0f;
-	RadialForceComponent->ImpulseStrength = 1000.0f;
-	RadialForceComponent->Radius = 250.0f;
-	RadialForceComponent->SetupAttachment(RootComponent);
 }
-
 
 void AFirework_PowerUp::Use(FVector direction)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Firework: USED!"));
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
+
+	isFired = true;
 
 	PowerupSphere->SetSimulatePhysics(true);
-	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	PowerupSphere->SetNotifyRigidBodyCollision(true);
-	PowerupSphere->GetBodyInstance()->AddForce(direction * 1000000 * PowerupSphere->GetMass());
+	PowerupSphere->SetCollisionProfileName("Firework");
+	PowerupSphere->GetBodyInstance()->AddForce(direction * 50000 * PowerupSphere->GetMass());
 }
 
 void AFirework_PowerUp::Explode()
 {
-	RadialForceComponent->FireImpulse();
-	UGameplayStatics::ApplyRadialDamage(this, 100, this->GetActorLocation(), 250.0f, UDamageType::StaticClass(),
-		TArray<AActor*>(), this);
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: BOOM!"));
 	if (ExplosionTemplate)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, ExplosionTemplate, GetActorLocation());
 	}
-	FTimerHandle DestroyHandle;
-	GetWorld()->GetTimerManager().SetTimer(DestroyHandle, this, &AFirework_PowerUp::DestroyBomb, 1.f, false);
-}
-
-void AFirework_PowerUp::DestroyBomb()
-{
 	Destroy();
 }
 
@@ -66,28 +45,53 @@ void AFirework_PowerUp::DestroyBomb()
 void AFirework_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame
 void AFirework_PowerUp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//RootComponent->SetRelativeLocation(FVector(RootComponent->GetForwardVector() * DeltaTime));
+
+	if (isFired)
+	{
+		m_Cooldown += DeltaTime;
+		TimeUntilDespawn += DeltaTime;
+		if (m_Cooldown > m_MaxCooldown)
+		{
+			PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
+			m_Cooldown = 0.0f;
+		}
+		
+		if (TimeUntilDespawn > MaxTimeUntilDespawn)
+		{
+			Destroy();
+			TimeUntilDespawn = 0.0f;
+		}
+	}
+
 }
 
 void AFirework_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//if (OtherActor != this)
-	//{
-	//	Explode();
-	//}
+	Super::OnHit(HitComp, OtherActor, OtherComp, NormalImpulse, Hit);
+
+	if (isPicked)
+	{
+		if (OtherActor != this)
+		{
+			ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(OtherActor);
+
+			if (playerPawn)
+			{
+				Explode();
+				playerPawn->GotHit();
+			}
+
+		}
+	}
 }
 
 void AFirework_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (isPicked)
-	{
-		
-	}
 }

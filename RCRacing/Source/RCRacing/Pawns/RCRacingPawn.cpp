@@ -370,19 +370,12 @@ void ARCRacingPawn::OnUsePowerUp()
 	{
 		if (CurrentPowerUp)
 		{
-			//for (UActorComponent* Component : GetComponents())
-			//{
-			//	if (UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(Component))
-			//	{
-			//		PrimComp->SetSimulatePhysics(true);
-			//	}
-			//}
-			
-			CurrentPowerUp->SetPicked(true);
-			CurrentPowerUp->SetActorEnableCollision(true);
-			
 			CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+
 			CurrentPowerUp->SetActive(true);
+			CurrentPowerUp->SetUsed(true);
+			CurrentPowerUp->SetActorEnableCollision(true);
+
 			CurrentPowerUp->Use(GetActorForwardVector());
 			CurrentPowerUp = nullptr;
 		}
@@ -391,6 +384,9 @@ void ARCRacingPawn::OnUsePowerUp()
 
 void ARCRacingPawn::SetCurrentPowerUp(int power)
 {
+	if (CurrentPowerUp != nullptr)
+		CurrentPowerUp->Destroy();
+
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
@@ -424,12 +420,12 @@ void ARCRacingPawn::SetCurrentPowerUp(int power)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Trap!"));
 	}
 
-	CurrentPowerUp->SetActive(false);
+	CurrentPowerUp->SetPicked(true);
 	CurrentPowerUp->SetActorEnableCollision(false);
 
-	CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	CurrentPowerUp->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, "BowlingBallSocket");
-	//CurrentPowerUp->DisableComponentsSimulatePhysics();
+	CurrentPowerUp->DetachAllSceneComponents(GetMesh(), FDetachmentTransformRules::KeepWorldTransform);
+	CurrentPowerUp->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, 
+		"BowlingBallSocket");
 }
 
 void ARCRacingPawn::Trapped()
@@ -450,7 +446,7 @@ void ARCRacingPawn::Trapped()
 	}
 }
 
-void ARCRacingPawn::Freezed()
+void ARCRacingPawn::Freezed(float deltaTime)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been freezed!"));
 
@@ -459,6 +455,18 @@ void ARCRacingPawn::Freezed()
 		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
 		{
 			VehicleMesh->SetPhysicsLinearVelocity(FVector(0), false);
+		}
+	}
+}
+
+void ARCRacingPawn::GotHit()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been hit!"));
+	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+	{
+		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
+		{
+			VehicleMesh->SetPhysicsLinearVelocity(FVector(0.0f, 0.0f, 500.0f), false);
 		}
 	}
 }

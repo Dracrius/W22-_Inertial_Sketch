@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/Actor.h"
 #include "PowerUp.generated.h"
 
@@ -20,10 +21,13 @@ public:
 	virtual void Use(FVector direction);
 
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpBox")
-		UBoxComponent* PowerupBox;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpBox")
+	//	UBoxComponent* PowerupBox;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpBox")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
+		USphereComponent* PowerupSphere;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
 		UStaticMeshComponent* PowerupMesh;
 
 	// Called when the game starts or when spawned
@@ -47,6 +51,23 @@ public:
 	bool GetActive() { return m_IsActive; }
 
 	void SetPicked(bool picked) { isPicked = picked; }
+	void SetUsed(bool used) { isUsed = used; }
 
-	bool isPicked = false;
+	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
+		bool isPicked = false;
+	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
+		bool isUsed = false;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
+		float m_Cooldown;
+	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
+		float m_MaxCooldown = 2.0f;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
+	float TimeUntilDespawn;
+	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
+	float MaxTimeUntilDespawn = 5.0f;
+
+	UPROPERTY(EditAnywhere, Category = "PowerUp")
+	int RandomPowerUp;
 };

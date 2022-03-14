@@ -165,8 +165,8 @@ public:
 public:
 	void OnUsePowerUp();
 
-	APowerUp* CurrentPowerUp = nullptr;
-
+	UPROPERTY(EditAnywhere, Category = "PowerUp")
+		APowerUp* CurrentPowerUp = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
 		TSubclassOf<APowerUp> BowlingBall_PowerUpClass;
@@ -192,15 +192,13 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
 		APowerUp* Trap_PowerUp;
 
+
 	void SetCurrentPowerUp(APowerUp* power);
 	void SetCurrentPowerUp(int power);
 
 	void Trapped();
-	void Freezed();
-
-	UPROPERTY(EditAnywhere, Category = "Mesh")
-		USkeletalMeshComponent* CarMeshComponent;
-
+	void Freezed(float deltaTime);
+	void GotHit();
 };
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
