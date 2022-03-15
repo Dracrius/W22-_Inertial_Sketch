@@ -250,11 +250,11 @@ void ARCRacingPawn::FlipCar(float DeltaTime)
 				const float RightInput = InputComponent->GetAxisValue("MoveRight");
 
 				const float AirMovementForcePitch = 2.0f;
-				const float AirMovementForceRoll = !bInAir && bNotGrounded ? 15.0f : 2.0f;
+				const float FlipAirMovementForceRoll = !bInAir && bNotGrounded ? 15.0f : 2.0f;
 
 				if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
 				{
-					const FVector MovementVector = FVector(RightInput * AirMovementForceRoll, ForwardInput * AirMovementForcePitch, 0.0f) * DeltaTime * 200.0f;
+					const FVector MovementVector = FVector(RightInput * FlipAirMovementForceRoll, ForwardInput * AirMovementForcePitch, 0.0f) * DeltaTime * 200.0f;
 					const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
 					VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
 				}
@@ -431,8 +431,6 @@ void ARCRacingPawn::Trapped()
 
 	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
 	{
-		const float AirMovementForceRoll = 250.0f;
-
 		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
 		{
 			const FVector MovementVector = FVector(AirMovementForceRoll, 0.0f, 0.0f);

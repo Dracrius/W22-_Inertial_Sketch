@@ -24,8 +24,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	FTimerHandle TimerHandle_Fuse;
-
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -194,6 +194,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 		int BoostAmount = 1000.0f;
 
+	UPROPERTY(EditAnywhere, Category = "PowerUp")
+		float AirMovementForceRoll = 250.0f;
+
 	void SetCurrentPowerUp(APowerUp* power);
 	void SetCurrentPowerUp(int power);
 

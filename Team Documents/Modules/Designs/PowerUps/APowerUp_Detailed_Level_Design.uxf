@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>0</y>
+      <w>776</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AActor&gt;&gt;
+APowerUp
+--
+# UPROPERTY() PowerupSphere: USphereComponent*
+# UPROPERTY() PowerupMesh: UStaticMeshComponent*
+# bImGoingUp: bool
++ m_IsActive: bool
++ UPROPERTY() isPicked: bool
++ UPROPERTY() isUsed: bool
++ UPROPERTY() m_Cooldown: float
++ UPROPERTY() m_MaxCooldown: float
++ UPROPERTY() TimeUntilDespawn: float
++ UPROPERTY() MaxTimeUntilDespawn: float
++ UPROPERTY() RandomPowerUp: int
+
+--
++ APowerUp()
+# Use(direction: FVector): void &lt;virtual&gt;
+# BeginPlay(): void &lt;virtual&gt;
+# Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void &lt;virtual&gt;
+
++ UFUNCTION() OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+FVector NormalImpulse, const FHitResult&amp; Hit): void &lt;virtual&gt;
+
++ GetActive(): bool
++ SetActive(isActive: bool): void
++ SetPicked(picked: bool): void
++ SetUsed(used: bool): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>1208</y>
+      <w>776</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;APowerUp&gt;&gt;
+ATrap_PowerUp
+--
++ UPROPERTY() TraceRadius: float
+
+--
++ ATrap_PowerUp()
+# BeginPlay(): void override
++ Use(direction: FVector): void override
++ Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void override
+
++ UFUNCTION() OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+FVector NormalImpulse, const FHitResult&amp; Hit): void override
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>440</y>
+      <w>776</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;APowerUp&gt;&gt;
+ABowlingBall_PowerUp
+--
++ UPROPERTY() ExplosionTemplate: UParticleSystem*
+
+--
++ ABowlingBall_PowerUp()
+# BeginPlay(): void override
+# Explode(): void
++ Use(direction: FVector): void override
++ Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void override
+
++ UFUNCTION() OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+FVector NormalImpulse, const FHitResult&amp; Hit): void override</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>696</y>
+      <w>776</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;APowerUp&gt;&gt;
+AFirework_PowerUp
+--
++ UPROPERTY() ExplosionTemplate: UParticleSystem*
+
+--
++ AFirework_PowerUp()
+# BeginPlay(): void override
+# Explode(): void
++ Use(direction: FVector): void override
++ Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void override
+
++ UFUNCTION() OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+FVector NormalImpulse, const FHitResult&amp; Hit): void override</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>952</y>
+      <w>776</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;APowerUp&gt;&gt;
+AFreeze_PowerUp
+--
++ UPROPERTY() TraceRadius: float
+
+--
++ AFirework_PowerUp()
+# BeginPlay(): void override
+# Explode(): void
++ Use(direction: FVector): void override
++ Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void override
+
++ UFUNCTION() OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+FVector NormalImpulse, const FHitResult&amp; Hit): void override</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>392</y>
+      <w>120</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Is a</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0;130.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>552</y>
+      <w>120</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-
+Is a
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0;130.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>808</y>
+      <w>120</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-
+Is a
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0;130.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>1064</y>
+      <w>120</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-
+Is a</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0;130.0;330.0</additional_attributes>
+  </element>
+</diagram>

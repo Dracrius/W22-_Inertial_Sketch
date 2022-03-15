@@ -55,16 +55,12 @@ void AFreeze_PowerUp::Tick(float DeltaTime)
 
 			if (Hit)
 			{
-				m_Cooldown += DeltaTime;
-				if (m_Cooldown > m_MaxCooldown)
+				for (const FHitResult HitResult : HitArray)
 				{
-					for (const FHitResult HitResult : HitArray)
+					ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(HitResult.GetActor());
+					if (playerPawn)
 					{
-						ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(HitResult.GetActor());
-						if (playerPawn)
-						{
-							playerPawn->Freezed(DeltaTime);
-						}
+						playerPawn->Freezed(DeltaTime);
 					}
 				}
 			}
