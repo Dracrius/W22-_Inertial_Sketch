@@ -54,10 +54,6 @@ class ARCRacingPawn : public AWheeledVehicle
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		UAudioComponent* EngineSoundComponent;
 
-
-	UPROPERTY(EditAnywhere, Category = "Powerups")
-		TSubclassOf<APowerUp> PowerupClass;
-
 public:
 	ARCRacingPawn();
 
@@ -108,9 +104,6 @@ public:
 
 	/** Handle pressing forwards */
 	void MoveForward(float Val);
-
-
-	void MoveSlower();
 
 	/** Setup the strings used on the hud */
 	void SetupInCarHUD();
@@ -163,6 +156,9 @@ public:
 
 public:
 	void OnUsePowerUp();
+
+	UPROPERTY(EditAnywhere, Category = "Powerups")
+		TSubclassOf<APowerUp> PowerupClass;
 
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 		APowerUp* CurrentPowerUp = nullptr;

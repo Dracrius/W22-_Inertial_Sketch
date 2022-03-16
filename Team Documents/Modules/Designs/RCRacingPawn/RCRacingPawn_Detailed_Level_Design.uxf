@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>282</y>
+      <w>576</w>
+      <h>732</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AWheeledVehicle&gt;&gt;
+ARCRacingPawn
+--
++ UPROPERTY() SpringArm: USpringArmComponent*
++ UPROPERTY() Camera: UCameraComponent*
++ UPROPERTY() InternalCameraBase: USceneComponent*
++ UPROPERTY() InternalCamera: UCameraComponent*
++ UPROPERTY() InCarSpeed: UTextRenderComponent*
++ UPROPERTY() InCarGear: UTextRenderComponent*
++ UPROPERTY() EngineSoundComponent: UAudioComponent*
+
++ UPROPERTY() SpeedDisplayString: FText
++ UPROPERTY() GearDisplayString: FText
++ UPROPERTY() GearDisplayColor: FColor
++ UPROPERTY() GearDisplayReverseColor: FColor
++ UPROPERTY() bInCarCameraActive: bool
++ UPROPERTY() bInReverseGear: bool
++ UPROPERTY() InternalCameraOrigin: FVector
+
++ LookUpBinding: FName static const
++ LookRightBinding: FName static const
++ EngineAudioRPM: FName static const
+
+- bIsLowFriction: bool
+- SlipperyMaterial: UPhysicalMaterial
+- NonSlipperyMaterial: UPhysicalMaterial
+
++ UPROPERTY() PowerupClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() BowlingBall_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() Firework_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() Freeze_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() Trap_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() CurrentPowerUp: APowerUp*
++ UPROPERTY() BowlingBall_PowerUp: APowerUp*
++ UPROPERTY() Firework_PowerUp: APowerUp*
++ UPROPERTY() Freeze_PowerUp: APowerUp*
++ UPROPERTY() Trap_PowerUp: APowerUp*
+
++ UPROPERTY() BoostAmount: int*
++ UPROPERTY() AirMovementForceRoll: float*
+
+--
++ ARCRacingPawn()
++ SetupPlayerInputComponent(class UInputComponent* InputComponent): void &lt;virtual&gt; override
+# BeginPlay(): void &lt;virtual&gt; override
++ Tick: void &lt;virtual&gt; override
+
+# UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void &lt;virtual&gt;
+
++ MoveForward(float Val): void
++ MoveRight(float Val): void
++ SetupInCarHUD: void
++ UpdatePhysicsMaterial: void
++ OnHandbrakePressed: void
++ OnHandbrakeReleased: void
++ OnToggleCamera: void
+
+- FlipCar(float DeltaTime): void
+- EnableIncarView( const bool bState ): void
+- UpdateHUDStrings: void
+
++ GetSpringArm: USpringArmComponent* const
++ GetCamera: UCameraComponent* const
++ GetInternalCamera: UCameraComponent* const
++ GetInCarSpeed: UTextRenderComponent* const
++ GetInCarGear: UTextRenderComponent* const
++ GetEngineSoundComponent: UAudioComponent* const
+
++ OnUsePowerUp: void
++ SetCurrentPowerUp(APowerUp* power)
++ SetCurrentPowerUp(int power)
++ Trapped: void
++ Freezed: void
++ GotHit: void
++ Boost: void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1146</x>
+      <y>306</y>
+      <w>132</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UVehicleWheel&gt;&gt;
+URCRacingWheelRear
+
+--
++ URCRacingWheelRear()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1038</x>
+      <y>312</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 2
+Has</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1038</x>
+      <y>384</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 2
+Has</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1146</x>
+      <y>378</y>
+      <w>132</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UVehicleWheel&gt;&gt;
+URCRacingWheelFront
+
+--
++ URCRacingWheelFront()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1146</x>
+      <y>486</y>
+      <w>582</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AActor&gt;&gt;
+APowerUp
+--
+# UPROPERTY() PowerupSphere: USphereComponent*
+# UPROPERTY() PowerupMesh: UStaticMeshComponent*
+# bImGoingUp: bool
++ m_IsActive: bool
++ UPROPERTY() isPicked: bool
++ UPROPERTY() isUsed: bool
++ UPROPERTY() m_Cooldown: float
++ UPROPERTY() m_MaxCooldown: float
++ UPROPERTY() TimeUntilDespawn: float
++ UPROPERTY() MaxTimeUntilDespawn: float
++ UPROPERTY() RandomPowerUp: int
+
+--
++ APowerUp()
+# Use(direction: FVector): void &lt;virtual&gt;
+# BeginPlay(): void &lt;virtual&gt;
+# Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void &lt;virtual&gt;
+
++ UFUNCTION() OnHit(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+FVector NormalImpulse, const FHitResult&amp; Hit): void &lt;virtual&gt;
+
++ GetActive(): bool
++ SetActive(isActive: bool): void
++ SetPicked(picked: bool): void
++ SetUsed(used: bool): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1038</x>
+      <y>498</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 9
+Has</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1146</x>
+      <y>804</y>
+      <w>582</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AActor&gt;&gt;
+ABoost
+--
+# UPROPERTY() BoostSphere: USphereComponent*
+# UPROPERTY() BoostMesh: UStaticMeshComponent*
+
+--
++ ABoost
+# BeginPlay(): void &lt;virtual&gt;
+# Tick: void &lt;virtual&gt;
+
++ UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void &lt;virtual&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1038</x>
+      <y>810</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 1
+Has</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>402</y>
+      <w>126</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AGameModeBase&gt;&gt;
+ARCRacingGameMode
+--
++ ARCRacingGameMode</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>282</y>
+      <w>126</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;AGameStateBase&gt;&gt;
+ARCGameStateBase
+--
++ playerName: FString
++ lastCar: ACar*
++ maxSpeed: float
++ topScores: std::vector&lt;float&gt;
++ numFlips: int
++ musicVolume: float
++ effectVolume: effectVolume
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>312</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 1
+Has</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>402</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 1
+Has</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
