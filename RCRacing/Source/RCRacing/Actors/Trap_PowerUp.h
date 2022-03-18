@@ -15,17 +15,23 @@ class RCRACING_API ATrap_PowerUp : public APowerUp
 {
 	GENERATED_BODY()
 public:
+	// Sets default values for this actor's properties
 	ATrap_PowerUp();
-	virtual void Use(FVector direction) override;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//switch
 	bool bImGoingUp = true;
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	//Called on space bar by the player
+	virtual void Use(FVector direction) override;
 };

@@ -474,7 +474,7 @@ void ARCRacingPawn::Boost()
 		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
 		{
 			FVector Force = GetActorForwardVector() * BoostAmount;
-			VehicleMesh->SetPhysicsLinearVelocity(Force, false);
+			VehicleMesh->SetPhysicsLinearVelocity(Force, true);
 		}
 	}
 }

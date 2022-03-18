@@ -18,9 +18,8 @@ class RCRACING_API AFreeze_PowerUp : public APowerUp
 	GENERATED_BODY()
 
 public:
+	// Sets default values for this actor's properties
 	AFreeze_PowerUp();
-	virtual void Use(FVector direction) override;
-	void Explode();
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,11 +29,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) override;
+	//Called on space bar by the player
+	virtual void Use(FVector direction) override;
 
-	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
+	//Freeze Radius
 	UPROPERTY(EditAnywhere, Category = "Trace")
 		float TraceRadius = 500.0f;
-
 };

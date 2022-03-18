@@ -16,9 +16,8 @@ class RCRACING_API AFirework_PowerUp : public APowerUp
 {
 	GENERATED_BODY()
 public:
+	// Sets default values for this actor's properties
 	AFirework_PowerUp();
-	virtual void Use(FVector direction) override;
-	void Explode();
 
 protected:
 	// Called when the game starts or when spawned
@@ -28,13 +27,21 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) override;
+	//starts when the power up collision sphere hits a vehicle
+	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+		FVector NormalImpulse, const FHitResult& Hit) override;
 
-	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	//Called on space bar by the player
+	virtual void Use(FVector direction) override;
 
+	//Called when OnHit is triggered by a vehicle
+	void Explode();
+
+	//Explosion visual
 	UPROPERTY(EditAnywhere, Category = "BombActor")
 		UParticleSystem* ExplosionTemplate;
 
+	//Switch
 	bool isFired = false;
 
 };

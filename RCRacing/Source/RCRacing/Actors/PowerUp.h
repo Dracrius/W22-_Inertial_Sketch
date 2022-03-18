@@ -18,12 +18,13 @@ class RCRACING_API APowerUp : public AActor
 public:	
 	// Sets default values for this actor's properties
 	APowerUp();
-	virtual void Use(FVector direction);
 
 protected:
+
+	//Collision sphere
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
 		USphereComponent* PowerupSphere;
-
+	//Mesh
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PowerUpSphere")
 		UStaticMeshComponent* PowerupMesh;
 
@@ -35,37 +36,47 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	bool bImGoingUp = true;
-
+	//OnHit and OnOverlap Virtual functions
 	UFUNCTION()
-		virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+		virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+			FVector NormalImpulse, const FHitResult& Hit);
 	UFUNCTION()
-		virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	bool m_IsActive;
+	//Called on space bar by the player
+	virtual void Use(FVector direction);
 
+	//Setters
 	void SetActive(bool isActive) { m_IsActive = isActive; }
-
-	bool GetActive() { return m_IsActive; }
-
 	void SetPicked(bool picked) { isPicked = picked; }
 	void SetUsed(bool used) { isUsed = used; }
 
+	//Getters
+	bool GetActive() { return m_IsActive; }
+
+	// Member variables
+	bool bImGoingUp = true;
+	bool m_IsActive;
+
+	// Members accessible from UE
+	//switches
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
 		bool isPicked = false;
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
 		bool isUsed = false;
 
+	//Cooldowns
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
 		float m_Cooldown;
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
 		float m_MaxCooldown = 2.0f;
-
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
 		float TimeUntilDespawn;
 	UPROPERTY(EditAnywhere, Category = "PowerUpStatus")
 		float MaxTimeUntilDespawn = 5.0f;
 
+	//Random 
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 		int RandomPowerUp;
 };

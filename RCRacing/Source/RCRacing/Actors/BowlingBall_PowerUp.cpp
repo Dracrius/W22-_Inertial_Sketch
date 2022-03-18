@@ -20,6 +20,7 @@ ABowlingBall_PowerUp::ABowlingBall_PowerUp()
 	ExplosionTemplate = CreateDefaultSubobject<UParticleSystem>(TEXT("ExplosionEffectComponent"));
 }
 
+//Called on space bar by the player
 void ABowlingBall_PowerUp::Use(FVector direction)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
@@ -30,6 +31,7 @@ void ABowlingBall_PowerUp::Use(FVector direction)
 	PowerupSphere->GetBodyInstance()->AddForce(direction * -10000 * PowerupSphere->GetMass());
 }
 
+//Called when OnHit is triggered by a vehicle
 void ABowlingBall_PowerUp::Explode()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: BOOM!"));
@@ -52,6 +54,7 @@ void ABowlingBall_PowerUp::Tick(float DeltaTime)
 	TimeUntilDespawn += DeltaTime;
 	if (TimeUntilDespawn > MaxTimeUntilDespawn)
 	{
+		//make sure the power up will be destroy if it doesn’t hit a vehicle within 5 seconds.
 		Destroy();
 		TimeUntilDespawn = 0.0f;
 	}
@@ -61,6 +64,8 @@ void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 {
 	Super::OnHit(HitComp, OtherActor, OtherComp, NormalImpulse, Hit);
 
+	//starts when the power up collision sphere hits a vehicle
+	//Calls Explode function
 	if (isPicked)
 	{
 		if (OtherActor != this)
@@ -75,8 +80,4 @@ void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 				
 		}
 	}
-}
-
-void ABowlingBall_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
 }

@@ -17,13 +17,10 @@ AFreeze_PowerUp::AFreeze_PowerUp()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+////Called on space bar by the player
 void AFreeze_PowerUp::Use(FVector direction)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Freeze: USED!"));
-}
-
-void AFreeze_PowerUp::Explode()
-{
 }
 
 // Called when the game starts or when spawned
@@ -36,7 +33,7 @@ void AFreeze_PowerUp::BeginPlay()
 void AFreeze_PowerUp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	//detect the actors and pawns in a radius around the power up by using SphereTraceMulti
 	if (isPicked && isUsed)
 	{
 		m_Cooldown += DeltaTime;
@@ -45,14 +42,15 @@ void AFreeze_PowerUp::Tick(float DeltaTime)
 			const FVector Start = GetActorLocation();
 			const FVector End = GetActorLocation();
 
+			//AActor*: used as an ignore list for the SphereTraceMulti.
+			//FHitResult * : used to get the hit result from SphereTraceMulti.
 			TArray<AActor*> ActorsToIgnore;
-
-			//ActorsToIgnore.Add(GetOwner());
 			TArray<FHitResult> HitArray;
 
 			const bool Hit = UKismetSystemLibrary::SphereTraceMulti(GetWorld(), Start, End, TraceRadius, ETraceTypeQuery::TraceTypeQuery1,
 				false, ActorsToIgnore, EDrawDebugTrace::ForDuration, HitArray, true, FLinearColor::Green, FLinearColor::Blue, 0.0f);
 
+			//then apply the freeze effect when it hits the right target.
 			if (Hit)
 			{
 				for (const FHitResult HitResult : HitArray)
@@ -69,12 +67,4 @@ void AFreeze_PowerUp::Tick(float DeltaTime)
 			m_Cooldown = 0.0f;
 		}
 	}
-}
-
-void AFreeze_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-}
-
-void AFreeze_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
 }
