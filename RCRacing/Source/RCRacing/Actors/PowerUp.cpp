@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//Version: 0.1
+//Author : Antoine Plouffe
 
 #include "PowerUp.h"
 #include "Components/BoxComponent.h"

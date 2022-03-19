@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>830</x>
-      <y>200</y>
+      <x>1050</x>
+      <y>40</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>830</x>
-      <y>360</y>
+      <x>1050</x>
+      <y>200</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -26,8 +26,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>830</x>
-      <y>280</y>
+      <x>1050</x>
+      <y>120</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -37,20 +37,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>380</y>
+      <x>1090</x>
+      <y>220</y>
       <w>30</w>
       <h>140</h>
     </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>750</y>
+      <x>1090</x>
+      <y>590</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -61,9 +60,9 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>750</x>
-      <y>500</y>
-      <w>560</w>
+      <x>960</x>
+      <y>340</y>
+      <w>570</w>
       <h>930</h>
     </coordinates>
     <panel_attributes>IF Speed == 0
@@ -74,8 +73,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>840</y>
+      <x>1090</x>
+      <y>680</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -86,8 +85,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>900</y>
+      <x>1120</x>
+      <y>740</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -97,8 +96,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>890</y>
+      <x>1090</x>
+      <y>730</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -109,32 +108,32 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>300</y>
+      <x>1090</x>
+      <y>140</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>220</y>
+      <x>1090</x>
+      <y>60</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>430</y>
+      <x>1120</x>
+      <y>270</y>
       <w>300</w>
       <h>30</h>
     </coordinates>
@@ -144,8 +143,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>420</y>
+      <x>1090</x>
+      <y>260</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -156,9 +155,9 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>780</x>
-      <y>540</y>
-      <w>530</w>
+      <x>990</x>
+      <y>380</y>
+      <w>540</w>
       <h>890</h>
     </coordinates>
     <panel_attributes>IF TimeUntilDespawn &gt; MaxTimeUntilDespawn
@@ -169,32 +168,31 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>510</y>
+      <x>1090</x>
+      <y>350</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>550</y>
+      <x>1090</x>
+      <y>390</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>570</y>
+      <x>1090</x>
+      <y>410</y>
       <w>440</w>
       <h>90</h>
     </coordinates>
@@ -205,9 +203,9 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>810</x>
-      <y>660</y>
-      <w>500</w>
+      <x>1020</x>
+      <y>500</y>
+      <w>510</w>
       <h>770</h>
     </coordinates>
     <panel_attributes>IF Vehicle4W
@@ -218,8 +216,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>700</y>
+      <x>1120</x>
+      <y>540</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -229,8 +227,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>690</y>
+      <x>1090</x>
+      <y>530</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -241,20 +239,20 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>670</y>
+      <x>1090</x>
+      <y>510</y>
       <w>30</w>
       <h>300</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;280.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>750</y>
+      <x>1120</x>
+      <y>590</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -264,8 +262,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>800</y>
+      <x>1120</x>
+      <y>640</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -275,8 +273,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>850</y>
+      <x>1120</x>
+      <y>690</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -286,8 +284,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>790</y>
+      <x>1090</x>
+      <y>630</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -298,9 +296,9 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>840</x>
-      <y>950</y>
-      <w>470</w>
+      <x>1050</x>
+      <y>790</y>
+      <w>480</w>
       <h>480</h>
     </coordinates>
     <panel_attributes>IF bInAir || bNotGrounded
@@ -311,8 +309,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>1000</y>
+      <x>1120</x>
+      <y>840</y>
       <w>220</w>
       <h>30</h>
     </coordinates>
@@ -322,8 +320,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>1050</y>
+      <x>1120</x>
+      <y>890</y>
       <w>220</w>
       <h>30</h>
     </coordinates>
@@ -333,8 +331,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>1100</y>
+      <x>1120</x>
+      <y>940</y>
       <w>220</w>
       <h>30</h>
     </coordinates>
@@ -344,8 +342,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>1150</y>
+      <x>1120</x>
+      <y>990</y>
       <w>220</w>
       <h>30</h>
     </coordinates>
@@ -355,9 +353,9 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>870</x>
-      <y>1240</y>
-      <w>440</w>
+      <x>1080</x>
+      <y>1080</y>
+      <w>450</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>IF VehicleMesh
@@ -368,20 +366,20 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>960</y>
+      <x>1090</x>
+      <y>800</y>
       <w>30</w>
       <h>300</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;280.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>1090</y>
+      <x>1090</x>
+      <y>930</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -392,8 +390,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>1040</y>
+      <x>1090</x>
+      <y>880</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -404,8 +402,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>990</y>
+      <x>1090</x>
+      <y>830</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -416,8 +414,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>1140</y>
+      <x>1090</x>
+      <y>980</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -428,8 +426,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>1280</y>
+      <x>1120</x>
+      <y>1120</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -439,8 +437,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>1330</y>
+      <x>1120</x>
+      <y>1170</y>
       <w>160</w>
       <h>30</h>
     </coordinates>
@@ -450,8 +448,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1090</x>
-      <y>1380</y>
+      <x>1310</x>
+      <y>1220</y>
       <w>200</w>
       <h>30</h>
     </coordinates>
@@ -461,8 +459,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>1250</y>
+      <x>1090</x>
+      <y>1090</y>
       <w>30</w>
       <h>110</h>
     </coordinates>
@@ -473,8 +471,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>1270</y>
+      <x>1090</x>
+      <y>1110</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -485,8 +483,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>870</x>
-      <y>1320</y>
+      <x>1090</x>
+      <y>1160</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -497,8 +495,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1190</x>
-      <y>1280</y>
+      <x>1410</x>
+      <y>1120</y>
       <w>30</w>
       <h>120</h>
     </coordinates>
@@ -509,8 +507,8 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1030</x>
-      <y>1270</y>
+      <x>1250</x>
+      <y>1110</y>
       <w>190</w>
       <h>40</h>
     </coordinates>
@@ -521,13 +519,255 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>1320</y>
+      <x>1270</x>
+      <y>1160</y>
       <w>170</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
     <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>40</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>120</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>200</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>270</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>340</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>970</x>
+      <y>380</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>420</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>500</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>540</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>600</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>10</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>640</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>690</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>12</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>740</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>13</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>790</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>840</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>14</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>890</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>15</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>940</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>16</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>990</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>17</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1060</x>
+      <y>1080</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>18</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>1120</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>19</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>1170</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>20</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1290</x>
+      <y>1220</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>21</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

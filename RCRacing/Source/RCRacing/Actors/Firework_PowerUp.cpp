@@ -1,4 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+//Version: 0.1
+//Author : Antoine Plouffe
+
+
 
 
 #include "Firework_PowerUp.h"
@@ -22,7 +26,7 @@ AFirework_PowerUp::AFirework_PowerUp()
 //Called on space bar by the player
 void AFirework_PowerUp::Use(FVector direction)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Firework: USED!"));
 
 	isFired = true;
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>6</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>282</y>
-      <w>576</w>
-      <h>732</h>
+      <x>342</x>
+      <y>117</y>
+      <w>864</w>
+      <h>1098</h>
     </coordinates>
     <panel_attributes>&lt;&lt;AWheeledVehicle&gt;&gt;
 ARCRacingPawn
@@ -67,6 +67,8 @@ int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void 
 + OnHandbrakeReleased: void
 + OnToggleCamera: void
 
++Pause: void
+
 - FlipCar(float DeltaTime): void
 - EnableIncarView( const bool bState ): void
 - UpdateHUDStrings: void
@@ -90,10 +92,10 @@ int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void 
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1146</x>
-      <y>306</y>
-      <w>132</w>
-      <h>54</h>
+      <x>1359</x>
+      <y>153</y>
+      <w>198</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>&lt;&lt;UVehicleWheel&gt;&gt;
 URCRacingWheelRear
@@ -105,10 +107,10 @@ URCRacingWheelRear
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1038</x>
-      <y>312</y>
-      <w>120</w>
-      <h>30</h>
+      <x>1197</x>
+      <y>162</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1= 1
@@ -119,10 +121,10 @@ Has</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1038</x>
-      <y>384</y>
-      <w>120</w>
-      <h>30</h>
+      <x>1197</x>
+      <y>270</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1= 1
@@ -133,10 +135,10 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1146</x>
-      <y>378</y>
-      <w>132</w>
-      <h>54</h>
+      <x>1359</x>
+      <y>261</y>
+      <w>198</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>&lt;&lt;UVehicleWheel&gt;&gt;
 URCRacingWheelFront
@@ -148,10 +150,10 @@ URCRacingWheelFront
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1146</x>
-      <y>486</y>
-      <w>582</w>
-      <h>300</h>
+      <x>1359</x>
+      <y>423</y>
+      <w>873</w>
+      <h>450</h>
     </coordinates>
     <panel_attributes>&lt;&lt;AActor&gt;&gt;
 APowerUp
@@ -191,10 +193,10 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void &lt;virtual&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1038</x>
-      <y>498</y>
-      <w>120</w>
-      <h>30</h>
+      <x>1197</x>
+      <y>441</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1= 1
@@ -205,10 +207,10 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1146</x>
-      <y>804</y>
-      <w>582</w>
-      <h>126</h>
+      <x>1359</x>
+      <y>900</y>
+      <w>873</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>&lt;&lt;AActor&gt;&gt;
 ABoost
@@ -229,10 +231,10 @@ int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void 
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1038</x>
-      <y>810</y>
-      <w>120</w>
-      <h>30</h>
+      <x>1197</x>
+      <y>909</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1= 1
@@ -243,10 +245,10 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>402</y>
-      <w>126</w>
-      <h>48</h>
+      <x>0</x>
+      <y>333</y>
+      <w>189</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;AGameModeBase&gt;&gt;
 ARCRacingGameMode
@@ -257,10 +259,10 @@ ARCRacingGameMode
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>282</y>
-      <w>126</w>
-      <h>102</h>
+      <x>0</x>
+      <y>117</y>
+      <w>189</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>&lt;&lt;AGameStateBase&gt;&gt;
 ARCGameStateBase
@@ -272,16 +274,17 @@ ARCGameStateBase
 + numFlips: int
 + musicVolume: float
 + effectVolume: effectVolume
-</panel_attributes>
++ isPaused: bool
++ menuSelection: int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>312</y>
-      <w>120</w>
-      <h>30</h>
+      <x>180</x>
+      <y>162</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1= 1
@@ -292,10 +295,10 @@ Has</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>402</y>
-      <w>120</w>
-      <h>30</h>
+      <x>180</x>
+      <y>333</y>
+      <w>180</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1= 1

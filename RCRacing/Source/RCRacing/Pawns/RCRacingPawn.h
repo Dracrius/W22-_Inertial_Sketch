@@ -1,4 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
+//Version: 0.1
+//Author : Antoine Plouffe
+//Author : Alexander Achorn
+//Author : UE4
 
 #pragma once
 
@@ -105,7 +109,6 @@ protected:
 
 public:
 	// End Actor interface
-
 	void Pause();
 
 	/** Handle pressing forwards */
@@ -131,6 +134,8 @@ public:
 	static const FName EngineAudioRPM;
 
 private:
+
+	//Flips the car on inputkey when upside down
 	void FlipCar(float DeltaTime);
 
 	void EnableIncarView( const bool bState );
@@ -161,13 +166,15 @@ public:
 	FORCEINLINE UAudioComponent* GetEngineSoundComponent() const { return EngineSoundComponent; }
 
 public:
+
+	//Power Up section
+
+	//switch a few settings and is to call the virtual Use function of the PowerUp class
 	void OnUsePowerUp();
 
-	UPROPERTY(EditAnywhere, Category = "Powerups")
+	//These variables are used inside UE4 to sets the power ups inside this class' blueprint
+	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
 		TSubclassOf<APowerUp> PowerupClass;
-
-	UPROPERTY(EditAnywhere, Category = "PowerUp")
-		APowerUp* CurrentPowerUp = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
 		TSubclassOf<APowerUp> BowlingBall_PowerUpClass;
@@ -181,30 +188,47 @@ public:
 	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
 		TSubclassOf<APowerUp> Trap_PowerUpClass;
 
+	//Use by the player on InputKey to use the player's current power up
+	UPROPERTY(EditAnywhere, Category = "PowerUp")
+		APowerUp* CurrentPowerUp = nullptr;
+
+	//Use to set CurrentPowerUp to this 
 	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
 		APowerUp* BowlingBall_PowerUp;
 
+	//Use to set CurrentPowerUp to this 
 	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
 		APowerUp* Firework_PowerUp;
 
+	//Use to set CurrentPowerUp to this 
 	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
 		APowerUp* Freeze_PowerUp;
 
+	//Use to set CurrentPowerUp to this 
 	UPROPERTY(EditDefaultsOnly, Category = "PowerUp")
 		APowerUp* Trap_PowerUp;
 
+	//Boost amount for when the vehicle overlaps the boost pad
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 		int BoostAmount = 1000.0f;
 
+	//Roll force for the Trap
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 		float AirMovementForceRoll = 250.0f;
 
-	void SetCurrentPowerUp(APowerUp* power);
+	//Called by the PowerUp parent class to randomly assign a power up to CurrentPowerUp
 	void SetCurrentPowerUp(int power);
 
+	//Called by the Trap PowerUp on overlap
 	void Trapped();
+
+	//Called by the Freeze PowerUp when the vehicle is in the effect radius
 	void Freezed(float deltaTime);
+
+	//Called by the BowlingBall and Firework PowerUp on hit
 	void GotHit();
+
+	//Called by the Boost class on overlap
 	void Boost();
 };
 

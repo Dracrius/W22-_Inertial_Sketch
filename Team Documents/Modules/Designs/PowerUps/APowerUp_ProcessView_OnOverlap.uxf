@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>230</y>
+      <x>870</x>
+      <y>340</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -15,20 +15,20 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>250</y>
+      <x>910</x>
+      <y>360</y>
       <w>30</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>230</y>
+      <x>610</x>
+      <y>420</y>
       <w>160</w>
       <h>30</h>
     </coordinates>
@@ -38,20 +38,20 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
-      <y>250</y>
-      <w>230</w>
-      <h>100</h>
+      <x>760</x>
+      <y>420</y>
+      <w>180</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 OnHit</panel_attributes>
-    <additional_attributes>210.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>320</y>
+      <x>910</x>
+      <y>430</y>
       <w>220</w>
       <h>90</h>
     </coordinates>
@@ -62,8 +62,8 @@ OnOverlapBegin</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>740</x>
-      <y>410</y>
+      <x>840</x>
+      <y>520</y>
       <w>390</w>
       <h>300</h>
     </coordinates>
@@ -75,8 +75,8 @@ OnOverlapBegin</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>780</x>
-      <y>580</y>
+      <x>880</x>
+      <y>690</y>
       <w>350</w>
       <h>130</h>
     </coordinates>
@@ -88,8 +88,8 @@ OnOverlapBegin</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>480</y>
+      <x>910</x>
+      <y>590</y>
       <w>280</w>
       <h>90</h>
     </coordinates>
@@ -100,32 +100,31 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>420</y>
+      <x>910</x>
+      <y>530</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=&lt;-
 </panel_attributes>
     <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>460</y>
+      <x>910</x>
+      <y>570</y>
       <w>30</w>
       <h>140</h>
     </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>760</x>
-      <y>450</y>
+      <x>860</x>
+      <y>560</y>
       <w>370</w>
       <h>260</h>
     </coordinates>
@@ -137,8 +136,8 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>590</y>
+      <x>910</x>
+      <y>700</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -149,8 +148,8 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>660</y>
+      <x>940</x>
+      <y>770</y>
       <w>280</w>
       <h>30</h>
     </coordinates>
@@ -160,8 +159,8 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>650</y>
+      <x>910</x>
+      <y>760</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -172,8 +171,8 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>610</y>
+      <x>910</x>
+      <y>720</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -184,12 +183,100 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>620</y>
+      <x>940</x>
+      <y>730</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>isPicked</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>340</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>420</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>520</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>560</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>600</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>690</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>730</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>770</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>8</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
