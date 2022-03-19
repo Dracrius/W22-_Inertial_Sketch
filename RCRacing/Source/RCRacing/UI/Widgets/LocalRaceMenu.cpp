@@ -15,10 +15,13 @@ void ULocalRaceMenu::NativeConstruct()
 
 void ULocalRaceMenu::StartRace()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideLocalMenu();
 }
 
 void ULocalRaceMenu::Return()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideLocalMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
 void ULocalRaceMenu::NextCar()

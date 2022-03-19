@@ -34,15 +34,13 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void Finish();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void QuitToMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void LoadPauseMenu();
-
-public:
-	
 };

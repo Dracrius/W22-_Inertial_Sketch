@@ -69,46 +69,70 @@ protected:
 
 	virtual void BeginPlay() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void GetSave();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void CreateFirstSave();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void Save();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void Quit();
 
-	UFUNCTION()
-	virtual void LoadMainMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowMainMenu();
 
-	UFUNCTION()
-	virtual void LoadPauseMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void HideMainMenu();
 
-	UFUNCTION()
-	virtual void LoadFinishMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowPauseMenu();
 
-	UFUNCTION()
-	virtual void LoadUsernameMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void HidePauseMenu();
 
-	UFUNCTION()
-	virtual void LoadVolumeMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowFinishMenu();
 
-	UFUNCTION()
-	virtual void LoadControlsMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void HideFinishMenu();
 
-	UFUNCTION()
-	virtual void LoadLocalMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowUsernameMenu();
 
-	UFUNCTION()
-	virtual void LoadNetworkMenu();
+	UFUNCTION(BlueprintCallable)
+	virtual void HideUsernameMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowVolumeMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void HideVolumeMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowControlsMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void HideControlsMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowLocalMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void HideLocalMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void ShowNetworkMenu();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void HideNetworkMenu();
+
+	UFUNCTION(BlueprintCallable)
 	virtual void SetVolume(FString channel, float vol);
 
-public:
 	virtual void Tick(float DeltaTime) override;
 	
 };

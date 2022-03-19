@@ -17,22 +17,32 @@ void UMainMenu::NativeConstruct()
 
 void UMainMenu::LoadUsernameMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideMainMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowUsernameMenu();
 }
 
 void UMainMenu::LoadVolumeMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideMainMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowVolumeMenu();
 }
 
 void UMainMenu::LoadControlsMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideMainMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowControlsMenu();
 }
 
 void UMainMenu::LoadLocalMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideMainMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowLocalMenu();
 }
 
 void UMainMenu::LoadNetworkMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideMainMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowNetworkMenu();
 }
 
 void UMainMenu::Quit()

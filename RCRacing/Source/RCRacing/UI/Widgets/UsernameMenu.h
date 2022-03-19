@@ -25,12 +25,10 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void Return();
 
-	UFUNCTION()
-	virtual void SetName(FText name);
-
-public:
-	
+	UFUNCTION(BlueprintCallable)
+	virtual void SetName(FText name);	
 };

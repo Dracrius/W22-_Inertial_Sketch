@@ -18,6 +18,9 @@ class RCRACING_API ARCGameStateBase : public AGameStateBase
 public:
 	FString playerName;
 
+	bool isPaused;
+	int menuSelection;
+
 	class ACar* lastCar;
 	float maxSpeed;
 	std::vector<float> topScores;

@@ -1,0 +1,18 @@
+{
+	"source": "UE",
+	"applications": [
+		{
+			"app_key": "application.generated.ue.vehicle-game-template-0.ue4editor.exe",
+			"launch_type": "url",
+			"url": "steam://launch/",
+			"action_manifest_path": "C:/Users/Dracrius/Unreal/W22-_Inertial_Sketch/RCRacing/Config/SteamVRBindings/steamvr_manifest.json",
+			"strings":
+			{
+				"en_us":
+				{
+					"name": "Vehicle Game Template-0 [UE Editor]"
+				}
+			}
+		}
+	]
+}

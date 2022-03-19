@@ -16,7 +16,14 @@ void UVolumeMenu::NativeConstruct()
 
 void UVolumeMenu::Return()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideVolumeMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowPauseMenu();
+}
 
+void UVolumeMenu::ReturnToMain()
+{
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideVolumeMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
 void UVolumeMenu::SetVolume(FText channel, float vol)

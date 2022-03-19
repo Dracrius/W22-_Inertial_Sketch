@@ -26,16 +26,6 @@ AInGameUI::AInGameUI()
 	musicVolume = 100.f;
 	effectVolume = 100.f;
 
-	if (mainMenuClass)
-	{
-		mainMenu = CreateWidget<UMainMenu>(GetWorld(), mainMenuClass);
-
-		if (mainMenuClass)
-		{
-			mainMenu->AddToViewport();
-		}
-	}
-
 	if (pauseMenuClass)
 	{
 		pauseMenu = CreateWidget<UPauseMenu>(GetWorld(), pauseMenuClass);
@@ -79,7 +69,7 @@ void AInGameUI::DrawHUD()
 void AInGameUI::BeginPlay()
 {
 	Super::BeginPlay();
-	GetSave();
+	//GetSave();
 }
 
 void AInGameUI::GetSave()
@@ -113,7 +103,8 @@ void AInGameUI::GetSave()
 
 void AInGameUI::CreateFirstSave()
 {
-	LoadUsernameMenu();
+	HideMainMenu();
+	ShowUsernameMenu();
 
 	float mVol = musicVolume; //Save to File
 	float eVol = effectVolume; //Save to File
@@ -134,44 +125,211 @@ void AInGameUI::Quit()
 	Save();
 }
 
-void AInGameUI::LoadMainMenu()
+void AInGameUI::ShowMainMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+	if (mainMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		mainMenu = CreateWidget<UMainMenu>(PC, mainMenuClass);
+	}
 
+	mainMenu->AddToViewport();
 }
 
-void AInGameUI::LoadPauseMenu()
+void AInGameUI::HideMainMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
 
+	if (mainMenu)
+	{
+		mainMenu->RemoveFromViewport();
+		mainMenu = nullptr;
+	}
 }
 
-void AInGameUI::LoadFinishMenu()
+void AInGameUI::ShowPauseMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
 
+	if (pauseMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		pauseMenu = CreateWidget<UPauseMenu>(PC, pauseMenuClass);
+	}
+
+	pauseMenu->AddToViewport();
 }
 
-void AInGameUI::LoadUsernameMenu()
+void AInGameUI::HidePauseMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
 
+	if (pauseMenu)
+	{
+		pauseMenu->RemoveFromViewport();
+		pauseMenu = nullptr;
+	}
 }
 
-void AInGameUI::LoadVolumeMenu()
+void AInGameUI::ShowFinishMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
 
+	if (finishScreenClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		finishScreen = CreateWidget<UFinishScreen>(PC, finishScreenClass);
+	}
+
+	finishScreen->AddToViewport();
 }
 
-void AInGameUI::LoadControlsMenu()
+void AInGameUI::HideFinishMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
 
+	if (finishScreen)
+	{
+		finishScreen->RemoveFromViewport();
+		finishScreen = nullptr;
+	}
 }
 
-void AInGameUI::LoadLocalMenu()
+void AInGameUI::ShowUsernameMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
 
+	if (usernameMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		usernameMenu = CreateWidget<UUsernameMenu>(PC, usernameMenuClass);
+	}
+
+	usernameMenu->AddToViewport();
 }
 
-void AInGameUI::LoadNetworkMenu()
+void AInGameUI::HideUsernameMenu()
 {
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
 
+	if (usernameMenu)
+	{
+		usernameMenu->RemoveFromViewport();
+		usernameMenu = nullptr;
+	}
+}
+
+void AInGameUI::ShowVolumeMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+
+	if (volumeMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		volumeMenu = CreateWidget<UVolumeMenu>(PC, volumeMenuClass);
+	}
+
+	volumeMenu->AddToViewport();
+}
+
+void AInGameUI::HideVolumeMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+
+	if (volumeMenu)
+	{
+		volumeMenu->RemoveFromViewport();
+		volumeMenu = nullptr;
+	}
+}
+
+void AInGameUI::ShowControlsMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+
+	if (controlsMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		controlsMenu = CreateWidget<UControlsMenu>(PC, controlsMenuClass);
+	}
+
+	controlsMenu->AddToViewport();
+}
+
+void AInGameUI::HideControlsMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+
+	if (controlsMenu)
+	{
+		controlsMenu->RemoveFromViewport();
+		controlsMenu = nullptr;
+	}
+}
+
+void AInGameUI::ShowLocalMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+
+	if (localRaceMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		localRaceMenu = CreateWidget<ULocalRaceMenu>(PC, localRaceMenuClass);
+	}
+
+	localRaceMenu->AddToViewport();
+}
+
+void AInGameUI::HideLocalMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+
+	if (localRaceMenu)
+	{
+		localRaceMenu->RemoveFromViewport();
+		localRaceMenu = nullptr;
+	}
+}
+
+void AInGameUI::ShowNetworkMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+
+	if (networkRaceMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		networkRaceMenu = CreateWidget<UNetworkRaceMenu>(PC, networkRaceMenuClass);
+	}
+
+	networkRaceMenu->AddToViewport();
+}
+
+void AInGameUI::HideNetworkMenu()
+{
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+
+	if (networkRaceMenu)
+	{
+		networkRaceMenu->RemoveFromViewport();
+		networkRaceMenu = nullptr;
+	}
 }
 
 void AInGameUI::SetVolume(FString channel, float vol)

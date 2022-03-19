@@ -33,22 +33,22 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void LoadUsernameMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void LoadVolumeMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void LoadControlsMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void LoadLocalMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void LoadNetworkMenu();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 		virtual void Quit();
 
 public:

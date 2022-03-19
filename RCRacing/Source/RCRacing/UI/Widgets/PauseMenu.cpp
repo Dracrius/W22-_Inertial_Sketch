@@ -21,14 +21,20 @@ void UPauseMenu::Quit()
 
 void UPauseMenu::LoadVolume()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HidePauseMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowVolumeMenu();
 }
 
 void UPauseMenu::LoadControls()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HidePauseMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowControlsMenu();
 }
 
 void UPauseMenu::ReturnToMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HidePauseMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
 void UPauseMenu::Continue()

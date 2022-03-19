@@ -23,9 +23,11 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void Return();
 
-public:
-	
+	UFUNCTION(BlueprintCallable)
+	virtual void ReturnToMain();
+
 };

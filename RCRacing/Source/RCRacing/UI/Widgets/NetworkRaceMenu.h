@@ -26,15 +26,13 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void GetLobbies();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void SetLobby(FText lobby);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void GetRacers();
-
-public:
-	
 };

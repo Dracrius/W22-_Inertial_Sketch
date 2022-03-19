@@ -16,7 +16,8 @@ void UUsernameMenu::NativeConstruct()
 
 void UUsernameMenu::Return()
 {
-
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideUsernameMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
 void UUsernameMenu::SetName(FText name)

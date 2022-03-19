@@ -23,9 +23,13 @@ void UFinishScreen::Finish()
 
 void UFinishScreen::QuitToMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideFinishMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
 void UFinishScreen::LoadPauseMenu()
 {
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideFinishMenu();
+	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowPauseMenu();
 }
 

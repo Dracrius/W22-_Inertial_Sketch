@@ -25,6 +25,10 @@
 #include "RCRacing/Actors/Firework_PowerUp.h"
 #include "RCRacing/Actors/Freeze_PowerUp.h"
 #include "RCRacing/Actors/Trap_PowerUp.h"
+#include "../GameStates/RCGameStateBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "../UI/InGameUI.h"
+#include "HeadMountedDisplayFunctionLibrary.h"
 
 
 const FName ARCRacingPawn::LookUpBinding("LookUp");
@@ -142,6 +146,9 @@ ARCRacingPawn::ARCRacingPawn()
 	InternalCameraBase->SetRelativeLocation(InternalCameraOrigin);
 	InternalCameraBase->SetupAttachment(GetMesh());
 
+    // Create a HMD Function Library
+    HMDFunctions = CreateDefaultSubobject<UHeadMountedDisplayFunctionLibrary>(TEXT("HMDFunctions"));
+
 	//InternalCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("InternalCamera"));
 	//InternalCamera->bUsePawnControlRotation = false;
 	//InternalCamera->FieldOfView = 90.f;
@@ -190,18 +197,33 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 	PlayerInputComponent->BindAxis(LookUpBinding);
 	PlayerInputComponent->BindAxis(LookRightBinding);
 
-	PlayerInputComponent->BindAction("Handbrake", IE_Pressed, this, &ARCRacingPawn::OnHandbrakePressed);
-	PlayerInputComponent->BindAction("Handbrake", IE_Released, this, &ARCRacingPawn::OnHandbrakeReleased);
+	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &ARCRacingPawn::Pause);
+
+	//PlayerInputComponent->BindAction("Handbrake", IE_Pressed, this, &ARCRacingPawn::OnHandbrakePressed);
+	//PlayerInputComponent->BindAction("Handbrake", IE_Released, this, &ARCRacingPawn::OnHandbrakeReleased);
 	PlayerInputComponent->BindAction("SwitchCamera", IE_Pressed, this, &ARCRacingPawn::OnToggleCamera);
 
 	PlayerInputComponent->BindAction("UsePowerUp", IE_Pressed, this, &ARCRacingPawn::OnUsePowerUp);
 
 	//PlayerInputComponent->BindAction("FlipCar", IE_Pressed, this, &ARCRacingPawn::FlipCar);
+
+    // VR headset functionality
+    PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARCRacingPawn::OnResetVR);
+}
+
+void ARCRacingPawn::Pause()
+{
+	static_cast<ARCGameStateBase*>(GetWorld()->GetGameState())->isPaused = true;
+
+	static_cast<AInGameUI*>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHUD())->ShowPauseMenu();
 }
 
 void ARCRacingPawn::MoveForward(float Val)
 {
-	GetVehicleMovementComponent()->SetThrottleInput(Val);
+	if (!static_cast<ARCGameStateBase*>(GetWorld()->GetGameState())->isPaused)
+	{
+		GetVehicleMovementComponent()->SetThrottleInput(Val);
+	}
 }
 
 void ARCRacingPawn::MoveRight(float Val)
@@ -247,7 +269,7 @@ void ARCRacingPawn::FlipCar(float DeltaTime)
 			if (bInAir || bNotGrounded)
 			{
 				const float ForwardInput = InputComponent->GetAxisValue("MoveForward");
-				const float RightInput = InputComponent->GetAxisValue("MoveRight");
+				const float RightInput = -InputComponent->GetAxisValue("MoveRight");
 
 				const float AirMovementForcePitch = 2.0f;
 				const float FlipAirMovementForceRoll = !bInAir && bNotGrounded ? 15.0f : 2.0f;
@@ -328,6 +350,20 @@ void ARCRacingPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
+    if (HMDFunctions->IsHeadMountedDisplayEnabled())
+    {
+        HMDFunctions->SetTrackingOrigin(EHMDTrackingOrigin::Eye);
+
+        Camera->bLockToHmd = true;
+        Camera->SetRelativeRotation(FRotator(0.0f, 0.0f, 0.0f));
+
+        SpringArm->bInheritPitch = false;
+        SpringArm->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
+        SpringArm->SetWorldRotation(FRotator(0.0f, 0.0f, 0.0f));
+        SpringArm->TargetArmLength = 200.0f;
+
+    }
+
 	bool bWantInCar = false;
 	// First disable both speed/gear displays 
 	bInCarCameraActive = false;
@@ -338,6 +374,11 @@ void ARCRacingPawn::BeginPlay()
 	EnableIncarView(bWantInCar);
 	// Start an engine sound playing
 	EngineSoundComponent->Play();
+}
+
+void ARCRacingPawn::OnResetVR()
+{
+    UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
 void ARCRacingPawn::UpdateHUDStrings()

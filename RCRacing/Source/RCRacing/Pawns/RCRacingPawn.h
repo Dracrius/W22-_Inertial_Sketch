@@ -54,6 +54,9 @@ class ARCRacingPawn : public AWheeledVehicle
 	UPROPERTY(Category = Display, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		UAudioComponent* EngineSoundComponent;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+    class UHeadMountedDisplayFunctionLibrary* HMDFunctions;
+
 public:
 	ARCRacingPawn();
 
@@ -94,13 +97,16 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+    /** Resets HMD orientation in VR. */
+    void OnResetVR();
+
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-
-
 public:
 	// End Actor interface
+
+	void Pause();
 
 	/** Handle pressing forwards */
 	void MoveForward(float Val);

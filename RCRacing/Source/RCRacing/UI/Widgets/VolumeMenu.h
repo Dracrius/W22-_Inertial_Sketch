@@ -26,12 +26,14 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void Return();
 
-	UFUNCTION()
-	virtual void SetVolume(FText channel, float vol);
+	UFUNCTION(BlueprintCallable)
+	virtual void ReturnToMain();
 
-public:
+	UFUNCTION(BlueprintCallable)
+	virtual void SetVolume(FText channel, float vol);
 	
 };

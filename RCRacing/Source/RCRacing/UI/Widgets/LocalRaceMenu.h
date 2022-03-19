@@ -34,16 +34,17 @@ protected:
 
 	virtual void NativeConstruct() override;
 
-	UFUNCTION()
+public:
+	UFUNCTION(BlueprintCallable)
 	virtual void StartRace();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void Return();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void NextCar();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void PreviousCar();
 
 public:
