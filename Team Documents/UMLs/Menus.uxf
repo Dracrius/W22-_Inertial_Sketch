@@ -1,46 +1,88 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>108</x><y>450</y><w>300</w><h>430</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
-AMainMenu
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>170</x><y>450</y><w>300</w><h>1210</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AInGameUI
 --
-+playerName: FText
-+topScores : std::vector&lt;float&gt;
-+lastCar: ACar
-+musicVolume: float
-+effectVolume: float
-+avgSpeed: float
-+numFlips : int 
-+volumeMenu:AVolumeMenu
-+usernameMenu:AUsernameMenu
-+localRaceMenu:ALocalRaceMenu
-+networkRaceMenu:ANetworkRaceMenu
+#mainMenu:UMainMenu*
+#pauseMenu:UPauseMenu*
+#finishScreen:UFinishScreen*
+#usernameMenu:UUsernameMenu
+#volumeMenu:UVolumeMenu
+#controlsMenu:UControlsMenu*
+#localRaceMenu:ULocalRaceMenu
+#networkRaceMenu:UNetworkRaceMenu
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++mainMenuClass:TSubclassOf&lt;UMainMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++pauseMenuClass:TSubclassOf&lt;UPauseMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++finishScreenClass:TSubclassOf&lt;UFinishScreen&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++usernameMenuClass:TSubclassOf&lt;UUsernameMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++volumeMenuClass:TSubclassOf&lt;UVolumeMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++controlsMenuClass:TSubclassOf&lt;UControlsMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++localRaceMenuClass:TSubclassOf&lt;ULocalRaceMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++networkRaceMenuClass:TSubclassOf&lt;UNetworkRaceMenu&gt; 
++menuFont:UFont* 
++playerName:FString 
++lastCar:class ACar* 
++maxSpeed:float 
++topScores:std::vector&lt;float&gt; 
++numFlips:int 
++musicVolume:float 
++effectVolume:float 
 --
 # BeginPlay() : void &lt;virtual override&gt;
-# GetSave() : void &lt;virtual&gt;
-# CreateSave() : void &lt;virtual&gt;
-# Save() : void &lt;virtual&gt;
-# Quit() : void &lt;virtual&gt;
-# LoadVolume() : void &lt;virtual&gt;
-# LoadUsername() : void &lt;virtual&gt;
-# LoadLocal() : void &lt;virtual&gt;
-# LoadNetwork() : void &lt;virtual&gt;
-# SetVolume(channel:FText, vol:float) : void &lt;virtual&gt;
-+ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>550</y><w>410</w><h>320</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-1 
-
-
-contains
-
-
-
-1
-</panel_attributes><additional_attributes>10;10;260;10;260;300;390;300</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>520</y><w>410</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-1 
-
-contains
-
-1
-</panel_attributes><additional_attributes>10;10;290;10;290;100;390;100</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>480</y><w>410</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+# DrawHUD() : void &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++ GetSave() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ CreateFirstSave() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ Save() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ Quit() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowMainMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideMainMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowPauseMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HidePauseMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowFinishMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideFinishMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowUsernameMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideUsernameMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowVolumeMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideVolumeMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowControlsMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideControlsMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowLocalMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideLocalMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowNetworkMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideNetworkMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ SetVolume(channel:FString, vol:float) : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>1210</y><w>440</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1    contains   1
-</panel_attributes><additional_attributes>10;20;390;20</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>170</y><w>410</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;420;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>480</y><w>440</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;420;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>170</y><w>440</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1 
 
 
@@ -49,45 +91,147 @@ contains
 
 
 1
-</panel_attributes><additional_attributes>10;310;130;310;130;10;390;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>100</y><w>210</w><h>170</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
-AVolumeMenu
+</panel_attributes><additional_attributes>10;310;160;310;160;10;420;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>880</x><y>730</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+ULocalRaceMenu
 --
-+musicVolume: float
-+effectVolume: float
++menuFont:UFont* 
++playerName:FString 
++lastCar:class ACar* 
++maxSpeed:float 
++topScores:std::vector&lt;float&gt; 
++numFlips:int 
 --
-# BeginPlay() : void &lt;virtual override&gt;
-# Return() : void &lt;virtual&gt;
-# SetVolume(channel:FText, vol:float) : void &lt;virtual&gt;
-+ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>370</y><w>300</w><h>170</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
-AUsernameMenu
+#ULocalRaceMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++StartRace():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++NextCar():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++PreviousCar():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>880</x><y>1050</y><w>300</w><h>230</h></coordinates><panel_attributes>&lt;&lt;ULocalRaceMenu&gt;&gt;
+UNetworkRaceMenu
 --
-+playerName: FText
++currentLobby:FText
++lobbyNames:std::vector&lt;FText&gt;
++NetworkRacers:std::vector&lt;FText&gt;
 --
-# BeginPlay() : void &lt;virtual override&gt;
-# Return() : void &lt;virtual&gt;
-# SetName(name:FText) : void &lt;virtual&gt;
-+ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>570</y><w>300</w><h>250</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
-ALocalRaceMenu
+#UNetworkRaceMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++GetLobbies():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++SetLobby():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++GetRacers():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>880</x><y>0</y><w>300</w><h>390</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UMainMenu
 --
-+playerName: FText
-+topScores : std::vector&lt;float&gt;
-+currentCar: ACar
-+cars:std::vector&lt;ACar&gt;
-+avgSpeed: float
-+numFlips : int 
++menuFont:UFont* 
++playerName:FString 
++lastCar:class ACar* 
++maxSpeed:float 
++topScores:std::vector&lt;float&gt; 
++numFlips:int 
++musicVolume:float 
++effectVolume:float 
 --
-# BeginPlay() : void &lt;virtual override&gt;
-# Start() : void &lt;virtual&gt;
-# Return() : void &lt;virtual&gt;
-# NextCar() : void &lt;virtual&gt;
-# PreviousCar() : void &lt;virtual&gt;
-+ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>788</x><y>830</y><w>300</w><h>180</h></coordinates><panel_attributes>&lt;&lt;ALocalRaceMenu&gt;&gt;
-ANetworkRaceMenu
+#UMainMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++LoadUsernameMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadVolumeMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadControlsMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadLocalMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadNetworkMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>880</x><y>410</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UPauseMenu
 --
-+lobbyNames: std::vector&lt;Ftext&gt;
-+lobbyName: Ftext
-+netwrorkRacers: std::vector&lt;FText&gt;
++menuFont:UFont* 
++playerName:FString 
++avgSpeed:float
++numFlips:int 
 --
-# GetLobbies() : void &lt;virtual&gt;
-# SetLobby(lobby: Ftext) : void &lt;virtual&gt;
-# GetRacers() : void &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+#UPauseMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++LoadVolumeMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadControlsMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ReturnToMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Continue():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>880</x><y>1300</y><w>300</w><h>290</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UFinishScreen
+--
++menuFont:UFont* 
++playerName:FString 
++playerPos:int
++racerNames:std::vector&lt;FText&gt;
++finishTimes:std::vector&lt;float&gt; 
++avgSpeed:float 
++numFlips:int 
+--
+#UFinishScreen(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Finish():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++QuitToMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadPauseMenu():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>960</y><w>300</w><h>220</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UVolumeMenu
+--
++menuFont:UFont* 
++musicVolume:float 
++effectVolume:float 
+--
+#UVolumeMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ReturnToMain():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++SetVolume(channel:FText , vol:float):void  &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>1470</y><w>300</w><h>180</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UUsernameMenu
+--
++menuFont:UFont* 
++playerName:FText
+--
+#UVolumeMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++SetName(name:FText):void  &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>1250</y><w>300</w><h>160</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UControlsMenu
+--
++menuFont:UFont* 
+--
+#UControlsMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ReturnToMain():void  &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>1430</y><w>440</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;420;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>1310</y><w>130</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;110;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>1530</y><w>130</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;110;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>1070</y><w>130</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;110;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>810</y><w>440</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   1
+</panel_attributes><additional_attributes>10;20;420;20</additional_attributes></element></diagram>

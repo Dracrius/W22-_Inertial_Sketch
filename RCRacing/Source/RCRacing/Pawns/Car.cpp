@@ -1,4 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Antoine Plouffe <antoine.plouffe1@gmail.com>
+Version: 0.1
+Author : Antoine Plouffe
+Author : UE4
+*/
 
 
 #include "Car.h"

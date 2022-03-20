@@ -1,0 +1,214 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>230</x><y>0</y><w>300</w><h>1210</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AInGameUI
+--
+#mainMenu:UMainMenu*
+#pauseMenu:UPauseMenu*
+#finishScreen:UFinishScreen*
+#usernameMenu:UUsernameMenu
+#volumeMenu:UVolumeMenu
+#controlsMenu:UControlsMenu*
+#localRaceMenu:ULocalRaceMenu
+#networkRaceMenu:UNetworkRaceMenu
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++mainMenuClass:TSubclassOf&lt;UMainMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++pauseMenuClass:TSubclassOf&lt;UPauseMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++finishScreenClass:TSubclassOf&lt;UFinishScreen&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++usernameMenuClass:TSubclassOf&lt;UUsernameMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++volumeMenuClass:TSubclassOf&lt;UVolumeMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++controlsMenuClass:TSubclassOf&lt;UControlsMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++localRaceMenuClass:TSubclassOf&lt;ULocalRaceMenu&gt; 
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++networkRaceMenuClass:TSubclassOf&lt;UNetworkRaceMenu&gt; 
++menuFont:UFont* 
++playerName:FString 
++lastCar:class ACar* 
++maxSpeed:float 
++topScores:std::vector&lt;float&gt; 
++numFlips:int 
++musicVolume:float 
++effectVolume:float 
+--
+# BeginPlay() : void &lt;virtual override&gt;
+# DrawHUD() : void &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++ GetSave() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ CreateFirstSave() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ Save() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ Quit() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowMainMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideMainMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowPauseMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HidePauseMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowFinishMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideFinishMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowUsernameMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideUsernameMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowVolumeMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideVolumeMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowControlsMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideControlsMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowLocalMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideLocalMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ ShowNetworkMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideNetworkMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ SetVolume(channel:FString, vol:float) : void &lt;virtual&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>0</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+ULocalRaceMenu
+--
++menuFont:UFont* 
++playerName:FString 
++lastCar:class ACar* 
++maxSpeed:float 
++topScores:std::vector&lt;float&gt; 
++numFlips:int 
+--
+#ULocalRaceMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++StartRace():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++NextCar():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++PreviousCar():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>320</y><w>300</w><h>230</h></coordinates><panel_attributes>&lt;&lt;ULocalRaceMenu&gt;&gt;
+UNetworkRaceMenu
+--
++currentLobby:FText
++lobbyNames:std::vector&lt;FText&gt;
++NetworkRacers:std::vector&lt;FText&gt;
+--
+#UNetworkRaceMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++GetLobbies():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++SetLobby():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++GetRacers():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>0</y><w>300</w><h>390</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UMainMenu
+--
++menuFont:UFont* 
++playerName:FString 
++lastCar:class ACar* 
++maxSpeed:float 
++topScores:std::vector&lt;float&gt; 
++numFlips:int 
++musicVolume:float 
++effectVolume:float 
+--
+#UMainMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++LoadUsernameMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadVolumeMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadControlsMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadLocalMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadNetworkMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>410</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UPauseMenu
+--
++menuFont:UFont* 
++playerName:FString 
++avgSpeed:float
++numFlips:int 
+--
+#UPauseMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++LoadVolumeMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadControlsMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ReturnToMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Continue():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>730</y><w>300</w><h>290</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UFinishScreen
+--
++menuFont:UFont* 
++playerName:FString 
++playerPos:int
++racerNames:std::vector&lt;FText&gt;
++finishTimes:std::vector&lt;float&gt; 
++avgSpeed:float 
++numFlips:int 
+--
+#UFinishScreen(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Finish():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++QuitToMenu():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++LoadPauseMenu():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>570</y><w>300</w><h>220</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UVolumeMenu
+--
++menuFont:UFont* 
++musicVolume:float 
++effectVolume:float 
+--
+#UVolumeMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ReturnToMain():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++SetVolume(channel:FText , vol:float):void  &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>810</y><w>300</w><h>180</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UUsernameMenu
+--
++menuFont:UFont* 
++playerName:FText
+--
+#UVolumeMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++SetName(name:FText):void  &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>1050</y><w>300</w><h>160</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+UControlsMenu
+--
++menuFont:UFont* 
+--
+#UControlsMenu(rootMenu:const FObjectInitializer&amp;)
+#NativeConstruct():void  &lt;virtual override&gt;
+UFUNCTION(BlueprintCallable)
++Return():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ReturnToMain():void  &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

@@ -1,4 +1,7 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+/*
+Copyright 2022 Inertial Sketch
+Version: 0.1
+*/
 
 using UnrealBuildTool;
 using System.Collections.Generic;

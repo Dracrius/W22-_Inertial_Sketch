@@ -1,4 +1,10 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Antoine Plouffe <antoine.plouffe1@gmail.com>
+Version: 0.1
+Author : Antoine Plouffe
+Author : UE4
+*/
 
 #pragma once
 

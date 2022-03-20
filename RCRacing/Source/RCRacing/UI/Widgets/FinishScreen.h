@@ -1,4 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Alexander Achorn
+Author : UE4
+*/
 
 #pragma once
 
@@ -7,9 +13,7 @@
 #include "Blueprint/UserWidget.h"
 #include "FinishScreen.generated.h"
 
-/**
- * 
- */
+//The Widget to show when the player has finished the Race
 UCLASS()
 class RCRACING_API UFinishScreen : public UUserWidget
 {
@@ -25,9 +29,6 @@ public:
 	std::vector<float> finishTimes;
 	float avgSpeed;
 	int numFlips;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenu")
-	class UPauseMenu* pauseMenu;
 
 protected:
 	UFinishScreen(const FObjectInitializer& rootMenu);

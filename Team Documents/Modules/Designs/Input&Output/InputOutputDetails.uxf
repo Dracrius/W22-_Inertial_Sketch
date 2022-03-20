@@ -1,0 +1,96 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>116</x><y>0</y><w>810</w><h>1130</h></coordinates><panel_attributes>&lt;&lt;AWheeledVehicle&gt;&gt;
+ARCRacingPawn
+--
++ UPROPERTY() SpringArm: USpringArmComponent*
++ UPROPERTY() Camera: UCameraComponent*
++ UPROPERTY() InternalCameraBase: USceneComponent*
++ UPROPERTY() InternalCamera: UCameraComponent*
++ UPROPERTY() InCarSpeed: UTextRenderComponent*
++ UPROPERTY() InCarGear: UTextRenderComponent*
++ UPROPERTY() EngineSoundComponent: UAudioComponent*
+
++ UPROPERTY() SpeedDisplayString: FText
++ UPROPERTY() GearDisplayString: FText
++ UPROPERTY() GearDisplayColor: FColor
++ UPROPERTY() GearDisplayReverseColor: FColor
++ UPROPERTY() bInCarCameraActive: bool
++ UPROPERTY() bInReverseGear: bool
++ UPROPERTY() InternalCameraOrigin: FVector
+
++ LookUpBinding: FName static const
++ LookRightBinding: FName static const
++ EngineAudioRPM: FName static const
+
+- bIsLowFriction: bool
+- SlipperyMaterial: UPhysicalMaterial
+- NonSlipperyMaterial: UPhysicalMaterial
+
++ UPROPERTY() PowerupClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() BowlingBall_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() Firework_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() Freeze_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() Trap_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
++ UPROPERTY() CurrentPowerUp: APowerUp*
++ UPROPERTY() BowlingBall_PowerUp: APowerUp*
++ UPROPERTY() Firework_PowerUp: APowerUp*
++ UPROPERTY() Freeze_PowerUp: APowerUp*
++ UPROPERTY() Trap_PowerUp: APowerUp*
+
++ UPROPERTY() BoostAmount: int*
++ UPROPERTY() AirMovementForceRoll: float*
+
+--
++ ARCRacingPawn()
++ SetupPlayerInputComponent(class UInputComponent* InputComponent): void &lt;virtual&gt; override
+# BeginPlay(): void &lt;virtual&gt; override
++ Tick: void &lt;virtual&gt; override
+
+# UFUNCTION() OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, 
+int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void &lt;virtual&gt;
+
++ MoveForward(float Val): void
++ MoveRight(float Val): void
++ SetupInCarHUD: void
++ UpdatePhysicsMaterial: void
++ OnHandbrakePressed: void
++ OnHandbrakeReleased: void
++ OnToggleCamera: void
+
+- FlipCar(float DeltaTime): void
+- EnableIncarView( const bool bState ): void
+- UpdateHUDStrings: void
+
++ GetSpringArm: USpringArmComponent* const
++ GetCamera: UCameraComponent* const
++ GetInternalCamera: UCameraComponent* const
++ GetInCarSpeed: UTextRenderComponent* const
++ GetInCarGear: UTextRenderComponent* const
++ GetEngineSoundComponent: UAudioComponent* const
+
++ OnUsePowerUp: void
++ SetCurrentPowerUp(APowerUp* power)
++ SetCurrentPowerUp(int power)
++ Trapped: void
++ Freezed: void
++ GotHit: void
++ Boost: void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>116</x><y>1150</y><w>540</w><h>300</h></coordinates><panel_attributes>&lt;&lt;ACharacter &gt;&gt;
+Dummy
+--
++menuPos:int 
+--
++ Dummy()
++ SetupPlayerInputComponent(class UInputComponent* InputComponent): void &lt;virtual&gt; override
+# BeginPlay(): void &lt;virtual&gt; override
++ Tick: void &lt;virtual&gt; override
+
+UFUNCTION(BlueprintCallable)
++ MenuUp() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ MenuDown() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ MenuLeft() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ MenuRight() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ MenuAccept() : void &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

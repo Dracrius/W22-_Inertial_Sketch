@@ -1,4 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Alexander Achorn
+Author : UE4
+*/
 
 #pragma once
 
@@ -7,9 +13,7 @@
 #include "Blueprint/UserWidget.h"
 #include "PauseMenu.generated.h"
 
-/**
- * 
- */
+//The Pause Menu for while in Game
 UCLASS()
 class RCRACING_API UPauseMenu : public UUserWidget
 {
@@ -22,15 +26,6 @@ public:
 
 	float avgSpeed;
 	int numFlips;
-
-	float musicVolume;
-	float effectVolume;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class UVolumeMenu* volumeMenu;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SubMenus")
-	class UControlsMenu* controlsMenu;
 
 protected:
 	UPauseMenu(const FObjectInitializer& rootMenu);

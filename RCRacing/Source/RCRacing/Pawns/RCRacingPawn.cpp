@@ -1,4 +1,18 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Antoine Plouffe <antoine.plouffe1@gmail.com>
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Antoine Plouffe
+Author : Alexander Achorn
+Author : UE4
+
+Changelog:
+3/18
+Added VR Support
+3/19
+Added More Comments
+*/
 
 #include "RCRacingPawn.h"
 #include "RCRacingWheelFront.h"

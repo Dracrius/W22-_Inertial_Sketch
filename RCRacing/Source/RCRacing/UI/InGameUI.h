@@ -1,4 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Alexander Achorn
+Author : UE4
+*/
 
 #pragma once
 
@@ -7,14 +13,13 @@
 #include "GameFramework/HUD.h"
 #include "InGameUI.generated.h"
 
-/**
- * 
- */
+//The Base UI Class that Controls all UI Widgets
 UCLASS()
 class RCRACING_API AInGameUI : public AHUD
 {
 	GENERATED_BODY()
 protected:
+    //Pointers to Our Widgets
 	class UMainMenu* mainMenu;
 	class UPauseMenu* pauseMenu;
 	class UFinishScreen* finishScreen;
@@ -38,6 +43,7 @@ public:
 	float musicVolume;
 	float effectVolume;
 
+    //Which Classes to use to Fill our Pointers
 	UPROPERTY(EditDefaultsOnly, Category = "Menus")
 	TSubclassOf<UMainMenu> mainMenuClass;
 
@@ -70,6 +76,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+    //Save Features
 	UFUNCTION(BlueprintCallable)
 	virtual void GetSave();
 
@@ -79,6 +86,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void Save();
 
+    //Menu Features
 	UFUNCTION(BlueprintCallable)
 	virtual void Quit();
 
@@ -130,6 +138,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void HideNetworkMenu();
 
+    //Set the Games Volumes
 	UFUNCTION(BlueprintCallable)
 	virtual void SetVolume(FString channel, float vol);
 

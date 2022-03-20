@@ -1,4 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Alexander Achorn
+Author : UE4
+*/
 
 #pragma once
 
@@ -7,9 +13,7 @@
 #include "Blueprint/UserWidget.h"
 #include "ControlsMenu.generated.h"
 
-/**
- * 
- */
+//Just a simple menu to show the controls
 UCLASS()
 class RCRACING_API UControlsMenu : public UUserWidget
 {

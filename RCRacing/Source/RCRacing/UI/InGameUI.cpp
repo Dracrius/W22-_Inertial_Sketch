@@ -1,4 +1,20 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Alexander Achorn
+Author : UE4
+
+Changelog:
+3/10
+First Attempt
+3/12
+Rewrite Everything had the wrong idea
+3/16
+Finished Major Feature implimentation
+3/19
+Add Comments
+*/
 
 
 #include "InGameUI.h"
@@ -16,6 +32,7 @@
 
 AInGameUI::AInGameUI()
 {
+    //Lets Set Things Up!
 	menuFont = CreateDefaultSubobject<UFont>(TEXT("MenuFont"));
 
 	playerName = FString("Player01");
@@ -26,6 +43,7 @@ AInGameUI::AInGameUI()
 	musicVolume = 100.f;
 	effectVolume = 100.f;
 
+    //Fill the Widget Pointers
 	if (pauseMenuClass)
 	{
 		pauseMenu = CreateWidget<UPauseMenu>(GetWorld(), pauseMenuClass);
@@ -69,6 +87,8 @@ void AInGameUI::DrawHUD()
 void AInGameUI::BeginPlay()
 {
 	Super::BeginPlay();
+
+    //Commented Out until Save Files are added so you don't end up in a "What's your Name?" Loop
 	//GetSave();
 }
 
@@ -86,14 +106,18 @@ void AInGameUI::GetSave()
 		maxSpeed = 0.f; //Get from Save
 		numFlips = 0; //Get from Save
 
+        //Set Volumes Base on Saved Values
 		SetVolume(FString("Music"), mVol);
 		SetVolume(FString("Effect"), eVol);
 	}
 	else
 	{
+        //If there is no Save make one
 		CreateFirstSave();
 	}
 
+
+    //Get the Game State and apply the saved settings
 	ARCGameStateBase* gState = Cast<ARCGameStateBase>(GetWorld()->GetGameState());
 
 	gState->playerName = playerName;
@@ -103,6 +127,7 @@ void AInGameUI::GetSave()
 
 void AInGameUI::CreateFirstSave()
 {
+    //There was no save file so we ask the user for their name so we can make one
 	HideMainMenu();
 	ShowUsernameMenu();
 
@@ -334,6 +359,7 @@ void AInGameUI::HideNetworkMenu()
 
 void AInGameUI::SetVolume(FString channel, float vol)
 {
+    //Get the game state so that we can set our volumes to what was set
 	ARCGameStateBase* gState = Cast<ARCGameStateBase>(GetWorld()->GetGameState());
 
 	if (channel == FString("Music"))

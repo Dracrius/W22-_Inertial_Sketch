@@ -1,0 +1,32 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>450</x><y>458</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;AController&gt;&gt;
+APlayerController
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>758</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;ACharacter &gt;&gt;
+Dummy
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>878</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+AInGameUI
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>668</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;AWheeledVehicle&gt;&gt;
+ARCRacingPawn
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>508</y><w>290</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+contains
+
+
+
+1
+</panel_attributes><additional_attributes>10;10;10;190;270;190</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>508</y><w>280</w><h>430</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+contains
+
+
+
+1
+</panel_attributes><additional_attributes>10;10;10;410;260;410</additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>690</y><w>290</w><h>130</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;10;110;270;110</additional_attributes></element></diagram>

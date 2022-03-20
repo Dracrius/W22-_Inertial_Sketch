@@ -1,4 +1,18 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*
+Copyright 2022 Inertial Sketch
+Copyright 2022 Alexander Achorn <a.achorn@gmail.com>
+Version: 0.1
+Author : Alexander Achorn
+Author : UE4
+
+Changelog:
+3/12
+Switched to Widgets
+3/16
+Finished Basic Feature implimentation
+3/19
+Add Comments
+*/
 
 
 #include "VolumeMenu.h"
@@ -6,7 +20,6 @@
 
 UVolumeMenu::UVolumeMenu(const FObjectInitializer& rootMenu) : UUserWidget(rootMenu)
 {
-
 }
 
 void UVolumeMenu::NativeConstruct()
@@ -28,5 +41,5 @@ void UVolumeMenu::ReturnToMain()
 
 void UVolumeMenu::SetVolume(FText channel, float vol)
 {
-
+    //Need to learn how to Set Game Volumes Requires some implimentation of a custom sound engine from what I have seen.
 }
