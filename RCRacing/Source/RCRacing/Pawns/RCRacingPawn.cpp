@@ -211,6 +211,7 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
     PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARCRacingPawn::OnResetVR);
 }
 
+//Pause Menu
 void ARCRacingPawn::Pause()
 {
 	static_cast<ARCGameStateBase*>(GetWorld()->GetGameState())->isPaused = true;
@@ -218,6 +219,7 @@ void ARCRacingPawn::Pause()
 	static_cast<AInGameUI*>(UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetHUD())->ShowPauseMenu();
 }
 
+//Movements
 void ARCRacingPawn::MoveForward(float Val)
 {
 	if (!static_cast<ARCGameStateBase*>(GetWorld()->GetGameState())->isPaused)
@@ -246,6 +248,7 @@ void ARCRacingPawn::OnToggleCamera()
 	EnableIncarView(!bInCarCameraActive);
 }
 
+//prevents the player getting their vehicle upside down and/or stuck
 void ARCRacingPawn::FlipCar(float DeltaTime)
 {
 	float KPH = FMath::Abs(GetVehicleMovement()->GetForwardSpeed()) * 0.036f;
@@ -258,11 +261,15 @@ void ARCRacingPawn::FlipCar(float DeltaTime)
 			FCollisionQueryParams QueryParams;
 			QueryParams.AddIgnoredActor(this);
 
+			//TraceStart: where the LineTrace starts in the Z Axis;
+			//TraceEnd: where the LineTrace ends in the Z Axis.
 			const FVector TraceStart = GetActorLocation() + FVector(0.0f, 0.0f, 50.0f);
 			const FVector TraceEnd = GetActorLocation() + FVector(0.0f, 0.0f, 200.0f);
 
 			FHitResult Hit;
 
+			//bInAir uses LineTraceSingleByChannel to detect if the player is currently in the air;
+			//bNotGrounded uses a DotProduct to detect if the player’s up vector is parallel to an UpVector
 			const bool bInAir = GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
 			const bool bNotGrounded = FVector::DotProduct(GetActorUpVector(), FVector::UpVector) < 0.1f;
 
@@ -276,6 +283,7 @@ void ARCRacingPawn::FlipCar(float DeltaTime)
 
 				if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
 				{
+					//flip the car until it is grounded.
 					const FVector MovementVector = FVector(RightInput * FlipAirMovementForceRoll, ForwardInput * AirMovementForcePitch, 0.0f) * DeltaTime * 200.0f;
 					const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
 					VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
@@ -402,6 +410,7 @@ void ARCRacingPawn::UpdateHUDStrings()
 
 }
 
+//switch a few settings and is to call the virtual Use function of the PowerUp class. 
 void ARCRacingPawn::OnUsePowerUp()
 {
 	if (PowerupClass)
@@ -420,6 +429,7 @@ void ARCRacingPawn::OnUsePowerUp()
 	}
 }
 
+//sets the player’s current power up to the randomly chosen one inside the PowerUp class. 
 void ARCRacingPawn::SetCurrentPowerUp(int power)
 {
 	if (CurrentPowerUp != nullptr)
@@ -466,6 +476,7 @@ void ARCRacingPawn::SetCurrentPowerUp(int power)
 		"BowlingBallSocket");
 }
 
+//creates a wow moment when the player overlaps a trap by moving upwards and rotating their vehicle mesh
 void ARCRacingPawn::Trapped()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been trapped!"));
@@ -482,6 +493,7 @@ void ARCRacingPawn::Trapped()
 	}
 }
 
+//applies the freeze effect on the vehicle mesh.
 void ARCRacingPawn::Freezed(float deltaTime)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been freezed!"));
@@ -495,6 +507,7 @@ void ARCRacingPawn::Freezed(float deltaTime)
 	}
 }
 
+//temporarily paralyzed the player’s vehicle OnHit.
 void ARCRacingPawn::GotHit()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been hit!"));
@@ -507,6 +520,7 @@ void ARCRacingPawn::GotHit()
 	}
 }
 
+//temporarily boost the player’s vehicle speed.
 void ARCRacingPawn::Boost()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Boost!"));
@@ -518,10 +532,6 @@ void ARCRacingPawn::Boost()
 			VehicleMesh->SetPhysicsLinearVelocity(Force, true);
 		}
 	}
-}
-
-void ARCRacingPawn::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
 }
 
 void ARCRacingPawn::SetupInCarHUD()
