@@ -18,6 +18,7 @@ Add Comments
 #include "NetworkRaceMenu.h"
 #include "LocalRaceMenu.h"
 #include "../InGameUI.h"
+#include "Online_GameInstance.h"
 
 UNetworkRaceMenu::UNetworkRaceMenu(const FObjectInitializer& rootMenu) : ULocalRaceMenu(rootMenu)
 {
@@ -26,6 +27,26 @@ UNetworkRaceMenu::UNetworkRaceMenu(const FObjectInitializer& rootMenu) : ULocalR
 void UNetworkRaceMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
+}
+
+void UNetworkRaceMenu::HostLobby()
+{
+    UOnline_GameInstance* GI = Cast<UOnline_GameInstance>(GetGameInstance());
+    if (GI)
+    {
+        static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
+        GI->Button_HostServer();
+    }
+}
+
+void UNetworkRaceMenu::JoinLobby()
+{
+    UOnline_GameInstance* GI = Cast<UOnline_GameInstance>(GetGameInstance());
+    if (GI)
+    {
+        static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
+        GI->Button_JoinServer();
+    }
 }
 
 void UNetworkRaceMenu::GetLobbies()
@@ -41,4 +62,10 @@ void UNetworkRaceMenu::SetLobby(FText lobby)
 void UNetworkRaceMenu::GetRacers()
 {
     //Needs Networking Implimentation
+}
+
+void UNetworkRaceMenu::Return()
+{
+    static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
+    static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }

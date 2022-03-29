@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "OnlineSessionsLite",
+	"Description": "",
+	"Category": "Other",
+	"CreatedBy": "crystalboxes",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "OnlineSessionsLite",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

@@ -196,6 +196,9 @@ ARCRacingPawn::ARCRacingPawn()
 	bIsLowFriction = false;
 	bInReverseGear = false;
 
+    SetReplicates(true);
+    SetReplicateMovement(true);
+
 	GetMesh()->OnComponentBeginOverlap.AddDynamic(this, &ARCRacingPawn::OnOverlapBegin);
 }
 

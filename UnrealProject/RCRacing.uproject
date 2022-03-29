@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.27",
+	"EngineAssociation": "{EAD9CE85-440A-B625-E769-729741094694}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -32,14 +32,18 @@
 				"Android"
 			]
 		},
-		{
-			"Name": "OculusOpenXR",
-			"Enabled": true,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Android"
-			]
-		}
+    {
+      "Name": "OculusOpenXR",
+      "Enabled": true,
+      "SupportedTargetPlatforms": [
+        "Win32",
+        "Win64",
+        "Android"
+      ]
+    },
+    {
+      "Name": "OnlineSubsystemSteam",
+      "Enabled": true
+    }
 	]
 }

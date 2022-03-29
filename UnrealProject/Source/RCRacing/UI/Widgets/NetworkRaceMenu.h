@@ -31,6 +31,12 @@ protected:
 	virtual void NativeConstruct() override;
 
 public:
+    UFUNCTION(BlueprintCallable)
+    virtual void HostLobby();
+
+    UFUNCTION(BlueprintCallable)
+    virtual void JoinLobby();
+
 	UFUNCTION(BlueprintCallable)
 	virtual void GetLobbies();
 
@@ -39,4 +45,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void GetRacers();
+
+    virtual void Return() override;
+
 };
