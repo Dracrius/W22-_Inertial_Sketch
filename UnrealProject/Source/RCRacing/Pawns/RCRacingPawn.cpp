@@ -35,7 +35,7 @@ Added More Comments
 #include "GameFramework/PlayerController.h"
 #include "RCRacing/Actors/BowlingBall_PowerUp.h"
 #include "RCRacing/Actors/PowerUp.h"
-#include "Editor/EditorEngine.h"
+#include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
 #include "RCRacing/Actors/Firework_PowerUp.h"
 #include "RCRacing/Actors/Freeze_PowerUp.h"
 #include "RCRacing/Actors/Trap_PowerUp.h"
@@ -290,7 +290,7 @@ void ARCRacingPawn::FlipCar(float DeltaTime)
 			const bool bInAir = GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
 			const bool bNotGrounded = FVector::DotProduct(GetActorUpVector(), FVector::UpVector) < 0.1f;
 
-			if (bInAir || bNotGrounded)
+			if ((bInAir || bNotGrounded))
 			{
 				const float ForwardInput = InputComponent->GetAxisValue("MoveForward");
 				const float RightInput = -InputComponent->GetAxisValue("MoveRight");
@@ -367,8 +367,8 @@ void ARCRacingPawn::Tick(float Delta)
 	EngineSoundComponent->SetFloatParameter(EngineAudioRPM, GetVehicleMovement()->GetEngineRotationSpeed()*RPMToAudioScale);
 
 	//Powerups
-
-	FlipCar(Delta);
+    if(IsLocallyControlled())
+	    FlipCar(Delta);
 }
 
 void ARCRacingPawn::BeginPlay()
