@@ -43,6 +43,7 @@ Added More Comments
 #include "Kismet/GameplayStatics.h"
 #include "../UI/InGameUI.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
+#include "Net/UnrealNetwork.h"
 
 
 const FName ARCRacingPawn::LookUpBinding("LookUp");
@@ -265,52 +266,6 @@ void ARCRacingPawn::OnToggleCamera()
 	EnableIncarView(!bInCarCameraActive);
 }
 
-//prevents the player getting their vehicle upside down and/or stuck
-void ARCRacingPawn::FlipCar(float DeltaTime)
-{
-	float KPH = FMath::Abs(GetVehicleMovement()->GetForwardSpeed()) * 0.036f;
-	int32 KPH_int = FMath::FloorToInt(KPH);
-
-	if (KPH_int == 0)
-	{
-		if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
-		{
-			FCollisionQueryParams QueryParams;
-			QueryParams.AddIgnoredActor(this);
-
-			//TraceStart: where the LineTrace starts in the Z Axis;
-			//TraceEnd: where the LineTrace ends in the Z Axis.
-			const FVector TraceStart = GetActorLocation() + FVector(0.0f, 0.0f, 50.0f);
-			const FVector TraceEnd = GetActorLocation() + FVector(0.0f, 0.0f, 200.0f);
-
-			FHitResult Hit;
-
-			//bInAir uses LineTraceSingleByChannel to detect if the player is currently in the air;
-			//bNotGrounded uses a DotProduct to detect if the player’s up vector is parallel to an UpVector
-			const bool bInAir = GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
-			const bool bNotGrounded = FVector::DotProduct(GetActorUpVector(), FVector::UpVector) < 0.1f;
-
-			if ((bInAir || bNotGrounded))
-			{
-				const float ForwardInput = InputComponent->GetAxisValue("MoveForward");
-				const float RightInput = -InputComponent->GetAxisValue("MoveRight");
-
-				const float AirMovementForcePitch = 2.0f;
-				const float FlipAirMovementForceRoll = !bInAir && bNotGrounded ? 15.0f : 2.0f;
-
-				if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
-				{
-					//flip the car until it is grounded.
-					const FVector MovementVector = FVector(RightInput * FlipAirMovementForceRoll, ForwardInput * AirMovementForcePitch, 0.0f) * DeltaTime * 200.0f;
-					const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
-					VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
-				}
-			}
-		}
-	}
-
-}
-
 void ARCRacingPawn::EnableIncarView(const bool bState)
 {
 	if (bState != bInCarCameraActive)
@@ -367,8 +322,94 @@ void ARCRacingPawn::Tick(float Delta)
 	EngineSoundComponent->SetFloatParameter(EngineAudioRPM, GetVehicleMovement()->GetEngineRotationSpeed()*RPMToAudioScale);
 
 	//Powerups
-    if(IsLocallyControlled())
-	    FlipCar(Delta);
+	if (IsLocallyControlled() )//This is the AUtonomous_Proxy Client
+	{
+		if(InputComponent)
+		{
+			FMovementData mv;
+			mv.MovementForward = InputComponent->GetAxisValue("MoveForward");
+			mv.MovementRight = -InputComponent->GetAxisValue("MoveRight");
+			Server_CallFlipCar(mv);
+		}
+		
+	}
+}
+void ARCRacingPawn::Server_CallFlipCar_Implementation(FMovementData mvData)
+{
+	MovementDataStruct = mvData;
+	bNotGrounded = FVector::DotProduct(GetActorUpVector(), FVector::UpVector) < 0.1f;
+
+	if (bNotGrounded == false)
+	{
+		MovementDataStruct.MovementForward = 0.0f;
+		MovementDataStruct.MovementRight = 0.0f;
+	}
+
+	OnRepFlipCar();
+}
+
+void ARCRacingPawn::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ARCRacingPawn, MovementDataStruct);
+
+}
+
+//prevents the player getting their vehicle upside down and/or stuck
+void ARCRacingPawn::OnRepFlipCar()
+{
+	if (GetLocalRole() == ROLE_AutonomousProxy)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 20, FColor::Red, "Autonomous Proxy");
+		UE_LOG(LogTemp, Warning, TEXT("Client"));
+		FlipForceAmount = 50.0f;
+	}
+	else
+	{
+		FlipForceAmount = 200.0f;
+	}
+
+
+	float KPH = FMath::Abs(GetVehicleMovement()->GetForwardSpeed()) * 0.036f;
+	int32 KPH_int = FMath::FloorToInt(KPH);
+
+	if (KPH_int == 0)
+	{
+		if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+		{
+			FCollisionQueryParams QueryParams;
+			QueryParams.AddIgnoredActor(this);
+
+			//TraceStart: where the LineTrace starts in the Z Axis;
+			//TraceEnd: where the LineTrace ends in the Z Axis.
+			const FVector TraceStart = GetActorLocation() + FVector(0.0f, 0.0f, 50.0f);
+			const FVector TraceEnd = GetActorLocation() + FVector(0.0f, 0.0f, 200.0f);
+
+			FHitResult Hit;
+
+			//bInAir uses LineTraceSingleByChannel to detect if the player is currently in the air;
+			//bNotGrounded uses a DotProduct to detect if the player’s up vector is parallel to an UpVector
+			const bool bInAir = GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, QueryParams);
+
+			if (bNotGrounded)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 20, FColor::Red, FString::Printf(TEXT("Mv F = %d, Mv R = %d"), MovementDataStruct.MovementForward, MovementDataStruct.MovementRight));
+				const float RightInput = MovementDataStruct.MovementRight;
+
+				const float FlipAirMovementForceRoll = !bInAir && bNotGrounded ? 15.0f : 2.0f;
+
+				if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
+				{
+					//flip the car until it is grounded.
+					const FVector MovementVector = FVector(RightInput * FlipAirMovementForceRoll, 0.0f, 0.0f) * FApp::GetDeltaTime() * FlipForceAmount;
+					const FVector NewAngularMovement = GetActorRotation().RotateVector(MovementVector);
+					VehicleMesh->SetPhysicsAngularVelocity(NewAngularMovement, true);
+				}
+			}
+		}
+	}
+
 }
 
 void ARCRacingPawn::BeginPlay()
@@ -399,6 +440,10 @@ void ARCRacingPawn::BeginPlay()
 	EnableIncarView(bWantInCar);
 	// Start an engine sound playing
 	EngineSoundComponent->Play();
+
+	UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement());
+	UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive;
+	VehicleMesh->SetIsReplicated(true);
 }
 
 void ARCRacingPawn::OnResetVR()

@@ -29,6 +29,23 @@ class UAudioComponent;
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
+
+USTRUCT(BlueprintType)
+struct FMovementData
+{
+	GENERATED_BODY()
+
+public:
+
+	FMovementData(){}
+
+	UPROPERTY()
+	float MovementForward;
+
+	UPROPERTY()
+	float MovementRight;
+	
+};
 UCLASS(config=Game)
 class ARCRacingPawn : public AWheeledVehicle
 {
@@ -95,6 +112,16 @@ public:
 	/** Initial offset of incar camera */
 	FVector InternalCameraOrigin;
 
+	UPROPERTY(ReplicatedUsing = OnRepFlipCar)
+		FMovementData MovementDataStruct;
+
+	UFUNCTION(Server, Unreliable)
+		void Server_CallFlipCar(FMovementData mvData);
+
+	//Flips the car on inputkey when upside down
+	UFUNCTION()
+		void OnRepFlipCar(/*float DeltaTime*/);
+
 	// Begin Pawn interface
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 	// End Pawn interface
@@ -139,9 +166,6 @@ public:
 
 private:
 
-	//Flips the car on inputkey when upside down
-	void FlipCar(float DeltaTime);
-
 	void EnableIncarView( const bool bState );
 
 	/** Update the gear and speed strings */
@@ -172,6 +196,7 @@ public:
 public:
 
 	//Power Up section
+	bool bNotGrounded;
 
 	//switch a few settings and is to call the virtual Use function of the PowerUp class
 	void OnUsePowerUp();
@@ -219,6 +244,8 @@ public:
 	//Roll force for the Trap
 	UPROPERTY(EditAnywhere, Category = "PowerUp")
 		float AirMovementForceRoll = 250.0f;
+
+	float FlipForceAmount;
 
 	//Called by the PowerUp parent class to randomly assign a power up to CurrentPowerUp
 	void SetCurrentPowerUp(int power);
