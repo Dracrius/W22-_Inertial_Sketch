@@ -14,6 +14,7 @@ Author : UE4
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystem.h"
 #include "RCRacing/Pawns/RCRacingPawn.h"
+#include "DrawDebugHelpers.h"
 
 class ARCRacingPawn;
 // Sets default values
@@ -35,13 +36,17 @@ void ABowlingBall_PowerUp::Use(FVector direction, FVector SpawnPosition)
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
 
 	isFired = true;
+	//SetActorHiddenInGame(false);
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString() + " Spawn Position: " + SpawnPosition.ToString());
-	SetActorLocation(SpawnPosition);
+	
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString() + " Spawn Position: " + SpawnPosition.ToString());
 	PowerupSphere->SetSimulatePhysics(true);
 	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	PowerupSphere->SetNotifyRigidBodyCollision(true);
-	PowerupSphere->GetBodyInstance()->AddForce(direction * 100000 * PowerupSphere->GetMass());
+	SetActorLocation(SpawnPosition);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Position: " + SpawnPosition.ToString());
+	PowerupSphere->GetBodyInstance()->AddForce(-direction * 100000 * PowerupSphere->GetMass());
+
 }
 
 //Called when OnHit is triggered by a vehicle
@@ -63,6 +68,7 @@ void ABowlingBall_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
 	PowerupMesh->SetIsReplicated(true);
+	SetActorEnableCollision(false);
 }
 
 // Called every frame
@@ -70,6 +76,8 @@ void ABowlingBall_PowerUp::Tick(float DeltaTime)
 {
 	if (isFired)
 	{
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString());
+
 		TimeUntilDespawn += DeltaTime;
 		if (TimeUntilDespawn > MaxTimeUntilDespawn)
 		{
@@ -80,6 +88,33 @@ void ABowlingBall_PowerUp::Tick(float DeltaTime)
 			TimeUntilDespawn = 0.0f;
 		}
 	}
+
+	//DrawDebugSphere(GetWorld(), GetActorLocation(), 50.0f, 16, FColor::Red, false, 1);
+
+	//if (isFired)
+	//{
+	//	m_Cooldown += DeltaTime;
+	//	TimeUntilDespawn += DeltaTime;
+
+	//	//SetActorScale3D(FVector(0.1f) + (DeltaTime* 500));
+
+	//	if (m_Cooldown > m_MaxCooldown)
+	//	{
+	//		//To ensure the power up won’t collide with the emitter (vehicle pawn), 
+	//		PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	//		PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
+	//		m_Cooldown = 0.0f;
+	//	}
+
+	//	if (TimeUntilDespawn > MaxTimeUntilDespawn)
+	//	{
+	//		//make sure the power up will be destroy if it doesn’t hit a vehicle within 5 seconds.
+	//		this->SetActorHiddenInGame(true);
+	//		this->SetActorEnableCollision(false);
+	//		this->PowerupMesh = nullptr;
+	//		TimeUntilDespawn = 0.0f;
+	//	}
+	//}
 }
 
 void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -99,7 +134,7 @@ void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 				NetMulticastExplode();
 				playerPawn->OnRepGotHit();
 			}
-				
+
 		}
 	}
 }

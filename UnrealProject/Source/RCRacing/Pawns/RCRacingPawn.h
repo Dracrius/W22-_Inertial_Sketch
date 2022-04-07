@@ -198,8 +198,8 @@ public:
 	bool bNotGrounded;
 
 	//switch a few settings and is to call the virtual Use function of the PowerUp class
-	//UFUNCTION(Server, Reliable)
-		void OnUsePowerUp();
+	UFUNCTION(Server, Reliable)
+		void ServerOnUsePowerUp();
 
 	//These variables are used inside UE4 to sets the power ups inside this class' blueprint
 	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
@@ -281,12 +281,6 @@ public:
 
 	UFUNCTION()
 		void OnRepBoost();
-
-		void SpawnBowlingBall();
-		void SpawnFirework();
-		void SpawnFreeze();
-		void SpawnTrap();
-
 };
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

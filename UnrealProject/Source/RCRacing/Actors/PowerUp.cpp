@@ -86,7 +86,7 @@ void APowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,	AActor* OtherActor,	UPrimitiveComponent* OtherComp,	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	//set the player’s current power up to a random one.
-	if (!isPicked)
+	if (!isPicked && GetRemoteRole() != ROLE_Authority)
 	{
 		if (OtherActor != this)
 		{
