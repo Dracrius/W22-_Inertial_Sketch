@@ -217,13 +217,14 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 
 	PlayerInputComponent->BindAction("Pause", IE_Pressed, this, &ARCRacingPawn::Pause);
 
-	//PlayerInputComponent->BindAction("Handbrake", IE_Pressed, this, &ARCRacingPawn::OnHandbrakePressed);
-	//PlayerInputComponent->BindAction("Handbrake", IE_Released, this, &ARCRacingPawn::OnHandbrakeReleased);
 	PlayerInputComponent->BindAction("SwitchCamera", IE_Pressed, this, &ARCRacingPawn::OnToggleCamera);
 
 	PlayerInputComponent->BindAction("UsePowerUp", IE_Pressed, this, &ARCRacingPawn::OnUsePowerUp);
 
-	//PlayerInputComponent->BindAction("FlipCar", IE_Pressed, this, &ARCRacingPawn::FlipCar);
+	PlayerInputComponent->BindAction("SpawnBowlingBall", IE_Pressed, this, &ARCRacingPawn::SpawnBowlingBall);
+	PlayerInputComponent->BindAction("SpawnFirework", IE_Pressed, this, &ARCRacingPawn::SpawnFirework);
+	PlayerInputComponent->BindAction("SpawnFreeze", IE_Pressed, this, &ARCRacingPawn::SpawnFreeze);
+	PlayerInputComponent->BindAction("SpawnTrap", IE_Pressed, this, &ARCRacingPawn::SpawnTrap);
 
     // VR headset functionality
     PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARCRacingPawn::OnResetVR);
@@ -331,7 +332,6 @@ void ARCRacingPawn::Tick(float Delta)
 			mv.MovementRight = -InputComponent->GetAxisValue("MoveRight");
 			Server_CallFlipCar(mv);
 		}
-		
 	}
 }
 void ARCRacingPawn::Server_CallFlipCar_Implementation(FMovementData mvData)
@@ -353,7 +353,6 @@ void ARCRacingPawn::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ARCRacingPawn, MovementDataStruct);
-
 }
 
 //prevents the player getting their vehicle upside down and/or stuck
@@ -443,6 +442,7 @@ void ARCRacingPawn::BeginPlay()
 
 	UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement());
 	UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive;
+
 	VehicleMesh->SetIsReplicated(true);
 }
 
@@ -479,13 +479,21 @@ void ARCRacingPawn::OnUsePowerUp()
 	{
 		if (CurrentPowerUp)
 		{
-			CurrentPowerUp->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 			CurrentPowerUp->SetActive(true);
 			CurrentPowerUp->SetUsed(true);
 			CurrentPowerUp->SetActorEnableCollision(true);
+			CurrentPowerUp->SetActorHiddenInGame(false);
 
-			CurrentPowerUp->Use(GetActorForwardVector());
+			float offsetX = GetActorForwardVector().X * 250.0f;
+			float offsetY = GetActorForwardVector().Y * 250.0f;
+			float offsetZ = 1.0f;
+
+			FVector offset = FVector(offsetX, offsetY, offsetZ);
+
+			FVector spawnPosition = GetActorLocation() + offset;
+
+			CurrentPowerUp->Use(GetActorForwardVector(), spawnPosition);
 			CurrentPowerUp = nullptr;
 		}
 	}
@@ -495,7 +503,11 @@ void ARCRacingPawn::OnUsePowerUp()
 void ARCRacingPawn::SetCurrentPowerUp(int power)
 {
 	if (CurrentPowerUp != nullptr)
-		CurrentPowerUp->Destroy();
+	{
+		CurrentPowerUp->SetActorHiddenInGame(true);
+		CurrentPowerUp->SetActorEnableCollision(false);
+		CurrentPowerUp->SetMeshToNull();
+	}
 
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
@@ -503,47 +515,48 @@ void ARCRacingPawn::SetCurrentPowerUp(int power)
 
 	if (power == 1)
 	{
-		BowlingBall_PowerUp = GetWorld()->SpawnActor<APowerUp>(BowlingBall_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		BowlingBall_PowerUp = GetWorld()->SpawnActor<APowerUp>(BowlingBall_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
 
 		CurrentPowerUp = BowlingBall_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Bowling Ball!"));
 	}
 	else if (power == 2)
 	{
-		Firework_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		Firework_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
 
 		CurrentPowerUp = Firework_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Firework!"));
 	}
 	else if (power == 3)
 	{
-		Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
 		
 		CurrentPowerUp = Freeze_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Freeze!"));
 	}
 	else if (power == 4)
 	{
-		Trap_PowerUp = GetWorld()->SpawnActor<APowerUp>(Trap_PowerUpClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+		Trap_PowerUp = GetWorld()->SpawnActor<APowerUp>(Trap_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
 
 		CurrentPowerUp = Trap_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Trap!"));
 	}
 
 	CurrentPowerUp->SetPicked(true);
-	CurrentPowerUp->SetActorEnableCollision(false);
+	CurrentPowerUp->SetActorHiddenInGame(true);
+}
 
-	CurrentPowerUp->DetachAllSceneComponents(GetMesh(), FDetachmentTransformRules::KeepWorldTransform);
-	CurrentPowerUp->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, 
-		"BowlingBallSocket");
+void ARCRacingPawn::Server_CallTrapped_Implementation(AWheeledVehicle* ActorTrapped)
+{
+	OnRepTrapped(ActorTrapped);
 }
 
 //creates a wow moment when the player overlaps a trap by moving upwards and rotating their vehicle mesh
-void ARCRacingPawn::Trapped()
+void ARCRacingPawn::OnRepTrapped(AWheeledVehicle* ActorTrapped)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been trapped!"));
 
-	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
+	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(ActorTrapped->GetVehicleMovement()))
 	{
 		if (UPrimitiveComponent* VehicleMesh = Vehicle4W->UpdatedPrimitive)
 		{
@@ -555,8 +568,13 @@ void ARCRacingPawn::Trapped()
 	}
 }
 
+void ARCRacingPawn::Server_CallFreezed_Implementation(float deltaTime)
+{
+	OnRepFreezed(deltaTime);
+}
+
 //applies the freeze effect on the vehicle mesh.
-void ARCRacingPawn::Freezed(float deltaTime)
+void ARCRacingPawn::OnRepFreezed(float deltaTime)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been freezed!"));
 
@@ -569,8 +587,13 @@ void ARCRacingPawn::Freezed(float deltaTime)
 	}
 }
 
+void ARCRacingPawn::Server_CallGotHit_Implementation()
+{
+	OnRepGotHit();
+}
+
 //temporarily paralyzed the player’s vehicle OnHit.
-void ARCRacingPawn::GotHit()
+void ARCRacingPawn::OnRepGotHit()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("You've been hit!"));
 	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
@@ -582,8 +605,13 @@ void ARCRacingPawn::GotHit()
 	}
 }
 
+void ARCRacingPawn::Server_CallBoost_Implementation()
+{
+	OnRepBoost();
+}
+
 //temporarily boost the player’s vehicle speed.
-void ARCRacingPawn::Boost()
+void ARCRacingPawn::OnRepBoost()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Boost!"));
 	if (UWheeledVehicleMovementComponent4W* Vehicle4W = CastChecked<UWheeledVehicleMovementComponent4W>(GetVehicleMovement()))
@@ -594,6 +622,90 @@ void ARCRacingPawn::Boost()
 			VehicleMesh->SetPhysicsLinearVelocity(Force, true);
 		}
 	}
+}
+
+void ARCRacingPawn::SpawnBowlingBall()
+{
+	if (CurrentPowerUp != nullptr)
+	{
+		CurrentPowerUp->SetActorHiddenInGame(true);
+		CurrentPowerUp->SetActorEnableCollision(false);
+		CurrentPowerUp->SetMeshToNull();
+	}
+
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	BowlingBall_PowerUp = GetWorld()->SpawnActor<APowerUp>(BowlingBall_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
+	CurrentPowerUp = BowlingBall_PowerUp;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Bowling Ball!"));
+
+	CurrentPowerUp->SetPicked(true);
+	CurrentPowerUp->SetActorHiddenInGame(true);
+}
+
+void ARCRacingPawn::SpawnFirework()
+{
+	if (CurrentPowerUp != nullptr)
+	{
+		CurrentPowerUp->SetActorHiddenInGame(true);
+		CurrentPowerUp->SetActorEnableCollision(false);
+		CurrentPowerUp->SetMeshToNull();
+	}
+
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	Firework_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
+	CurrentPowerUp = Firework_PowerUp;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Firework!"));
+
+	CurrentPowerUp->SetPicked(true);
+	CurrentPowerUp->SetActorHiddenInGame(true);
+}
+
+void ARCRacingPawn::SpawnFreeze()
+{
+	if (CurrentPowerUp != nullptr)
+	{
+		CurrentPowerUp->SetActorHiddenInGame(true);
+		CurrentPowerUp->SetActorEnableCollision(false);
+		CurrentPowerUp->SetMeshToNull();
+	}
+
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
+	CurrentPowerUp = Freeze_PowerUp;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Freeze!"));
+
+	CurrentPowerUp->SetPicked(true);
+	CurrentPowerUp->SetActorHiddenInGame(true);
+}
+
+void ARCRacingPawn::SpawnTrap()
+{
+	if (CurrentPowerUp != nullptr)
+	{
+		CurrentPowerUp->SetActorHiddenInGame(true);
+		CurrentPowerUp->SetActorEnableCollision(false);
+		CurrentPowerUp->SetMeshToNull();
+	}
+
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	Trap_PowerUp = GetWorld()->SpawnActor<APowerUp>(Trap_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
+	CurrentPowerUp = Trap_PowerUp;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Trap!"));
+
+	CurrentPowerUp->SetPicked(true);
+	CurrentPowerUp->SetActorHiddenInGame(true);
 }
 
 void ARCRacingPawn::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

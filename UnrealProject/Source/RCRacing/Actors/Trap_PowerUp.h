@@ -39,5 +39,5 @@ public:
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	//Called on space bar by the player
-	virtual void Use(FVector direction) override;
+	virtual void Use(FVector direction, FVector SpawnPosition) override;
 };

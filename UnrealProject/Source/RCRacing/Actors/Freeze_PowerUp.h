@@ -35,7 +35,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//Called on space bar by the player
-	virtual void Use(FVector direction) override;
+	virtual void Use(FVector direction, FVector SpawnPosition) override;
 
 	//Freeze Radius
 	UPROPERTY(EditAnywhere, Category = "Trace")

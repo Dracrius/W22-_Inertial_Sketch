@@ -23,45 +23,62 @@ ABowlingBall_PowerUp::ABowlingBall_PowerUp()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ExplosionTemplate = CreateDefaultSubobject<UParticleSystem>(TEXT("ExplosionEffectComponent"));
+
+	SetReplicates(true);
+	SetReplicateMovement(true);
+	bAlwaysRelevant = true;
 }
 
 //Called on space bar by the player
-void ABowlingBall_PowerUp::Use(FVector direction)
+void ABowlingBall_PowerUp::Use(FVector direction, FVector SpawnPosition)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
 
+	isFired = true;
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString() + " Spawn Position: " + SpawnPosition.ToString());
+	SetActorLocation(SpawnPosition);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString() + " Spawn Position: " + SpawnPosition.ToString());
 	PowerupSphere->SetSimulatePhysics(true);
 	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	PowerupSphere->SetNotifyRigidBodyCollision(true);
-	PowerupSphere->GetBodyInstance()->AddForce(direction * -10000 * PowerupSphere->GetMass());
+	PowerupSphere->GetBodyInstance()->AddForce(direction * 100000 * PowerupSphere->GetMass());
 }
 
 //Called when OnHit is triggered by a vehicle
-void ABowlingBall_PowerUp::Explode()
+void ABowlingBall_PowerUp::NetMulticastExplode_Implementation()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: BOOM!"));
+
 	if (ExplosionTemplate)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, ExplosionTemplate, GetActorLocation());
 	}
-	Destroy();
+	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
+	PowerupMesh = nullptr;
 }
 
 // Called when the game starts or when spawned
 void ABowlingBall_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
+	PowerupMesh->SetIsReplicated(true);
 }
 
 // Called every frame
 void ABowlingBall_PowerUp::Tick(float DeltaTime)
 {
-	TimeUntilDespawn += DeltaTime;
-	if (TimeUntilDespawn > MaxTimeUntilDespawn)
+	if (isFired)
 	{
-		//make sure the power up will be destroy if it doesn’t hit a vehicle within 5 seconds.
-		Destroy();
-		TimeUntilDespawn = 0.0f;
+		TimeUntilDespawn += DeltaTime;
+		if (TimeUntilDespawn > MaxTimeUntilDespawn)
+		{
+			//make sure the power up will be destroy if it doesn’t hit a vehicle within 5 seconds.
+			this->SetActorHiddenInGame(true);
+			this->SetActorEnableCollision(false);
+			this->PowerupMesh = nullptr;
+			TimeUntilDespawn = 0.0f;
+		}
 	}
 }
 
@@ -79,8 +96,8 @@ void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 
 			if (playerPawn)
 			{
-				Explode();
-				playerPawn->GotHit();
+				NetMulticastExplode();
+				playerPawn->OnRepGotHit();
 			}
 				
 		}

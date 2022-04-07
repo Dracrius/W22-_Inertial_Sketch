@@ -34,16 +34,20 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//starts when the power up collision sphere hits a vehicle
-	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		FVector NormalImpulse, const FHitResult& Hit) override;
 
 	//Called on space bar by the player
-	virtual void Use(FVector direction) override;
+	virtual void Use(FVector direction, FVector SpawnPosition) override;
 
 	//Called when OnHit is triggered by a vehicle
-	void Explode();
+	UFUNCTION(NetMulticast, Reliable)
+		void NetMulticastExplode();
 
 	//Explosion visual
 	UPROPERTY(EditAnywhere, Category = "BombActor")
 		UParticleSystem* ExplosionTemplate;
+
+	//Switch
+	bool isFired = false;
 };
