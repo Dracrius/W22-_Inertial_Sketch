@@ -16,12 +16,17 @@ ATrap_PowerUp::ATrap_PowerUp()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	SetReplicates(true);
+	SetReplicateMovement(true);
+	bAlwaysRelevant = true;
 }
 
 // Called when the game starts or when spawned
 void ATrap_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
+	PowerupMesh->SetIsReplicated(true);
 }
 
 // Called every frame
@@ -41,15 +46,19 @@ void ATrap_PowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AAc
 
 			if (playerPawn)
 			{
-				playerPawn->Trapped();
-				Destroy();
+				playerPawn->OnRepTrapped(Cast<AWheeledVehicle>(OtherActor));
+
+				this->SetActorHiddenInGame(true);
+				this->SetActorEnableCollision(false);
+				this->PowerupMesh = nullptr;
 			}
 		}
 	}
 }
 
 //Called on space bar by the player
-void ATrap_PowerUp::Use(FVector direction)
+void ATrap_PowerUp::Use(FVector direction, FVector SpawnPosition)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Trap: USED!"));
+	SetActorLocation(SpawnPosition);
 }

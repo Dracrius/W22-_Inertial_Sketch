@@ -36,7 +36,6 @@ struct FMovementData
 	GENERATED_BODY()
 
 public:
-
 	FMovementData(){}
 
 	UPROPERTY()
@@ -44,8 +43,8 @@ public:
 
 	UPROPERTY()
 	float MovementRight;
-	
 };
+
 UCLASS(config=Game)
 class ARCRacingPawn : public AWheeledVehicle
 {
@@ -199,7 +198,8 @@ public:
 	bool bNotGrounded;
 
 	//switch a few settings and is to call the virtual Use function of the PowerUp class
-	void OnUsePowerUp();
+	UFUNCTION(Server, Reliable)
+		void ServerOnUsePowerUp();
 
 	//These variables are used inside UE4 to sets the power ups inside this class' blueprint
 	UPROPERTY(EditAnywhere, Category = "PowerUp Blueprint")
@@ -248,19 +248,39 @@ public:
 	float FlipForceAmount;
 
 	//Called by the PowerUp parent class to randomly assign a power up to CurrentPowerUp
-	void SetCurrentPowerUp(int power);
+	//UFUNCTION(Server, Reliable)
+		void SetCurrentPowerUp(int power);
 
 	//Called by the Trap PowerUp on overlap
-	void Trapped();
+
+	UFUNCTION(Server, Unreliable)
+		void Server_CallTrapped(AWheeledVehicle* ActorTrapped);
+
+	UFUNCTION()
+		void OnRepTrapped(AWheeledVehicle* ActorTrapped);
 
 	//Called by the Freeze PowerUp when the vehicle is in the effect radius
-	void Freezed(float deltaTime);
 
-	//Called by the BowlingBall and Firework PowerUp on hit
-	void GotHit();
+	UFUNCTION(Server, Unreliable)
+		void Server_CallFreezed(float deltaTime);
+
+	UFUNCTION()
+		void OnRepFreezed(float deltaTime);
+
+	//
+
+	UFUNCTION(Server, Unreliable)
+		void Server_CallGotHit();
+
+	UFUNCTION()
+		void OnRepGotHit();
 
 	//Called by the Boost class on overlap
-	void Boost();
+	UFUNCTION(Server, Unreliable)
+		void Server_CallBoost();
+
+	UFUNCTION()
+		void OnRepBoost();
 };
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

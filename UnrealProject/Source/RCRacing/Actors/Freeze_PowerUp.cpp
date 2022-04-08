@@ -20,18 +20,25 @@ AFreeze_PowerUp::AFreeze_PowerUp()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	SetReplicates(true);
+	SetReplicateMovement(true);
+	bAlwaysRelevant = true;
 }
 
 ////Called on space bar by the player
-void AFreeze_PowerUp::Use(FVector direction)
+void AFreeze_PowerUp::Use(FVector direction, FVector SpawnPosition)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Freeze: USED!"));
+	SetActorLocation(SpawnPosition);
+
 }
 
 // Called when the game starts or when spawned
 void AFreeze_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
+	PowerupMesh->SetIsReplicated(true);
 }
 
 // Called every frame
@@ -63,12 +70,14 @@ void AFreeze_PowerUp::Tick(float DeltaTime)
 					ARCRacingPawn* playerPawn = Cast<ARCRacingPawn>(HitResult.GetActor());
 					if (playerPawn)
 					{
-						playerPawn->Freezed(DeltaTime);
+						playerPawn->OnRepFreezed(DeltaTime);
 					}
 				}
 			}
 			
-			Destroy();
+			this->SetActorHiddenInGame(true);
+			this->SetActorEnableCollision(false);
+			this->PowerupMesh = nullptr;
 			m_Cooldown = 0.0f;
 		}
 	}

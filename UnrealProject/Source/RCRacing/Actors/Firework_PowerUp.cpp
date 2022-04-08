@@ -25,36 +25,48 @@ AFirework_PowerUp::AFirework_PowerUp()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ExplosionTemplate = CreateDefaultSubobject<UParticleSystem>(TEXT("ExplosionEffectComponent"));
+
+	SetReplicates(true);
+	SetReplicateMovement(true);
+	bAlwaysRelevant = true;
 }
 
 //Called on space bar by the player
-void AFirework_PowerUp::Use(FVector direction)
+void AFirework_PowerUp::Use(FVector direction, FVector SpawnPosition)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Firework: USED!"));
 
 	isFired = true;
-
+	SetActorLocation(SpawnPosition);
 	PowerupSphere->SetSimulatePhysics(true);
 	PowerupSphere->SetNotifyRigidBodyCollision(true);
-	PowerupSphere->SetCollisionProfileName("Firework");
-	PowerupSphere->GetBodyInstance()->AddForce(direction * 50000 * PowerupSphere->GetMass());
+	PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
+	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	//SetActorScale3D(FVector(0.1f));
+	PowerupSphere->GetBodyInstance()->AddForce(direction * 100000 * PowerupSphere->GetMass());
+
 }
 
 //Called when OnHit is triggered by a vehicle
-void AFirework_PowerUp::Explode()
+void AFirework_PowerUp::NetMulticastExplode_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: BOOM!"));
+
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Firework: BOOM!"));
+
 	if (ExplosionTemplate)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, ExplosionTemplate, GetActorLocation());
 	}
-	Destroy();
+	this->SetActorHiddenInGame(true);
+	this->SetActorEnableCollision(false);
+	this->PowerupMesh = nullptr;
 }
 
 // Called when the game starts or when spawned
 void AFirework_PowerUp::BeginPlay()
 {
 	Super::BeginPlay();
+	PowerupMesh->SetIsReplicated(true);
 }
 
 // Called every frame
@@ -66,22 +78,26 @@ void AFirework_PowerUp::Tick(float DeltaTime)
 	{
 		m_Cooldown += DeltaTime;
 		TimeUntilDespawn += DeltaTime;
-		if (m_Cooldown > m_MaxCooldown)
-		{
-			//To ensure the power up won’t collide with the emitter (vehicle pawn), 
-			PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-			PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
-			m_Cooldown = 0.0f;
-		}
+
+		//SetActorScale3D(FVector(0.1f) + (DeltaTime* 500));
+
+		//if (m_Cooldown > m_MaxCooldown)
+		//{
+		//	//To ensure the power up won’t collide with the emitter (vehicle pawn), 
+		//	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		//	PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
+		//	m_Cooldown = 0.0f;
+		//}
 		
 		if (TimeUntilDespawn > MaxTimeUntilDespawn)
 		{
 			//make sure the power up will be destroy if it doesn’t hit a vehicle within 5 seconds.
-			Destroy();
+			this->SetActorHiddenInGame(true);
+			this->SetActorEnableCollision(false);
+			this->PowerupMesh = nullptr;
 			TimeUntilDespawn = 0.0f;
 		}
 	}
-
 }
 
 void AFirework_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -98,8 +114,8 @@ void AFirework_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 
 			if (playerPawn)
 			{
-				Explode();
-				playerPawn->GotHit();
+				NetMulticastExplode();
+				playerPawn->OnRepGotHit();
 			}
 
 		}

@@ -28,6 +28,10 @@ ABoost::ABoost()
 	BoostMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	BoostMesh->SetRelativeLocation(FVector(0));
 	BoostMesh->SetupAttachment(RootComponent);
+
+	SetReplicates(true);
+	SetReplicateMovement(true);
+	bAlwaysRelevant = true;
 }
 
 // Called when the game starts or when spawned
@@ -53,7 +57,7 @@ void ABoost::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 
 		if (playerPawn)
 		{
-			playerPawn->Boost();
+			playerPawn->OnRepBoost();
 		}
 	}
 }

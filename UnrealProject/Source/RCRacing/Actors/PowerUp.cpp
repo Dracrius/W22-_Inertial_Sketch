@@ -36,10 +36,14 @@ APowerUp::APowerUp()
 	PowerupMesh->SetRelativeLocation(FVector(0));
 	//attach the mesh to RootComponent 
 	PowerupMesh->SetupAttachment(RootComponent);
+
+	SetReplicates(true);
+	SetReplicateMovement(true);
+	bAlwaysRelevant = true;
 }
 
 //Starts when the player presses the use key space bar which calls the PowerUp’s Use function.
-void APowerUp::Use(FVector direction)
+void APowerUp::Use(FVector direction, FVector SpawnPosition)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Powerup: USED!"));
 	isPicked = false;
@@ -53,6 +57,7 @@ void APowerUp::BeginPlay()
 
 	PowerupSphere->OnComponentHit.AddDynamic(this, &APowerUp::OnHit);
 	PowerupSphere->OnComponentBeginOverlap.AddDynamic(this, &APowerUp::OnOverlapBegin);
+	PowerupMesh->SetIsReplicated(true);
 }
 
 // Called every frame
@@ -81,7 +86,7 @@ void APowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiv
 void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,	AActor* OtherActor,	UPrimitiveComponent* OtherComp,	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	//set the player’s current power up to a random one.
-	if (!isPicked)
+	if (!isPicked && GetRemoteRole() != ROLE_Authority)
 	{
 		if (OtherActor != this)
 		{
@@ -91,7 +96,9 @@ void APowerUp::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,	AActor* 
 			{
 				RandomPowerUp = FMath::RandRange(1, 4);
 				playerPawn->SetCurrentPowerUp(RandomPowerUp);
-				Destroy();
+				this->SetActorHiddenInGame(true);
+				this->SetActorEnableCollision(false);
+				this->PowerupMesh = nullptr;
 			}
 		}
 	}
