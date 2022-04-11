@@ -364,8 +364,6 @@ void ARCRacingPawn::OnRepFlipCar()
 {
 	if (GetLocalRole() == ROLE_AutonomousProxy)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 20, FColor::Red, "Autonomous Proxy");
-		UE_LOG(LogTemp, Warning, TEXT("Client"));
 		FlipForceAmount = 50.0f;
 	}
 	else
@@ -493,7 +491,7 @@ void ARCRacingPawn::ServerOnUsePowerUp_Implementation()
 
 			if (Cast<ABowlingBall_PowerUp>(CurrentPowerUp) || Cast<ATrap_PowerUp>(CurrentPowerUp))
 			{
-				CurrentPowerUp->SetActorEnableCollision(true);
+				//CurrentPowerUp->SetActorEnableCollision(true);
 				float offsetX = GetActorForwardVector().X * -200.0f;
 				float offsetY = GetActorForwardVector().Y * -200.0f;
 				float offsetZ = 40.0f;

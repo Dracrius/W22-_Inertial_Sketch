@@ -48,18 +48,6 @@ Use</panel_attributes>
     <additional_attributes>60.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>980</x>
-      <y>530</y>
-      <w>80</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>60.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1040</x>
@@ -68,17 +56,6 @@ Use</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>isPicked</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1040</x>
-      <y>580</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>DetachFromComponent</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -135,17 +112,6 @@ Use</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>3</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>970</x>
-      <y>580</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>4</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

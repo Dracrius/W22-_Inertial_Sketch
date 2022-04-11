@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>0</y>
+      <x>344</x>
+      <y>264</y>
       <w>776</w>
       <h>400</h>
     </coordinates>
@@ -40,6 +40,7 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void &lt;virtual&gt;
 + SetActive(isActive: bool): void
 + SetPicked(picked: bool): void
 + SetUsed(used: bool): void
++ SetMeshToNull(): void
 
 </panel_attributes>
     <additional_attributes/>
@@ -47,8 +48,8 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void &lt;virtual&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>1208</y>
+      <x>488</x>
+      <y>1464</y>
       <w>776</w>
       <h>232</h>
     </coordinates>
@@ -74,8 +75,8 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void override
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>440</y>
+      <x>488</x>
+      <y>696</y>
       <w>776</w>
       <h>232</h>
     </coordinates>
@@ -87,7 +88,7 @@ ABowlingBall_PowerUp
 --
 + ABowlingBall_PowerUp()
 # BeginPlay(): void override
-# Explode(): void
++ UFUNCTION(NetMulticast, Reliable) NetMulticastExplode(): void
 + Use(direction: FVector): void override
 + Tick: void &lt;virtual&gt;
 
@@ -101,8 +102,8 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void override</panel_attribut
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>696</y>
+      <x>488</x>
+      <y>952</y>
       <w>776</w>
       <h>232</h>
     </coordinates>
@@ -114,7 +115,7 @@ AFirework_PowerUp
 --
 + AFirework_PowerUp()
 # BeginPlay(): void override
-# Explode(): void
++ UFUNCTION(NetMulticast, Reliable) NetMulticastExplode(): void
 + Use(direction: FVector): void override
 + Tick: void &lt;virtual&gt;
 
@@ -128,8 +129,8 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void override</panel_attribut
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>952</y>
+      <x>488</x>
+      <y>1208</y>
       <w>776</w>
       <h>232</h>
     </coordinates>
@@ -155,32 +156,19 @@ FVector NormalImpulse, const FHitResult&amp; Hit): void override</panel_attribut
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>392</y>
+      <x>384</x>
+      <y>656</y>
       <w>120</w>
-      <h>184</h>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 Is a</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;210.0;130.0;210.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0;130.0;200.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>552</y>
-      <w>120</w>
-      <h>280</h>
-    </coordinates>
-    <panel_attributes>lt=-
-Is a
-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;330.0;130.0;330.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>520</x>
+      <x>384</x>
       <y>808</y>
       <w>120</w>
       <h>280</h>
@@ -193,8 +181,21 @@ Is a
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
+      <x>384</x>
       <y>1064</y>
+      <w>120</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-
+Is a
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0;130.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>1320</y>
       <w>120</w>
       <h>280</h>
     </coordinates>

@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>370</y>
+      <x>930</x>
+      <y>380</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>390</y>
+      <x>970</x>
+      <y>400</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
@@ -26,10 +26,10 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>840</x>
-      <y>450</y>
-      <w>410</w>
-      <h>440</h>
+      <x>850</x>
+      <y>460</y>
+      <w>380</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>IF isFired
 --
@@ -39,8 +39,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>490</y>
+      <x>970</x>
+      <y>500</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -49,23 +49,10 @@
     <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>870</x>
-      <y>590</y>
-      <w>380</w>
-      <h>300</h>
-    </coordinates>
-    <panel_attributes>IF m_Cooldown &gt; m_MaxCooldown
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>310</y>
+      <x>970</x>
+      <y>320</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
@@ -75,8 +62,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>290</y>
+      <x>930</x>
+      <y>300</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -86,8 +73,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
-      <y>500</y>
+      <x>1000</x>
+      <y>510</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -97,8 +84,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>460</y>
+      <x>970</x>
+      <y>470</y>
       <w>30</w>
       <h>150</h>
     </coordinates>
@@ -106,67 +93,10 @@
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>630</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>SetCollisionEnabled</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>620</y>
-      <w>50</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
+      <x>970</x>
       <y>670</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>SetCollisionProfileName</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>660</y>
-      <w>50</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>710</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>m_Cooldown</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>700</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -177,10 +107,10 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>900</x>
-      <y>760</y>
+      <x>880</x>
+      <y>600</y>
       <w>350</w>
-      <h>130</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>IF TimeUntilDespawn &gt; MaxTimeUntilDespawn
 --
@@ -190,31 +120,20 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>600</y>
+      <x>970</x>
+      <y>610</y>
       <w>30</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>770</y>
-      <w>30</w>
-      <h>100</h>
-    </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>210</y>
+      <x>930</x>
+      <y>220</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -224,8 +143,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>230</y>
+      <x>970</x>
+      <y>240</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
@@ -235,8 +154,31 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
+      <x>1000</x>
+      <y>550</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TimeUntilDespawn</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>970</x>
       <y>540</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>760</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -246,8 +188,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>530</y>
+      <x>970</x>
+      <y>750</y>
       <w>50</w>
       <h>40</h>
     </coordinates>
@@ -258,54 +200,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
-      <y>800</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Destroy</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>790</y>
-      <w>50</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>840</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>TimeUntilDespawn</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>830</y>
-      <w>50</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>900</x>
-      <y>210</y>
+      <x>910</x>
+      <y>220</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -315,8 +211,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>290</y>
+      <x>910</x>
+      <y>300</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -326,8 +222,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>370</y>
+      <x>910</x>
+      <y>380</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -337,8 +233,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>820</x>
-      <y>450</y>
+      <x>830</x>
+      <y>460</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -348,8 +244,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>500</y>
+      <x>960</x>
+      <y>510</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -359,8 +255,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>540</y>
+      <x>960</x>
+      <y>550</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -370,8 +266,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>850</x>
-      <y>590</y>
+      <x>860</x>
+      <y>600</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -381,7 +277,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>880</x>
+      <x>960</x>
       <y>760</y>
       <w>20</w>
       <h>30</h>
@@ -392,30 +288,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>840</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>13</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>950</x>
-      <y>800</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>12</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>950</x>
-      <y>630</y>
+      <x>960</x>
+      <y>640</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -425,8 +299,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>670</y>
+      <x>960</x>
+      <y>680</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -434,14 +308,71 @@
     <additional_attributes/>
   </element>
   <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>970</x>
+      <y>630</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>950</x>
-      <y>710</y>
+      <x>960</x>
+      <y>720</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>10</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>970</x>
+      <y>710</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>640</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SetActorHiddenInGame</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>680</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SetActorEnableCollision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>720</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>PowerupMesh</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

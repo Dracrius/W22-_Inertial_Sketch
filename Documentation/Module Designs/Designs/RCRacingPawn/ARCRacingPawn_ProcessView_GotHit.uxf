@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>1180</x>
-      <y>360</y>
+      <y>280</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>1180</x>
-      <y>440</y>
+      <y>360</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -31,7 +31,7 @@
       <w>140</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>GotHit</panel_attributes>
+    <panel_attributes>OnRepGotHit</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -50,7 +50,7 @@
     <id>Relation</id>
     <coordinates>
       <x>1220</x>
-      <y>460</y>
+      <y>380</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
@@ -61,7 +61,7 @@
     <id>Relation</id>
     <coordinates>
       <x>1220</x>
-      <y>380</y>
+      <y>300</y>
       <w>30</w>
       <h>80</h>
     </coordinates>
@@ -228,7 +228,7 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1160</x>
-      <y>360</y>
+      <y>280</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -261,7 +261,7 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1160</x>
-      <y>440</y>
+      <y>360</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -310,6 +310,39 @@ Cast&lt;UWheeledVehicleMovementComponent4W&gt;</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>460</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1180</x>
+      <y>440</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Server_CallGotHit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1160</x>
+      <y>440</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>2</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

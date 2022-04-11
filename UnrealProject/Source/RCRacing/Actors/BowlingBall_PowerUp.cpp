@@ -36,15 +36,11 @@ void ABowlingBall_PowerUp::Use(FVector direction, FVector SpawnPosition)
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Bowling Ball: USED!"));
 
 	isFired = true;
-	//SetActorHiddenInGame(false);
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString() + " Spawn Position: " + SpawnPosition.ToString());
 	
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString() + " Spawn Position: " + SpawnPosition.ToString());
-	PowerupSphere->SetSimulatePhysics(true);
 	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	PowerupSphere->SetNotifyRigidBodyCollision(true);
 	SetActorLocation(SpawnPosition);
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Position: " + SpawnPosition.ToString());
+
 	PowerupSphere->GetBodyInstance()->AddForce(-direction * 100000 * PowerupSphere->GetMass());
 
 }
@@ -76,8 +72,6 @@ void ABowlingBall_PowerUp::Tick(float DeltaTime)
 {
 	if (isFired)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, "Position: " + GetActorLocation().ToString());
-
 		TimeUntilDespawn += DeltaTime;
 		if (TimeUntilDespawn > MaxTimeUntilDespawn)
 		{
@@ -88,33 +82,6 @@ void ABowlingBall_PowerUp::Tick(float DeltaTime)
 			TimeUntilDespawn = 0.0f;
 		}
 	}
-
-	//DrawDebugSphere(GetWorld(), GetActorLocation(), 50.0f, 16, FColor::Red, false, 1);
-
-	//if (isFired)
-	//{
-	//	m_Cooldown += DeltaTime;
-	//	TimeUntilDespawn += DeltaTime;
-
-	//	//SetActorScale3D(FVector(0.1f) + (DeltaTime* 500));
-
-	//	if (m_Cooldown > m_MaxCooldown)
-	//	{
-	//		//To ensure the power up won’t collide with the emitter (vehicle pawn), 
-	//		PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	//		PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
-	//		m_Cooldown = 0.0f;
-	//	}
-
-	//	if (TimeUntilDespawn > MaxTimeUntilDespawn)
-	//	{
-	//		//make sure the power up will be destroy if it doesn’t hit a vehicle within 5 seconds.
-	//		this->SetActorHiddenInGame(true);
-	//		this->SetActorEnableCollision(false);
-	//		this->PowerupMesh = nullptr;
-	//		TimeUntilDespawn = 0.0f;
-	//	}
-	//}
 }
 
 void ABowlingBall_PowerUp::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)

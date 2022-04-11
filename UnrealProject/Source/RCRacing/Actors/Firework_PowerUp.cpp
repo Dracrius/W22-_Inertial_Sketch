@@ -78,16 +78,6 @@ void AFirework_PowerUp::Tick(float DeltaTime)
 	{
 		m_Cooldown += DeltaTime;
 		TimeUntilDespawn += DeltaTime;
-
-		//SetActorScale3D(FVector(0.1f) + (DeltaTime* 500));
-
-		//if (m_Cooldown > m_MaxCooldown)
-		//{
-		//	//To ensure the power up won’t collide with the emitter (vehicle pawn), 
-		//	PowerupSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		//	PowerupSphere->SetCollisionProfileName("BlockAllDynamic");
-		//	m_Cooldown = 0.0f;
-		//}
 		
 		if (TimeUntilDespawn > MaxTimeUntilDespawn)
 		{

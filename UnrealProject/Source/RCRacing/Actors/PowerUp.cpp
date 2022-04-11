@@ -47,7 +47,6 @@ void APowerUp::Use(FVector direction, FVector SpawnPosition)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Powerup: USED!"));
 	isPicked = false;
-	PowerupSphere->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
 }
 
 // Called when the game starts or when spawned

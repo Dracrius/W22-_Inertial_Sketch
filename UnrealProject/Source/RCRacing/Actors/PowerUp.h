@@ -41,7 +41,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-
 	void SetMeshToNull() { PowerupMesh = nullptr; }
 
 	//OnHit and OnOverlap Virtual functions
@@ -55,8 +54,7 @@ public:
 			int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	//Called on space bar by the player
-	//UFUNCTION(Server, Reliable)
-		virtual void Use(FVector direction, FVector SpawnPosition);
+	virtual void Use(FVector direction, FVector SpawnPosition);
 
 	//Setters
 	void SetActive(bool isActive) { m_IsActive = isActive; }

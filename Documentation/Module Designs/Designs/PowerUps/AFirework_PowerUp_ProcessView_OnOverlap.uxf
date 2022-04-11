@@ -86,7 +86,7 @@ OnHit</panel_attributes>
       <x>890</x>
       <y>470</y>
       <w>390</w>
-      <h>470</h>
+      <h>300</h>
     </coordinates>
     <panel_attributes>IF isPicked
 --
@@ -122,7 +122,7 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
       <x>910</x>
       <y>510</y>
       <w>370</w>
-      <h>430</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>IF OtherActor != this
 --
@@ -135,127 +135,11 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
       <x>930</x>
       <y>640</y>
       <w>350</w>
-      <h>300</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>IF playerPawn
 --
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>680</y>
-      <w>90</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Explode</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>670</y>
-      <w>50</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>990</x>
-      <y>730</y>
-      <w>290</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>IF ExplosionTemplate
---
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1040</x>
-      <y>770</y>
-      <w>190</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>SpawnEmitterAtLocation</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1000</x>
-      <y>760</y>
-      <w>60</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>40.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1000</x>
-      <y>700</y>
-      <w>30</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1000</x>
-      <y>740</y>
-      <w>30</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>650</y>
-      <w>30</w>
-      <h>270</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>960</x>
-      <y>880</y>
-      <w>50</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>890</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>playerPawn-&gt;GotHit</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -279,29 +163,6 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1000</x>
-      <y>830</y>
-      <w>60</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-</panel_attributes>
-    <additional_attributes>40.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1040</x>
-      <y>840</y>
-      <w>190</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Destroy</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
@@ -392,61 +253,6 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>950</x>
-      <y>680</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>9</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>970</x>
-      <y>730</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>10</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>770</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>11</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>990</x>
-      <y>840</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>12</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>950</x>
-      <y>890</y>
-      <w>20</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>13</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>960</x>
@@ -458,15 +264,83 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
     <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>730</y>
+      <w>200</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>playerPawn-&gt;OnRepGotHit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <id>Relation</id>
     <coordinates>
-      <x>1000</x>
-      <y>810</y>
+      <x>960</x>
+      <y>720</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>950</x>
+      <y>680</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>650</y>
       <w>30</w>
-      <h>60</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>670</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>680</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>NetMulticastExplode</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>950</x>
+      <y>720</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>10</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

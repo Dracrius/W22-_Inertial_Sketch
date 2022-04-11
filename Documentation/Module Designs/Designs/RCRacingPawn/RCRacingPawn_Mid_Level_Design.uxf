@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>972</x>
-      <y>585</y>
+      <x>531</x>
+      <y>549</y>
       <w>180</w>
       <h>45</h>
     </coordinates>
@@ -17,8 +17,8 @@ ARCRacingPawn
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1152</x>
-      <y>477</y>
+      <x>711</x>
+      <y>441</y>
       <w>198</w>
       <h>36</h>
     </coordinates>
@@ -29,8 +29,8 @@ URCRacingWheelRear</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1143</x>
-      <y>504</y>
+      <x>702</x>
+      <y>468</y>
       <w>45</w>
       <h>99</h>
     </coordinates>
@@ -43,8 +43,8 @@ Has</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1143</x>
-      <y>567</y>
+      <x>702</x>
+      <y>531</y>
       <w>117</w>
       <h>45</h>
     </coordinates>
@@ -57,8 +57,8 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1242</x>
-      <y>585</y>
+      <x>801</x>
+      <y>549</y>
       <w>198</w>
       <h>36</h>
     </coordinates>
@@ -70,8 +70,8 @@ URCRacingWheelFront
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1242</x>
-      <y>630</y>
+      <x>801</x>
+      <y>594</y>
       <w>144</w>
       <h>45</h>
     </coordinates>
@@ -83,8 +83,8 @@ APowerUp
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1143</x>
-      <y>612</y>
+      <x>702</x>
+      <y>576</y>
       <w>117</w>
       <h>45</h>
     </coordinates>
@@ -97,8 +97,8 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1152</x>
-      <y>702</y>
+      <x>711</x>
+      <y>666</y>
       <w>108</w>
       <h>45</h>
     </coordinates>
@@ -110,8 +110,8 @@ ABoost
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1143</x>
-      <y>621</y>
+      <x>702</x>
+      <y>585</y>
       <w>45</w>
       <h>126</h>
     </coordinates>
@@ -124,8 +124,8 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>648</x>
-      <y>621</y>
+      <x>207</x>
+      <y>585</y>
       <w>189</w>
       <h>45</h>
     </coordinates>
@@ -137,8 +137,8 @@ ARCRacingGameMode
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>828</x>
-      <y>576</y>
+      <x>387</x>
+      <y>540</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -151,8 +151,8 @@ Has</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>828</x>
-      <y>603</y>
+      <x>387</x>
+      <y>567</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -165,8 +165,8 @@ Has</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>648</x>
-      <y>549</y>
+      <x>207</x>
+      <y>513</y>
       <w>189</w>
       <h>45</h>
     </coordinates>
@@ -174,5 +174,32 @@ Has</panel_attributes>
 ARCGameStateBase
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>423</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Struct&gt;&gt;
+FMovementData
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>522</x>
+      <y>459</y>
+      <w>45</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1= 1
+m2= 1
+Has</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

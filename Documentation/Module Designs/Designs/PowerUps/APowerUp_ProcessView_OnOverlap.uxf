@@ -65,9 +65,9 @@ OnOverlapBegin</panel_attributes>
       <x>840</x>
       <y>520</y>
       <w>390</w>
-      <h>300</h>
+      <h>420</h>
     </coordinates>
-    <panel_attributes>IF !isPicked
+    <panel_attributes>IF !isPicked &amp;&amp; GetRemoteRole() != ROLE_Authority
 --
 </panel_attributes>
     <additional_attributes/>
@@ -78,7 +78,7 @@ OnOverlapBegin</panel_attributes>
       <x>880</x>
       <y>690</y>
       <w>350</w>
-      <h>130</h>
+      <h>250</h>
     </coordinates>
     <panel_attributes>IF playerPawn
 --
@@ -126,7 +126,7 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
       <x>860</x>
       <y>560</y>
       <w>370</w>
-      <h>260</h>
+      <h>380</h>
     </coordinates>
     <panel_attributes>IF OtherActor != this
 --
@@ -278,5 +278,107 @@ Cast&lt;ARCRacingPawn&gt;</panel_attributes>
     </coordinates>
     <panel_attributes>8</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>890</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>PowerupMesh</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>850</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SetActorEnableCollision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>810</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>SetActorHiddenInGame</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>810</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>850</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>10</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>890</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>910</x>
+      <y>880</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>910</x>
+      <y>840</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>910</x>
+      <y>800</y>
+      <w>50</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
