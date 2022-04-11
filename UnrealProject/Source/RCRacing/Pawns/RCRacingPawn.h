@@ -119,7 +119,7 @@ public:
 
 	//Flips the car on inputkey when upside down
 	UFUNCTION()
-		void OnRepFlipCar(/*float DeltaTime*/);
+		void OnRepFlipCar();
 
 	// Begin Pawn interface
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
@@ -248,11 +248,9 @@ public:
 	float FlipForceAmount;
 
 	//Called by the PowerUp parent class to randomly assign a power up to CurrentPowerUp
-	//UFUNCTION(Server, Reliable)
-		void SetCurrentPowerUp(int power);
+	void SetCurrentPowerUp(int power);
 
 	//Called by the Trap PowerUp on overlap
-
 	UFUNCTION(Server, Unreliable)
 		void Server_CallTrapped(AWheeledVehicle* ActorTrapped);
 

@@ -548,7 +548,7 @@ void ARCRacingPawn::SetCurrentPowerUp(int power)
 	}
 	else if (power == 3)
 	{
-		Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Firework_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
+		Freeze_PowerUp = GetWorld()->SpawnActor<APowerUp>(Freeze_PowerUpClass, FVector(0), FRotator::ZeroRotator, SpawnParams);
 		
 		CurrentPowerUp = Freeze_PowerUp;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Current Power: Freeze!"));
