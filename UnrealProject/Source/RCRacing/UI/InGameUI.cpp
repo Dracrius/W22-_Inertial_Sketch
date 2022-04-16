@@ -78,6 +78,11 @@ AInGameUI::AInGameUI()
 	{
 		networkRaceMenu = CreateWidget<UNetworkRaceMenu>(GetWorld(), networkRaceMenuClass);
 	}
+
+    if (networkMapMenuClass)
+    {
+        networkMapMenu = CreateWidget<UNetworkRaceMenu>(GetWorld(), networkMapMenuClass);
+    }
 }
 
 void AInGameUI::DrawHUD()
@@ -355,6 +360,32 @@ void AInGameUI::HideNetworkMenu()
 		networkRaceMenu->RemoveFromViewport();
 		networkRaceMenu = nullptr;
 	}
+}
+
+void AInGameUI::ShowNetworkMapMenu()
+{
+    UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
+    UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+
+    if (networkRaceMenuClass)
+    {
+        APlayerController* PC = Cast<APlayerController>(GetOwner());
+        networkMapMenu = CreateWidget<UNetworkRaceMenu>(PC, networkMapMenuClass);
+    }
+
+    networkMapMenu->AddToViewport();
+}
+
+void AInGameUI::HideNetworkMapMenu()
+{
+    UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+    UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+
+    if (networkRaceMenu)
+    {
+        networkMapMenu->RemoveFromViewport();
+        networkMapMenu = nullptr;
+    }
 }
 
 void AInGameUI::SetVolume(FString channel, float vol)

@@ -49,6 +49,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Characters")
 		int CharacterChoice = 0;
 
+    FString LevelName = FString("/Game/Maps/ParkFullScale?listen");
+
 	FORCEINLINE  TSubclassOf<class ACharacter> GetCharacterChoice() { return GameCharacters[CharacterChoice].Character; }
 
 protected:
@@ -110,7 +112,7 @@ public:
 	   Called when the Create Server button is pressed in the menu
 	 */
 	UFUNCTION(BlueprintCallable)
-		void Button_HostServer();
+		void Button_HostServer(FString levelName);
 
 	/*
 	   Called when the Create Join button is pressed in the menu

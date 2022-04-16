@@ -32,7 +32,7 @@ protected:
 
 public:
     UFUNCTION(BlueprintCallable)
-    virtual void HostLobby();
+    virtual void HostLobby(FString LevelName);
 
     UFUNCTION(BlueprintCallable)
     virtual void JoinLobby();
@@ -41,11 +41,14 @@ public:
 	virtual void GetLobbies();
 
 	UFUNCTION(BlueprintCallable)
-	virtual void SetLobby(FText lobby);
+	virtual void OpenMapSelect();
 
 	UFUNCTION(BlueprintCallable)
 	virtual void GetRacers();
 
     virtual void Return() override;
+
+    UFUNCTION(BlueprintCallable)
+    virtual void MapReturn();
 
 };

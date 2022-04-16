@@ -29,13 +29,13 @@ void UNetworkRaceMenu::NativeConstruct()
 	Super::NativeConstruct();
 }
 
-void UNetworkRaceMenu::HostLobby()
+void UNetworkRaceMenu::HostLobby(FString LevelName)
 {
     UOnline_GameInstance* GI = Cast<UOnline_GameInstance>(GetGameInstance());
     if (GI)
     {
         static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
-        GI->Button_HostServer();
+        GI->Button_HostServer(LevelName);
     }
 }
 
@@ -54,9 +54,10 @@ void UNetworkRaceMenu::GetLobbies()
     //Needs Networking Implimentation
 }
 
-void UNetworkRaceMenu::SetLobby(FText lobby)
+void UNetworkRaceMenu::OpenMapSelect()
 {
-    //Needs Networking Implimentation
+    static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
+    static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowNetworkMapMenu();
 }
 
 void UNetworkRaceMenu::GetRacers()
@@ -68,4 +69,10 @@ void UNetworkRaceMenu::Return()
 {
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
+}
+
+void UNetworkRaceMenu::MapReturn()
+{
+    static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMapMenu();
+    static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowNetworkMenu();
 }

@@ -28,6 +28,7 @@ protected:
 	class UControlsMenu* controlsMenu;
 	class ULocalRaceMenu* localRaceMenu;
 	class UNetworkRaceMenu* networkRaceMenu;
+    class UNetworkRaceMenu* networkMapMenu;
 
 public:
 	UPROPERTY()
@@ -67,6 +68,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Menus")
 	TSubclassOf<UNetworkRaceMenu> networkRaceMenuClass;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Menus")
+    TSubclassOf<UNetworkRaceMenu> networkMapMenuClass;
 
 protected:
 	AInGameUI();
@@ -137,6 +141,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void HideNetworkMenu();
+
+    UFUNCTION(BlueprintCallable)
+    virtual void ShowNetworkMapMenu();
+
+    UFUNCTION(BlueprintCallable)
+    virtual void HideNetworkMapMenu();
 
     //Set the Games Volumes
 	UFUNCTION(BlueprintCallable)

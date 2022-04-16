@@ -58,7 +58,7 @@ void UOnline_GameInstance::OnDestroySessionComplete(FName SessionName, bool Succ
 }
 
 //////////////////////////////////////HOSTING///////////////////////////////////////////////////////////////
-void UOnline_GameInstance::Button_HostServer()
+void UOnline_GameInstance::Button_HostServer(FString levelName)
 {
 	if (SessionInterface.IsValid())
 	{
@@ -72,6 +72,7 @@ void UOnline_GameInstance::Button_HostServer()
 		}
 		else
 		{
+            LevelName = levelName;
 			/*If it exists, then destroy it*/
 			//CALL CreateSession()
 			CreateSession();
@@ -147,7 +148,7 @@ void UOnline_GameInstance::OnStartSessionComplete(FName SessionName, bool bWasSu
 	{
 		/*Host Server Travels all connected players to the map*/
 		//CALL GetWorld()->ServerTravel() passing in "/Game/Scenes/dev_scene?listen", true
-		GetWorld()->ServerTravel("/Game/Maps/VehicleAdvExampleMap?listen", true);
+		GetWorld()->ServerTravel(LevelName, true);
 	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
