@@ -14,6 +14,8 @@ Rewrite Everything had the wrong idea
 Finished Major Feature implimentation
 3/19
 Add Comments
+4/16
+Completed Networking Adaptations
 */
 
 

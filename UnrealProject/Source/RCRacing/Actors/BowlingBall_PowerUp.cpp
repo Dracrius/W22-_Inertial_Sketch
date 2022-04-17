@@ -4,6 +4,10 @@ Copyright 2022 Antoine Plouffe <antoine.plouffe1@gmail.com>
 Version: 0.1
 Author : Antoine Plouffe
 Author : UE4
+
+Changelog:
+4/7
+Completed Networking Adaptations
 */
 
 #include "BowlingBall_PowerUp.h"

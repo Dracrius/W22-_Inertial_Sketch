@@ -12,6 +12,12 @@ Changelog:
 Added VR Support
 3/19
 Added More Comments
+3/28
+Started Networking Adaptations
+3/29
+Fixed Networked Player Controls
+4/7
+Completed Networking Adaptations
 */
 
 #include "RCRacingPawn.h"
