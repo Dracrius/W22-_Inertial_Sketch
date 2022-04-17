@@ -207,7 +207,7 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-    /*
+    
 	// set up gameplay key bindings
 	check(PlayerInputComponent);
 
@@ -224,7 +224,6 @@ void ARCRacingPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 
     // VR headset functionality
     PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARCRacingPawn::OnResetVR);
-    */
 }
 
 //Pause Menu

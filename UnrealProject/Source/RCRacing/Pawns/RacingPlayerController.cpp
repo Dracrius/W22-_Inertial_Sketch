@@ -94,10 +94,6 @@ void ARacingPlayerController::SetupInputComponent()
     }
 }
 
-void ARacingPlayerController::AcknowledgePossession(APawn* PossesedPawn)
-{
-}
-
 void ARacingPlayerController::OnResetVR()
 {
     if (MyPawn)

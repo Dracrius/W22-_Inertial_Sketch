@@ -21,17 +21,17 @@ public:
     virtual void OnUnPossess() override;
 
     // End Actor interface
-    void Pause();
+    virtual void Pause();
 
     /** Handle pressing forwards */
-    void MoveForward(float Val);
+    virtual void MoveForward(float Val);
 
     /** Handle pressing right */
-    void MoveRight(float Val);
+    virtual void MoveRight(float Val);
 
     //switch a few settings and is to call the virtual Use function of the PowerUp class
     UFUNCTION(Server, Reliable)
-    void ServerOnUsePowerUp();
+    virtual void ServerOnUsePowerUp();
 
     static const FName LookUpBinding;
     static const FName LookRightBinding;
@@ -39,10 +39,8 @@ public:
 protected:
     virtual void SetupInputComponent() override;
 
-    virtual void AcknowledgePossession(APawn* PossesedPawn) override;
-
     /** Resets HMD orientation in VR. */
-    void OnResetVR();
+    virtual void OnResetVR();
 
     class ARCRacingPawn* MyPawn;
 	
