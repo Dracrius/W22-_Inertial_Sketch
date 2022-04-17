@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>230</x><y>0</y><w>300</w><h>1210</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>280</x><y>0</y><w>300</w><h>1320</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
 AInGameUI
 --
 #mainMenu:UMainMenu*
@@ -9,6 +9,7 @@ AInGameUI
 #controlsMenu:UControlsMenu*
 #localRaceMenu:ULocalRaceMenu
 #networkRaceMenu:UNetworkRaceMenu
+#networkMapMenu:UNetworkRaceMenu
 UPROPERTY(EditDefaultsOnly, Category = "Menus")
 +mainMenuClass:TSubclassOf&lt;UMainMenu&gt; 
 UPROPERTY(EditDefaultsOnly, Category = "Menus")
@@ -24,7 +25,9 @@ UPROPERTY(EditDefaultsOnly, Category = "Menus")
 UPROPERTY(EditDefaultsOnly, Category = "Menus")
 +localRaceMenuClass:TSubclassOf&lt;ULocalRaceMenu&gt; 
 UPROPERTY(EditDefaultsOnly, Category = "Menus")
-+networkRaceMenuClass:TSubclassOf&lt;UNetworkRaceMenu&gt; 
++networkRaceMenuClass:TSubclassOf&lt;UNetworkRaceMenu&gt;
+UPROPERTY(EditDefaultsOnly, Category = "Menus")
++networkMapMenuClass:TSubclassOf&lt;UNetworkRaceMenu&gt; 
 +menuFont:UFont* 
 +playerName:FString 
 +lastCar:class ACar* 
@@ -77,8 +80,12 @@ UFUNCTION(BlueprintCallable)
 UFUNCTION(BlueprintCallable)
 + HideNetworkMenu() : void &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
++ ShowNetworkMapMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++ HideNetworkMapMenu() : void &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
 + SetVolume(channel:FString, vol:float) : void &lt;virtual&gt;
-+ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>0</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
++ Tick() : void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>0</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 ULocalRaceMenu
 --
 +menuFont:UFont* 
@@ -97,7 +104,7 @@ UFUNCTION(BlueprintCallable)
 UFUNCTION(BlueprintCallable)
 +NextCar():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
-+PreviousCar():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>320</y><w>300</w><h>230</h></coordinates><panel_attributes>&lt;&lt;ULocalRaceMenu&gt;&gt;
++PreviousCar():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>320</y><w>300</w><h>230</h></coordinates><panel_attributes>&lt;&lt;ULocalRaceMenu&gt;&gt;
 UNetworkRaceMenu
 --
 +currentLobby:FText
@@ -109,9 +116,11 @@ UNetworkRaceMenu
 UFUNCTION(BlueprintCallable)
 +GetLobbies():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
-+SetLobby():void  &lt;virtual&gt;
++OpenMapSelect():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
-+GetRacers():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>0</y><w>300</w><h>390</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
++GetRacers():void  &lt;virtual&gt;
+UFUNCTION(BlueprintCallable)
++MapReturn():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>0</y><w>300</w><h>390</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UMainMenu
 --
 +menuFont:UFont* 
@@ -136,7 +145,7 @@ UFUNCTION(BlueprintCallable)
 UFUNCTION(BlueprintCallable)
 +LoadNetworkMenu():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
-+Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>410</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
++Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>410</y><w>300</w><h>300</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UPauseMenu
 --
 +menuFont:UFont* 
@@ -155,7 +164,7 @@ UFUNCTION(BlueprintCallable)
 UFUNCTION(BlueprintCallable)
 +Continue():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
-+Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>730</y><w>300</w><h>290</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
++Quit():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>730</y><w>300</w><h>290</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UFinishScreen
 --
 +menuFont:UFont* 
@@ -173,7 +182,7 @@ UFUNCTION(BlueprintCallable)
 UFUNCTION(BlueprintCallable)
 +QuitToMenu():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
-+LoadPauseMenu():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>570</y><w>300</w><h>220</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
++LoadPauseMenu():void  &lt;virtual&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>570</y><w>300</w><h>220</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UVolumeMenu
 --
 +menuFont:UFont* 
@@ -188,7 +197,7 @@ UFUNCTION(BlueprintCallable)
 +ReturnToMain():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
 +SetVolume(channel:FText , vol:float):void  &lt;virtual&gt;
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>810</y><w>300</w><h>180</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>810</y><w>300</w><h>180</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UUsernameMenu
 --
 +menuFont:UFont* 
@@ -200,7 +209,7 @@ UFUNCTION(BlueprintCallable)
 +Return():void  &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
 +SetName(name:FText):void  &lt;virtual&gt;
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>1050</y><w>300</w><h>160</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>1050</y><w>300</w><h>160</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UControlsMenu
 --
 +menuFont:UFont* 

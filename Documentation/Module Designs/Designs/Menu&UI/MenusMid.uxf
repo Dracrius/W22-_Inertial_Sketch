@@ -1,7 +1,7 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>450</x><y>458</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>80</x><y>468</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;AHUD&gt;&gt;
 AInGameUI
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>178</y><w>270</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>188</y><w>270</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1 
 
 
@@ -10,33 +10,33 @@ contains
 
 
 1
-</panel_attributes><additional_attributes>10;310;160;310;160;10;250;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1010</x><y>338</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes>10;310;160;310;160;10;250;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>640</x><y>348</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 ULocalRaceMenu
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1050</x><y>458</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;ULocalRaceMenu&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>468</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;ULocalRaceMenu&gt;&gt;
 UNetworkRaceMenu
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>158</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>168</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UMainMenu
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>248</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>258</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UPauseMenu
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>970</x><y>688</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>698</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UFinishScreen
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1050</x><y>608</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>618</y><w>300</w><h>60</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UVolumeMenu
 --
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>878</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>888</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UUsernameMenu
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>810</x><y>778</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>788</y><w>300</w><h>70</h></coordinates><panel_attributes>&lt;&lt;UUserWidget&gt;&gt;
 UControlsMenu
 --
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>508</y><w>390</w><h>220</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>518</y><w>390</w><h>220</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1 
 
 
@@ -44,16 +44,7 @@ contains
 
 
 
-1</panel_attributes><additional_attributes>10;10;10;200;370;200</additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>508</y><w>310</w><h>320</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-1 
-
-
-contains
-
-
-
-1
-</panel_attributes><additional_attributes>10;10;10;300;290;300</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>508</y><w>280</w><h>430</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1</panel_attributes><additional_attributes>10;10;10;200;370;200</additional_attributes></element><element><id>Relation</id><coordinates><x>150</x><y>518</y><w>310</w><h>320</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1 
 
 
@@ -62,15 +53,7 @@ contains
 
 
 1
-</panel_attributes><additional_attributes>10;10;10;410;260;410</additional_attributes></element><element><id>Relation</id><coordinates><x>650</x><y>508</y><w>420</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-
-
-
-
-1 
-contains
-1
-</panel_attributes><additional_attributes>10;10;10;120;400;120</additional_attributes></element><element><id>Relation</id><coordinates><x>740</x><y>278</y><w>270</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;300;290;300</additional_attributes></element><element><id>Relation</id><coordinates><x>90</x><y>518</y><w>280</w><h>430</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1 
 
 
@@ -79,8 +62,25 @@ contains
 
 
 1
-</panel_attributes><additional_attributes>10;230;210;230;210;10;250;10</additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>388</y><w>320</w><h>190</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;410;260;410</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>518</y><w>420</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+
+
+
+
+1 
+contains
+1
+</panel_attributes><additional_attributes>10;10;10;120;400;120</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>288</y><w>270</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1 
+
+
+contains
+
+
+
+1
+</panel_attributes><additional_attributes>10;230;210;230;210;10;250;10</additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>398</y><w>320</w><h>190</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 1    contains   1
-</panel_attributes><additional_attributes>10;130;10;160;300;160;300;10</additional_attributes></element><element><id>Relation</id><coordinates><x>690</x><y>508</y><w>430</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-1    contains   1
-</panel_attributes><additional_attributes>10;10;10;70;410;70;410;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1160</x><y>390</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes>10;130;10;160;300;160;300;10</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>518</y><w>430</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+1    contains   2
+</panel_attributes><additional_attributes>10;10;10;70;410;70;410;20</additional_attributes></element><element><id>Relation</id><coordinates><x>790</x><y>400</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>

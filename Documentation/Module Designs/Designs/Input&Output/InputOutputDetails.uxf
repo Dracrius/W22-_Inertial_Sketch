@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>116</x><y>0</y><w>810</w><h>1130</h></coordinates><panel_attributes>&lt;&lt;AWheeledVehicle&gt;&gt;
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>142</x><y>0</y><w>810</w><h>1280</h></coordinates><panel_attributes>&lt;&lt;AWheeledVehicle&gt;&gt;
 ARCRacingPawn
 --
 + UPROPERTY() SpringArm: USpringArmComponent*
@@ -25,6 +25,7 @@ ARCRacingPawn
 - SlipperyMaterial: UPhysicalMaterial
 - NonSlipperyMaterial: UPhysicalMaterial
 
++ UPROPERTY(ReplicatedUsing = OnRepFlipCar) MovementDataStruct: FMovementData
 + UPROPERTY() PowerupClass: TSubclassOf&lt;APowerUp&gt;
 + UPROPERTY() BowlingBall_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
 + UPROPERTY() Firework_PowerUpClass: TSubclassOf&lt;APowerUp&gt;
@@ -56,7 +57,11 @@ int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void 
 + OnHandbrakeReleased: void
 + OnToggleCamera: void
 
-- FlipCar(float DeltaTime): void
++Pause: void
+
+- UFUNCTION(Server, Unreliable) Server_CallFlipCar(FMovementData mvData): void
+- UFUNCTION() OnRepFlipCar: void
+
 - EnableIncarView( const bool bState ): void
 - UpdateHUDStrings: void
 
@@ -70,10 +75,15 @@ int32 OtherBodyIndex, bool bFromSweep, const FHitResult&amp; SweepResult): void 
 + OnUsePowerUp: void
 + SetCurrentPowerUp(APowerUp* power)
 + SetCurrentPowerUp(int power)
-+ Trapped: void
-+ Freezed: void
-+ GotHit: void
-+ Boost: void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>116</x><y>1150</y><w>540</w><h>300</h></coordinates><panel_attributes>&lt;&lt;ACharacter &gt;&gt;
+
++ UFUNCTION(Server, Unreliable) Server_CallTrapped(AWheeledVehicle* ActorTrapped): void
++ UFUNCTION() OnRepTrapped(AWheeledVehicle* ActorTrapped): void
++ UFUNCTION(Server, Unreliable) Server_CallFreezed(float deltaTime): void
++ UFUNCTION() OnRepFreezed(float deltaTime): void
++ UFUNCTION(Server, Unreliable) Server_CallGotHit(): void
++ UFUNCTION() OnRepGotHit: void
++ UFUNCTION(Server, Unreliable) Server_CallBoost(): void
++ UFUNCTION() OnRepBoost: void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>142</x><y>1300</y><w>540</w><h>300</h></coordinates><panel_attributes>&lt;&lt;ACharacter &gt;&gt;
 Dummy
 --
 +menuPos:int 
@@ -93,4 +103,24 @@ UFUNCTION(BlueprintCallable)
 + MenuRight() : void &lt;virtual&gt;
 UFUNCTION(BlueprintCallable)
 + MenuAccept() : void &lt;virtual&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>692</x><y>1300</y><w>320</w><h>270</h></coordinates><panel_attributes>&lt;&lt;APlayerController&gt;&gt;
+ARacingPlayerController
+--
++ LookUpBinding: FName static const
++ LookRightBinding: FName static const
+- MyPawn: ARCRacingPawn*
+--
++ SetupPlayerInputComponent(): void &lt;virtual&gt; override
+
++ OnPossess(aPawn: APawn* ): void &lt;virtual&gt; override
++ OnUnPossess() void &lt;virtual&gt; override
+
++ MoveForward(float Val): void
++ MoveRight(float Val): void
++Pause: void
+- UFUNCTION(Server, Reliable) 
++ ServerOnUsePowerUp: void &lt;virtual&gt;
+- OnResetVR(): void &lt;virtual&gt;
+
+
 </panel_attributes><additional_attributes></additional_attributes></element></diagram>
