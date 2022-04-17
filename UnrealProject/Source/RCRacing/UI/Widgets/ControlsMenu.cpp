@@ -28,12 +28,14 @@ void UControlsMenu::NativeConstruct()
 	Super::NativeConstruct();
 }
 
+//Return to Pause Menu
 void UControlsMenu::Return()
 {
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideControlsMenu();
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowPauseMenu();
 }
 
+//Return to Main Menu
 void UControlsMenu::ReturnToMain()
 {
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideControlsMenu();

@@ -29,29 +29,34 @@ void UPauseMenu::NativeConstruct()
 	Super::NativeConstruct();
 }
 
+//Quit the Game
 void UPauseMenu::Quit()
 {
     //Handled in Blueprint will likely Remove if there is no future use
 }
 
+//Show Volume Menu
 void UPauseMenu::LoadVolume()
 {
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HidePauseMenu();
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowVolumeMenu();
 }
 
+//Show Controls Menu
 void UPauseMenu::LoadControls()
 {
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HidePauseMenu();
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowControlsMenu();
 }
 
+//Return to Main Menu
 void UPauseMenu::ReturnToMenu()
 {
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HidePauseMenu();
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
+//Return to Game
 void UPauseMenu::Continue()
 {
     //Simply hides the menu and returns Control to the Car

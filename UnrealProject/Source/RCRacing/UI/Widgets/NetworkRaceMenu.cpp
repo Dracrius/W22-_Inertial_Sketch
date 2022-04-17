@@ -33,6 +33,7 @@ void UNetworkRaceMenu::NativeConstruct()
 	Super::NativeConstruct();
 }
 
+//Start Hosting a Network Lobby
 void UNetworkRaceMenu::HostLobby(FString LevelName)
 {
     UOnline_GameInstance* GI = Cast<UOnline_GameInstance>(GetGameInstance());
@@ -43,6 +44,7 @@ void UNetworkRaceMenu::HostLobby(FString LevelName)
     }
 }
 
+//Join an Active Network Lobby
 void UNetworkRaceMenu::JoinLobby()
 {
     UOnline_GameInstance* GI = Cast<UOnline_GameInstance>(GetGameInstance());
@@ -53,28 +55,33 @@ void UNetworkRaceMenu::JoinLobby()
     }
 }
 
+//Get List of Lobbies - Not Implemented Yet
 void UNetworkRaceMenu::GetLobbies()
 {
     //Needs Networking Implimentation
 }
 
+//Open the Map Select Menu after Choosing to Host
 void UNetworkRaceMenu::OpenMapSelect()
 {
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowNetworkMapMenu();
 }
 
+//Get List of Racers - Not Implemented Yet
 void UNetworkRaceMenu::GetRacers()
 {
     //Needs Networking Implimentation
 }
 
+//Return to Networking Menu
 void UNetworkRaceMenu::Return()
 {
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMenu();
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
+//Return to Main Menu
 void UNetworkRaceMenu::MapReturn()
 {
     static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideNetworkMapMenu();

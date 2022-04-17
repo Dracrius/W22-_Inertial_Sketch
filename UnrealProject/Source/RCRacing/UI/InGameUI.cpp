@@ -32,6 +32,7 @@ Completed Networking Adaptations
 #include "../GameStates/RCGameStateBase.h"
 #include "Kismet/GameplayStatics.h"
 
+//Constructor
 AInGameUI::AInGameUI()
 {
     //Lets Set Things Up!
@@ -91,6 +92,7 @@ void AInGameUI::DrawHUD()
 {
 }
 
+//Game First Start
 void AInGameUI::BeginPlay()
 {
 	Super::BeginPlay();
@@ -99,6 +101,7 @@ void AInGameUI::BeginPlay()
 	//GetSave();
 }
 
+//Get a Save File
 void AInGameUI::GetSave()
 {
 	bool save = false;
@@ -132,6 +135,7 @@ void AInGameUI::GetSave()
 	gState->effectVolume = effectVolume;
 }
 
+//Create a Save File
 void AInGameUI::CreateFirstSave()
 {
     //There was no save file so we ask the user for their name so we can make one
@@ -147,16 +151,19 @@ void AInGameUI::CreateFirstSave()
 	float numFlps = numFlips; //Save to File
 }
 
+//Save
 void AInGameUI::Save()
 {
-
+    //No Save Files Setup Yet
 }
 
+//Quit the Game
 void AInGameUI::Quit()
 {
 	Save();
 }
 
+//MainMenu Task
 void AInGameUI::ShowMainMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -182,6 +189,7 @@ void AInGameUI::HideMainMenu()
 	}
 }
 
+//Pause Task
 void AInGameUI::ShowPauseMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -208,6 +216,7 @@ void AInGameUI::HidePauseMenu()
 	}
 }
 
+//Finish Task
 void AInGameUI::ShowFinishMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -234,6 +243,7 @@ void AInGameUI::HideFinishMenu()
 	}
 }
 
+//Username Menu Task
 void AInGameUI::ShowUsernameMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -260,6 +270,7 @@ void AInGameUI::HideUsernameMenu()
 	}
 }
 
+//Volume Menu Task
 void AInGameUI::ShowVolumeMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -286,6 +297,7 @@ void AInGameUI::HideVolumeMenu()
 	}
 }
 
+//Controls Menu Task
 void AInGameUI::ShowControlsMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -312,6 +324,7 @@ void AInGameUI::HideControlsMenu()
 	}
 }
 
+//Local Race Menu Task
 void AInGameUI::ShowLocalMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -338,6 +351,7 @@ void AInGameUI::HideLocalMenu()
 	}
 }
 
+//Networked Race Menu Task
 void AInGameUI::ShowNetworkMenu()
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -364,6 +378,7 @@ void AInGameUI::HideNetworkMenu()
 	}
 }
 
+//Networked Map Menu Task
 void AInGameUI::ShowNetworkMapMenu()
 {
     UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeUIOnly());
@@ -390,6 +405,7 @@ void AInGameUI::HideNetworkMapMenu()
     }
 }
 
+//Set the Game Volumes - Not Fully Implemented
 void AInGameUI::SetVolume(FString channel, float vol)
 {
     //Get the game state so that we can set our volumes to what was set

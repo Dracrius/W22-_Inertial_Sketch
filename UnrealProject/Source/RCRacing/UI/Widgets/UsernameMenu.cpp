@@ -27,12 +27,14 @@ void UUsernameMenu::NativeConstruct()
 	Super::NativeConstruct();
 }
 
+//Return to Main Menu
 void UUsernameMenu::Return()
 {
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->HideUsernameMenu();
 	static_cast<AInGameUI*>(GetOwningPlayer()->GetHUD())->ShowMainMenu();
 }
 
+//Set the Players Username - Not Implemented
 void UUsernameMenu::SetName(FText name)
 {
     //Need to add Save Files to Store this.
