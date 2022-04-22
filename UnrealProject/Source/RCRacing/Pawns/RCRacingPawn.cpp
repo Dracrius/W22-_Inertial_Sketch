@@ -50,6 +50,7 @@ Completed Networking Adaptations
 #include "../UI/InGameUI.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"
+#include "RacingPlayerState.h"
 
 #include <string>
 
@@ -81,10 +82,6 @@ ARCRacingPawn::ARCRacingPawn()
 
         CarBodyMeshs.Add(CarBodyMesh);
     }
-
-    int randBody = FMath::RandRange(0, CarBodyMeshs.Num() - 1);
-
-    CarBodyMeshs[randBody]->SetVisibility(true);
 
 	// Car mesh
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> CarMesh(TEXT("/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh"));
@@ -447,6 +444,12 @@ void ARCRacingPawn::OnRepFlipCar()
 void ARCRacingPawn::BeginPlay()
 {
 	Super::BeginPlay();
+
+    ARacingPlayerState* playerState = Cast<ARacingPlayerState>(GetPlayerState());
+    if (playerState)
+    {
+        CarBodyMeshs[playerState->CarBodySelection]->SetVisibility(true);
+    }
 
     if (HMDFunctions->IsHeadMountedDisplayEnabled())
     {
