@@ -206,8 +206,9 @@ void AInGameUI::ShowPauseMenu()
 
 void AInGameUI::HidePauseMenu()
 {
-	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameOnly());
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->SetInputMode(FInputModeGameAndUI());
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = false;
+    static_cast<ARCGameStateBase*>(GetWorld()->GetGameState())->isPaused = false;
 
 	if (pauseMenu)
 	{
