@@ -41,7 +41,6 @@ Completed Networking Adaptations
 #include "GameFramework/PlayerController.h"
 #include "RCRacing/Actors/BowlingBall_PowerUp.h"
 #include "RCRacing/Actors/PowerUp.h"
-#include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
 #include "RCRacing/Actors/Firework_PowerUp.h"
 #include "RCRacing/Actors/Freeze_PowerUp.h"
 #include "RCRacing/Actors/Trap_PowerUp.h"
