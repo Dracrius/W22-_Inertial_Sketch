@@ -50,9 +50,12 @@ class ARCRacingPawn : public AWheeledVehicle
 {
 	GENERATED_BODY()
 
+    UPROPERTY(VisibleAnywhere, Category = "Car Bodies")
+        TArray<UStaticMeshComponent*> CarBodyMeshs;
+
 		/** Spring arm that will offset the camera */
-		UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		USpringArmComponent* SpringArm;
+    UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+        USpringArmComponent* SpringArm;
 
 	/** Camera component that will be our viewpoint */
 	UPROPERTY(Category = Camera, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

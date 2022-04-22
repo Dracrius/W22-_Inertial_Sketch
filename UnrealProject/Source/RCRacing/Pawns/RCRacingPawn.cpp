@@ -51,6 +51,7 @@ Completed Networking Adaptations
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"
 
+#include <string>
 
 const FName ARCRacingPawn::LookUpBinding("LookUp");
 const FName ARCRacingPawn::LookRightBinding("LookRight");
@@ -62,6 +63,29 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 ARCRacingPawn::ARCRacingPawn()
 {
+    for (int i = 0; i < 3; i++)
+    {
+        std::string name = "Car Body Mesh " + std::to_string(i);
+        //mesh
+        UStaticMeshComponent* CarBodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(name.c_str());
+        //Rotating the Mesh
+        CarBodyMesh->SetRelativeRotation(FRotator(0.f, 90.f, 0.f));
+        //No collision
+        CarBodyMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        //Make Invisible
+        CarBodyMesh->SetVisibility(false);
+        //Location at 0
+        CarBodyMesh->SetRelativeLocation(FVector(0));
+        //attach the mesh to RootComponent 
+        CarBodyMesh->SetupAttachment(RootComponent);
+
+        CarBodyMeshs.Add(CarBodyMesh);
+    }
+
+    int randBody = FMath::RandRange(0, CarBodyMeshs.Num() - 1);
+
+    CarBodyMeshs[randBody]->SetVisibility(true);
+
 	// Car mesh
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> CarMesh(TEXT("/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh"));
 	GetMesh()->SetSkeletalMesh(CarMesh.Object);
